@@ -16,18 +16,37 @@ void C_KeyboardMovement::Update(float deltaTime) {
 		return;
 
 	int xMove = 0;
-	if (input->IsKeyPressed(Input::Key::Left))
+	if (input->IsKeyPressed(Input::Key::Left)) {
 		xMove = -moveSpeed;
-	else if (input->IsKeyPressed(Input::Key::Right))
+		animation->SetAnimationDirection(FacingDirection::Left);
+		animation->SetAnimationState(AnimationState::WalkLeft);
+	}
+	else if (input->IsKeyPressed(Input::Key::Right)) {
 		xMove = moveSpeed;
+		animation->SetAnimationDirection(FacingDirection::Right);
+		animation->SetAnimationState(AnimationState::WalkRight);
+	}
 
 	int yMove = 0;
-	if (input->IsKeyPressed(Input::Key::Up))
+	if (input->IsKeyPressed(Input::Key::Up)) {
 		yMove = -moveSpeed;
-	else if (input->IsKeyPressed(Input::Key::Down))
+		animation->SetAnimationDirection(FacingDirection::Up);
+		animation->SetAnimationState(AnimationState::WalkUp);
+	}
+	else if (input->IsKeyPressed(Input::Key::Down)) {
 		yMove = moveSpeed;
+		animation->SetAnimationDirection(FacingDirection::Down);
+		animation->SetAnimationState(AnimationState::WalkDown);
+	}
+
+	if (xMove == 0 && yMove == 0)
+		animation->SetAnimationState(AnimationState::Idle);
 
 	float xFrameMove = xMove * deltaTime;
 	float yFrameMove = yMove * deltaTime;
 	owner->transform->AddPosition(xFrameMove, yFrameMove);
+}
+
+void C_KeyboardMovement::Awake() {
+	animation = owner->GetComponent<C_Animation>();
 }

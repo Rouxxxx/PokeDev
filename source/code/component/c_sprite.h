@@ -16,8 +16,12 @@ public:
 	// We override the draw method so we can draw our sprite.
 	void Draw(Window& window) override;
 	void LateUpdate(float deltaTime) override;
+
+	void SetTextureRect(int x, int y, int width, int height);
+	void SetTextureRect(const sf::IntRect& rect);
+
 private:
 	ResourceAllocator<sf::Texture>* allocator;
 	sf::Sprite sprite;
-
+	int currentTextureID; // We’ll now keep track of our currently set texture.
 };

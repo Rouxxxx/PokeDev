@@ -139,9 +139,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="code\component\c_animation.cpp" />
     <ClCompile Include="code\component\c_keyboardMovement.cpp" />
     <ClCompile Include="code\component\c_sprite.cpp" />
     <ClCompile Include="code\component\c_transform.cpp" />
+    <ClCompile Include="code\game\animation\animation.cpp" />
     <ClCompile Include="code\game\game.cpp" />
     <ClCompile Include="code\object\objectCollection.cpp" />
     <ClCompile Include="code\resource\resourseAllocator.cpp" />
@@ -156,9 +158,11 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="code\component\c_animation.h" />
     <ClInclude Include="code\component\c_keyboardMovement.h" />
     <ClInclude Include="code\component\c_sprite.h" />
     <ClInclude Include="code\component\c_transform.h" />
+    <ClInclude Include="code\game\animation\animation.h" />
     <ClInclude Include="code\game\game.h" />
     <ClInclude Include="code\object\objectCollection.h" />
     <ClInclude Include="code\resource\resourceAllocator.h" />

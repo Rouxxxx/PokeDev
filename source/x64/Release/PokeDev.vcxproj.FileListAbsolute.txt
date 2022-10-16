@@ -1,0 +1,2 @@
+D:\dev\ImGuiApps\PokeDev\x64\Release\PokeDev.exe
+D:\dev\PokeDev\source\x64\Release\PokeDev.exe

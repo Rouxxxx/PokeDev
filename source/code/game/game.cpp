@@ -9,7 +9,7 @@ Game::Game()
     unsigned int splashScreenID = sceneStateMachine.Add(splashScreen);
     unsigned int gameSceneID = sceneStateMachine.Add(gameScene);
     splashScreen->SetSwitchToScene(gameSceneID);
-    sceneStateMachine.SwitchTo(splashScreenID);
+    sceneStateMachine.SwitchTo(gameSceneID);
     deltaTime = clock.restart().asSeconds();
 }
 

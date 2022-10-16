@@ -12,9 +12,6 @@
 
 #include "../../resource/resourceAllocator.h"
 
-
-
-
 class SceneGame : public Scene
 {
 public:
