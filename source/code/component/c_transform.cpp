@@ -4,6 +4,7 @@ C_Transform::C_Transform(Object* owner)
 	: Component(owner), position(0.f, 0.f)
 { }
 
+
 void C_Transform::SetPosition(float x, float y)
 {
 	position.x = x;

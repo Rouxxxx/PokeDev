@@ -7,18 +7,18 @@ SceneSplashScreen::SceneSplashScreen(WorkingDirectory& workingDir, SceneStateMac
 
 void SceneSplashScreen::OnCreate()
 {
-	int textureID = textureAllocator.add(workingDir.Get()
-		+ "image0.png");
-		if (textureID >= 0) {
-			std::shared_ptr<sf::Texture> texture = textureAllocator.get(textureID);
-			splashSprite.setTexture(*texture);
-			sf::FloatRect spriteSize = splashSprite.getLocalBounds();
-			splashSprite.setOrigin(spriteSize.width * 0.5f,
-				spriteSize.height * 0.5f);
-			splashSprite.setScale(0.5f, 0.5f);
-			sf::Vector2u windowCentre = window.GetCentre();
-			splashSprite.setPosition(windowCentre.x, windowCentre.y);
-		}
+	int textureID = textureAllocator.add(workingDir.Get() + "image0.png");
+
+	if (textureID <= 0)
+		return;
+
+	std::shared_ptr<sf::Texture> texture = textureAllocator.get(textureID);
+	splashSprite.setTexture(*texture);
+	sf::FloatRect spriteSize = splashSprite.getLocalBounds();
+	splashSprite.setOrigin(spriteSize.width * 0.5f, spriteSize.height * 0.5f);
+	splashSprite.setScale(0.5f, 0.5f);
+	sf::Vector2u windowCentre = window.GetCentre();
+	splashSprite.setPosition(windowCentre.x, windowCentre.y);
 }
 
 void SceneSplashScreen::OnActivate()
@@ -28,19 +28,14 @@ void SceneSplashScreen::OnActivate()
 }
 void SceneSplashScreen::OnDestroy() { }
 
-void SceneSplashScreen::SetSwitchToScene(unsigned int id)
-{
-	// Stores the id of the scene that we will transition to.
+void SceneSplashScreen::SetSwitchToScene(unsigned int id) {
 	switchToState = id;
 }
 void SceneSplashScreen::Update(float deltaTime)
 {
 	currentSeconds += deltaTime;
 	if (currentSeconds >= showForSeconds)
-	{
-		// Switches states.
 		sceneStateMachine.SwitchTo(switchToState);
-	}
 }
 void SceneSplashScreen::Draw(Window& window)
 {

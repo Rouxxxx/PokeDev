@@ -12,6 +12,11 @@ public:
 	void SetX(float x);
 	void SetY(float y);
 	const sf::Vector2f& GetPosition() const;
+	void SetStatic(bool isStatic);
+	bool isStatic() const;
+
 private:
 	sf::Vector2f position;
+	bool isStaticTransform;
+
 };

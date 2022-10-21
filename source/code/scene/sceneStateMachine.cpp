@@ -36,20 +36,18 @@ unsigned int SceneStateMachine::Add(std::shared_ptr<Scene> scene)
 void SceneStateMachine::Remove(unsigned int id)
 {
 	auto it = scenes.find(id);
-	if (it != scenes.end())
-	{
-		if (curScene == it->second)
-		{
-			// If the scene we are removing is the current scene, 
-			// we also want to set that to a null pointer so the scene 
-			// is no longer updated.
-			curScene = nullptr;
-		}
-		// We make sure to call the OnDestroy method 
-		// of the scene we are removing.
-		it->second->OnDestroy();
-		scenes.erase(it);
-	}
+
+	if (it == scenes.end())
+		return;
+
+	if (curScene == it->second)
+		// If the scene we are removing is the current scene, 
+		// we also want to set that to a null pointer so the scene 
+		// is no longer updated.
+		curScene = nullptr;
+
+	it->second->OnDestroy();
+	scenes.erase(it);
 }
 
 

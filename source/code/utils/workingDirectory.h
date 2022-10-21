@@ -8,8 +8,7 @@ class WorkingDirectory
 {
 public:
 	WorkingDirectory();
-	inline const std::string& Get()
-	{
+	inline const std::string& Get() {
 		return path;
 	}
 private:

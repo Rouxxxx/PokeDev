@@ -12,6 +12,9 @@
 
 #include "../../resource/resourceAllocator.h"
 
+#include "../../map/tileMapParser.h"
+
+
 class SceneGame : public Scene
 {
 public:
@@ -29,4 +32,5 @@ private:
 	ObjectCollection objects;
 	WorkingDirectory& workingDir;
 	Input input;
+	TileMapParser mapParser;
 };

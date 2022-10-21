@@ -1,8 +1,7 @@
 #include "object.h"
 
 Object::Object() 
-	: queuedForRemoval(false)
-{
+	: queuedForRemoval(false) {
 	transform = AddComponent<C_Transform>();
 }
 void Object::QueueForRemoval() {
@@ -11,8 +10,6 @@ void Object::QueueForRemoval() {
 bool Object::IsQueuedForRemoval() {
 	return queuedForRemoval;
 }
-
-
 
 void Object::Awake() {
 	for (int i = static_cast<int>(components.size()) - 1; i >= 0; i--)
@@ -34,6 +31,5 @@ void Object::LateUpdate(float timeDelta) {
 		components[i]->LateUpdate(timeDelta);
 }
 void Object::Draw(Window& window) {
-	for (int i = static_cast<int>(components.size()) - 1; i >= 0; i--)
-		components[i]->Draw(window);
+	drawable->Draw(window);
 }

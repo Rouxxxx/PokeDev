@@ -1,10 +1,13 @@
 #pragma once
 #include "component.h"
 #include "c_transform.h"
+#include "c_Drawable.h"
+
 #include "../resource/resourceAllocator.h"
 
 
-class C_Sprite : public Component
+
+class C_Sprite : public Component, public C_Drawable
 {
 public:
 	C_Sprite(Object* owner);
@@ -19,6 +22,7 @@ public:
 
 	void SetTextureRect(int x, int y, int width, int height);
 	void SetTextureRect(const sf::IntRect& rect);
+	void SetScale(unsigned int scaleX, unsigned int scaleY);
 
 private:
 	ResourceAllocator<sf::Texture>* allocator;

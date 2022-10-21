@@ -6,9 +6,9 @@
 enum AnimationState
 {
 	Idle = 0,
-	WalkRight,
-	WalkLeft,
-	WalkUp,
+	WalkRight = 1,
+	WalkLeft = 2,
+	WalkUp = 3,
 	WalkDown,
 	RunRight,
 	RunLeft,
