@@ -1,0 +1,149 @@
+{
+    "ethan": {
+        "states": [
+            "idle",
+            "walkRight",
+            "walkLeft",
+            "walkUp",
+            "walkDown",
+            "runRight",
+            "runLeft",
+            "runUp",
+            "runDown"
+        ],
+        "meta": {
+            "image": "resources/sprites/ethan/ethan_sprites1.png",
+            "scale": 1,
+            "sortOrder": 10
+        },
+        "frames": {
+            "idle": [
+                {
+                    "idleAnimSeconds": 0.5,
+                    "spriteSource": {
+                        "x": 7,
+                        "y": 5,
+                        "w": 32,
+                        "h": 32
+                    }
+                }
+            ],
+            "walkDown": [
+                {
+                    "idleAnimSeconds": 0.5,
+                    "spriteSource": {
+                        "x": 26,
+                        "y": 5,
+                        "w": 32,
+                        "h": 32
+                    }
+                },
+                {
+                    "idleAnimSeconds": 0.5,
+                    "spriteSource": {
+                        "x": 7,
+                        "y": 5,
+                        "w": 32,
+                        "h": 32
+                    }
+                },
+                {
+                    "idleAnimSeconds": 0.5,
+                    "spriteSource": {
+                        "x": 7,
+                        "y": 5,
+                        "w": 32,
+                        "h": 32
+                    }
+                }
+            ],
+            "walkUp": [
+                {
+                    "idleAnimSeconds": 0.5,
+                    "spriteSource": {
+                        "x": 26,
+                        "y": 5,
+                        "w": 32,
+                        "h": 32
+                    }
+                },
+                {
+                    "idleAnimSeconds": 0.5,
+                    "spriteSource": {
+                        "x": 7,
+                        "y": 5,
+                        "w": 32,
+                        "h": 32
+                    }
+                },
+                {
+                    "idleAnimSeconds": 0.5,
+                    "spriteSource": {
+                        "x": 7,
+                        "y": 5,
+                        "w": 32,
+                        "h": 32
+                    }
+                }
+            ],
+            "walkRight": [
+                {
+                    "idleAnimSeconds": 0.5,
+                    "spriteSource": {
+                        "x": 20,
+                        "y": 89,
+                        "w": 32,
+                        "h": 32
+                    }
+                },
+                {
+                    "idleAnimSeconds": 0.5,
+                    "spriteSource": {
+                        "x": 5,
+                        "y": 89,
+                        "w": 32,
+                        "h": 32
+                    }
+                },
+                {
+                    "idleAnimSeconds": 0.5,
+                    "spriteSource": {
+                        "x": 44,
+                        "y": 89,
+                        "w": 32,
+                        "h": 32
+                    }
+                }
+            ],
+            "walkLeft": [
+                {
+                    "idleAnimSeconds": 0.5,
+                    "spriteSource": {
+                        "x": 26,
+                        "y": 34,
+                        "w": 32,
+                        "h": 32
+                    }
+                },
+                {
+                    "idleAnimSeconds": 0.5,
+                    "spriteSource": {
+                        "x": 5,
+                        "y": 33,
+                        "w": 32,
+                        "h": 32
+                    }
+                },
+                {
+                    "idleAnimSeconds": 0.5,
+                    "spriteSource": {
+                        "x": 47,
+                        "y": 34,
+                        "w": 32,
+                        "h": 32
+                    }
+                }
+            ]
+        }
+    }
+}

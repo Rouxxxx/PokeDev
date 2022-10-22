@@ -10,7 +10,6 @@ void C_Animation::Awake()
 }
 
 
-#include <iostream>
 void C_Animation::Update(float deltaTime)
 {
 	if (currentAnimation.first == AnimationState::Idle)
@@ -62,9 +61,4 @@ const AnimationState& C_Animation::GetAnimationState() const {
 	// Returns out current animation state. We can use this 
 	// to compare the objects current state to a desired state.
 	return currentAnimation.first;
-}
-
-void C_Animation::SetAnimationDirection(FacingDirection dir) {
-	if (currentAnimation.first != AnimationState::Idle)
-		currentAnimation.second->SetDirection(dir);
 }

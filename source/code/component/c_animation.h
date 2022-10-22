@@ -6,9 +6,9 @@
 enum AnimationState
 {
 	Idle = 0,
-	WalkRight = 1,
-	WalkLeft = 2,
-	WalkUp = 3,
+	WalkRight,
+	WalkLeft,
+	WalkUp,
 	WalkDown,
 	RunRight,
 	RunLeft,
@@ -29,7 +29,6 @@ public:
 	void SetAnimationState(AnimationState state);
 	// Returns current animation state.
 	const AnimationState& GetAnimationState() const;
-	void SetAnimationDirection(FacingDirection dir);
 private:
 	std::shared_ptr<C_Sprite> sprite;
 	std::map<AnimationState, std::shared_ptr<Animation>> animations;

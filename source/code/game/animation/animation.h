@@ -28,7 +28,6 @@ public:
 	bool UpdateFrame(float deltaTime);
 	void Reset();
 
-	void SetDirection(FacingDirection dir);
 	FacingDirection GetDirection() const;
 private:
 	void IncrementFrame();

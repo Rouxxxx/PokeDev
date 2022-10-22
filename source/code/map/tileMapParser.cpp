@@ -6,7 +6,7 @@ TileMapParser::TileMapParser(ResourceAllocator<sf::Texture>& textureAllocator)
 	: textureAllocator(textureAllocator) 
 {}
 
-std::vector<std::shared_ptr<Object>> TileMapParser::Parse(const std::string& file, sf::Vector2i offset) {
+std::vector<std::shared_ptr<Object>> TileMapParser::Parse(const std::string& file, sf::Vector2i offset, Collider* collider) {
 	//std::cout << file << "\n";
 	//struct stat buffer;
 	//std::cout << (stat(file.c_str(), &buffer) == 0) << "\n";
@@ -25,7 +25,10 @@ std::vector<std::shared_ptr<Object>> TileMapParser::Parse(const std::string& fil
 	xml_node<>* rootNode = doc.first_node("map");
 
 	// Loads tile layers from XML.
-	std::shared_ptr<MapTiles> tiles = BuildMapTiles(rootNode);
+	std::pair<std::shared_ptr<MapTiles>, std::shared_ptr<TileSheets>> pair = BuildMapTiles(rootNode);
+	std::shared_ptr<MapTiles> tiles = pair.first;
+
+	std::pair<int, int> collisionsGid = findCollisionsGid(pair.second);
 
 	// We need these to calculate the tiles position in world space
 	int tileSizeX = std::atoi(rootNode->first_attribute("tilewidth")->value());
@@ -38,7 +41,7 @@ std::vector<std::shared_ptr<Object>> TileMapParser::Parse(const std::string& fil
 
 	// We iterate through each layer in the tile map
 	for (const auto& layer : *tiles) {
-		// And each tile in the layer
+
 		for (const auto& tile : *layer.second->layer) {
 
 			std::shared_ptr<TileInfo> tileInfo = tile->properties;
@@ -59,6 +62,12 @@ std::vector<std::shared_ptr<Object>> TileMapParser::Parse(const std::string& fil
 			// Calculate world position.
 			unsigned int x = tile->x * tileSizeX * tileScale + offset.x;
 			unsigned int y = tile->y * tileSizeY * tileScale + offset.y;
+
+			int tileID = tileInfo->tileID;
+			if (tileID >= collisionsGid.first && tileID <= collisionsGid.second)
+				collider->Add((float)x, (float)y, tileID - collisionsGid.first);
+
+			
 			tileObject->transform->SetPosition(x, y);
 			// Add new tile Object to the collection.
 			tileObjects.emplace_back(tileObject);
@@ -67,7 +76,7 @@ std::vector<std::shared_ptr<Object>> TileMapParser::Parse(const std::string& fil
 	return tileObjects;
 }
 
-std::shared_ptr<MapTiles> TileMapParser::BuildMapTiles(xml_node<>* rootNode) {
+std::pair<std::shared_ptr<MapTiles>, std::shared_ptr<TileSheets>> TileMapParser::BuildMapTiles(xml_node<>* rootNode) {
 	std::shared_ptr<TileSheets> tileSheetData = BuildTileSheetData(rootNode);
 	std::shared_ptr<MapTiles> map = std::make_shared<MapTiles>();
 	// We loop through each layer in the XML document.
@@ -75,23 +84,43 @@ std::shared_ptr<MapTiles> TileMapParser::BuildMapTiles(xml_node<>* rootNode) {
 		std::pair<std::string, std::shared_ptr<LayerStruct>> mapLayer = BuildLayer(node, tileSheetData);
 		map->emplace(mapLayer);
 	}
-	return map;
+	return std::make_pair(map, tileSheetData);
+}
+
+std::pair<int, int> TileMapParser::findCollisionsGid(std::shared_ptr<TileSheets> tileSheets) {
+	std::map<int, std::shared_ptr<TileSheetData>>::iterator it;
+
+	for (it = tileSheets->begin(); it != tileSheets->end(); it++)
+		if (it->second->name == "collisions") {
+			int firstGid = it->first;
+			return std::make_pair(it->first, it->first + it->second->tileCount);
+		}
+	return std::make_pair(-1, -1);
+
 }
 
 std::shared_ptr<TileSheets> TileMapParser::BuildTileSheetData(xml_node<>* rootNode) {
 	std::map<int, std::shared_ptr<TileSheetData>> tileSheets;
+
 	for (xml_node<>* tilesheetNode = rootNode->first_node("tileset"); tilesheetNode; tilesheetNode = tilesheetNode->next_sibling("tileset")) {
 		TileSheetData tileSheetData;
+		tileSheetData.name = tilesheetNode->first_attribute("name")->value();
+		
+
 		int firstid = std::atoi(tilesheetNode->first_attribute("firstgid")->value());
 		tileSheetData.tileSize.x = std::atoi(tilesheetNode->first_attribute("tilewidth")->value());
 		tileSheetData.tileSize.y = std::atoi(tilesheetNode->first_attribute("tileheight")->value());
+
 		int tileCount = std::atoi(tilesheetNode->first_attribute("tilecount")->value());
+		tileSheetData.tileCount = tileCount;
 		tileSheetData.columns = std::atoi(tilesheetNode->first_attribute("columns")->value());
 		tileSheetData.rows = tileCount / tileSheetData.columns;
+
 		xml_node<>* imageNode = tilesheetNode->first_node("image");
 		tileSheetData.textureId = textureAllocator.add("resources/sprites/" + std::string(imageNode->first_attribute("source")->value()));
 		tileSheetData.imageSize.x = std::atoi(imageNode->first_attribute("width")->value());
 		tileSheetData.imageSize.y = std::atoi(imageNode->first_attribute("height")->value());
+
 		// We store the tile sheets firstid.
 		tileSheets.insert(std::make_pair(firstid, std::make_shared<TileSheetData>(tileSheetData)));
 	}
@@ -146,10 +175,8 @@ std::pair<std::string, std::shared_ptr<LayerStruct>> TileMapParser::BuildLayer(x
                 }
 
                 if (!tileSheet)
-                {
                     //TODO: output error message.
                     continue;
-                }
 
                 int textureX = tileId % tileSheet->columns - 1;
                 int textureY = tileId / tileSheet->columns;

@@ -127,19 +127,20 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>SFML_STATIC</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>D:\dev\PokeDev\SFML-2.5.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\dev\PokeDev\source\code\utils\nlohmann;D:\dev\PokeDev\SFML-2.5.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>D:\dev\PokeDev\external libs;D:\dev\PokeDev\SFML-2.5.1\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>D:\dev\PokeDev\external libs;D:\dev\PokeDev\SFML-2.5.1\lib</AdditionalLibraryDirectories>
       <AdditionalDependencies>sfml-window-s.lib;sfml-graphics-s.lib;sfml-audio-s.lib;sfml-network-s.lib;sfml-system-s.lib;sfml-main.lib;opengl32.lib;winmm.lib;gdi32.lib;freetype.lib;jpeg.lib;openal32.lib;flac.lib;vorbisenc.lib;vorbisfile.lib;vorbis.lib;ogg.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="code\component\c_animation.cpp" />
+    <ClCompile Include="code\map\collider.cpp" />
     <ClCompile Include="code\component\c_drawable.cpp" />
     <ClCompile Include="code\component\c_keyboardMovement.cpp" />
     <ClCompile Include="code\component\c_sprite.cpp" />
@@ -162,6 +163,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="code\component\c_animation.h" />
+    <ClInclude Include="code\map\collider.h" />
     <ClInclude Include="code\component\c_drawable.h" />
     <ClInclude Include="code\component\c_keyboardMovement.h" />
     <ClInclude Include="code\component\c_sprite.h" />
@@ -180,6 +182,134 @@
     <ClInclude Include="code\utils\bitMask.h" />
     <ClInclude Include="code\component\component.h" />
     <ClInclude Include="code\object\object.h" />
+    <ClInclude Include="code\utils\json\adl_serializer.hpp" />
+    <ClInclude Include="code\utils\json\byte_container_with_subtype.hpp" />
+    <ClInclude Include="code\utils\json\detail\abi_macros.hpp" />
+    <ClInclude Include="code\utils\json\detail\conversions\from_json.hpp" />
+    <ClInclude Include="code\utils\json\detail\conversions\to_chars.hpp" />
+    <ClInclude Include="code\utils\json\detail\conversions\to_json.hpp" />
+    <ClInclude Include="code\utils\json\detail\exceptions.hpp" />
+    <ClInclude Include="code\utils\json\detail\hash.hpp" />
+    <ClInclude Include="code\utils\json\detail\input\binary_reader.hpp" />
+    <ClInclude Include="code\utils\json\detail\input\input_adapters.hpp" />
+    <ClInclude Include="code\utils\json\detail\input\json_sax.hpp" />
+    <ClInclude Include="code\utils\json\detail\input\lexer.hpp" />
+    <ClInclude Include="code\utils\json\detail\input\parser.hpp" />
+    <ClInclude Include="code\utils\json\detail\input\position_t.hpp" />
+    <ClInclude Include="code\utils\json\detail\iterators\internal_iterator.hpp" />
+    <ClInclude Include="code\utils\json\detail\iterators\iteration_proxy.hpp" />
+    <ClInclude Include="code\utils\json\detail\iterators\iterator_traits.hpp" />
+    <ClInclude Include="code\utils\json\detail\iterators\iter_impl.hpp" />
+    <ClInclude Include="code\utils\json\detail\iterators\json_reverse_iterator.hpp" />
+    <ClInclude Include="code\utils\json\detail\iterators\primitive_iterator.hpp" />
+    <ClInclude Include="code\utils\json\detail\json_custom_base_class.hpp" />
+    <ClInclude Include="code\utils\json\detail\json_pointer.hpp" />
+    <ClInclude Include="code\utils\json\detail\json_ref.hpp" />
+    <ClInclude Include="code\utils\json\detail\macro_scope.hpp" />
+    <ClInclude Include="code\utils\json\detail\macro_unscope.hpp" />
+    <ClInclude Include="code\utils\json\detail\meta\call_std\begin.hpp" />
+    <ClInclude Include="code\utils\json\detail\meta\call_std\end.hpp" />
+    <ClInclude Include="code\utils\json\detail\meta\cpp_future.hpp" />
+    <ClInclude Include="code\utils\json\detail\meta\detected.hpp" />
+    <ClInclude Include="code\utils\json\detail\meta\identity_tag.hpp" />
+    <ClInclude Include="code\utils\json\detail\meta\is_sax.hpp" />
+    <ClInclude Include="code\utils\json\detail\meta\std_fs.hpp" />
+    <ClInclude Include="code\utils\json\detail\meta\type_traits.hpp" />
+    <ClInclude Include="code\utils\json\detail\meta\void_t.hpp" />
+    <ClInclude Include="code\utils\json\detail\output\binary_writer.hpp" />
+    <ClInclude Include="code\utils\json\detail\output\output_adapters.hpp" />
+    <ClInclude Include="code\utils\json\detail\output\serializer.hpp" />
+    <ClInclude Include="code\utils\json\detail\string_concat.hpp" />
+    <ClInclude Include="code\utils\json\detail\string_escape.hpp" />
+    <ClInclude Include="code\utils\json\detail\value_t.hpp" />
+    <ClInclude Include="code\utils\json\json.hpp" />
+    <ClInclude Include="code\utils\json\json_fwd.hpp" />
+    <ClInclude Include="code\utils\json\ordered_map.hpp" />
+    <ClInclude Include="code\utils\json\thirdparty\hedley\hedley.hpp" />
+    <ClInclude Include="code\utils\json\thirdparty\hedley\hedley_undef.hpp" />
+    <ClInclude Include="code\utils\nlohmann\adl_serializer.hpp" />
+    <ClInclude Include="code\utils\nlohmann\byte_container_with_subtype.hpp" />
+    <ClInclude Include="code\utils\nlohmann\detail\abi_macros.hpp" />
+    <ClInclude Include="code\utils\nlohmann\detail\conversions\from_json.hpp" />
+    <ClInclude Include="code\utils\nlohmann\detail\conversions\to_chars.hpp" />
+    <ClInclude Include="code\utils\nlohmann\detail\conversions\to_json.hpp" />
+    <ClInclude Include="code\utils\nlohmann\detail\exceptions.hpp" />
+    <ClInclude Include="code\utils\nlohmann\detail\hash.hpp" />
+    <ClInclude Include="code\utils\nlohmann\detail\input\binary_reader.hpp" />
+    <ClInclude Include="code\utils\nlohmann\detail\input\input_adapters.hpp" />
+    <ClInclude Include="code\utils\nlohmann\detail\input\json_sax.hpp" />
+    <ClInclude Include="code\utils\nlohmann\detail\input\lexer.hpp" />
+    <ClInclude Include="code\utils\nlohmann\detail\input\parser.hpp" />
+    <ClInclude Include="code\utils\nlohmann\detail\input\position_t.hpp" />
+    <ClInclude Include="code\utils\nlohmann\detail\iterators\internal_iterator.hpp" />
+    <ClInclude Include="code\utils\nlohmann\detail\iterators\iteration_proxy.hpp" />
+    <ClInclude Include="code\utils\nlohmann\detail\iterators\iterator_traits.hpp" />
+    <ClInclude Include="code\utils\nlohmann\detail\iterators\iter_impl.hpp" />
+    <ClInclude Include="code\utils\nlohmann\detail\iterators\json_reverse_iterator.hpp" />
+    <ClInclude Include="code\utils\nlohmann\detail\iterators\primitive_iterator.hpp" />
+    <ClInclude Include="code\utils\nlohmann\detail\json_custom_base_class.hpp" />
+    <ClInclude Include="code\utils\nlohmann\detail\json_pointer.hpp" />
+    <ClInclude Include="code\utils\nlohmann\detail\json_ref.hpp" />
+    <ClInclude Include="code\utils\nlohmann\detail\macro_scope.hpp" />
+    <ClInclude Include="code\utils\nlohmann\detail\macro_unscope.hpp" />
+    <ClInclude Include="code\utils\nlohmann\detail\meta\call_std\begin.hpp" />
+    <ClInclude Include="code\utils\nlohmann\detail\meta\call_std\end.hpp" />
+    <ClInclude Include="code\utils\nlohmann\detail\meta\cpp_future.hpp" />
+    <ClInclude Include="code\utils\nlohmann\detail\meta\detected.hpp" />
+    <ClInclude Include="code\utils\nlohmann\detail\meta\identity_tag.hpp" />
+    <ClInclude Include="code\utils\nlohmann\detail\meta\is_sax.hpp" />
+    <ClInclude Include="code\utils\nlohmann\detail\meta\std_fs.hpp" />
+    <ClInclude Include="code\utils\nlohmann\detail\meta\type_traits.hpp" />
+    <ClInclude Include="code\utils\nlohmann\detail\meta\void_t.hpp" />
+    <ClInclude Include="code\utils\nlohmann\detail\output\binary_writer.hpp" />
+    <ClInclude Include="code\utils\nlohmann\detail\output\output_adapters.hpp" />
+    <ClInclude Include="code\utils\nlohmann\detail\output\serializer.hpp" />
+    <ClInclude Include="code\utils\nlohmann\detail\string_concat.hpp" />
+    <ClInclude Include="code\utils\nlohmann\detail\string_escape.hpp" />
+    <ClInclude Include="code\utils\nlohmann\detail\value_t.hpp" />
+    <ClInclude Include="code\utils\nlohmann\json.hpp" />
+    <ClInclude Include="code\utils\nlohmann\json_fwd.hpp" />
+    <ClInclude Include="code\utils\nlohmann\ordered_map.hpp" />
+    <ClInclude Include="code\utils\nlohmann\thirdparty\hedley\hedley.hpp" />
+    <ClInclude Include="code\utils\nlohmann\thirdparty\hedley\hedley_undef.hpp" />
+    <ClInclude Include="code\utils\rapidjson\allocators.h" />
+    <ClInclude Include="code\utils\rapidjson\cursorstreamwrapper.h" />
+    <ClInclude Include="code\utils\rapidjson\document.h" />
+    <ClInclude Include="code\utils\rapidjson\encodedstream.h" />
+    <ClInclude Include="code\utils\rapidjson\encodings.h" />
+    <ClInclude Include="code\utils\rapidjson\error\en.h" />
+    <ClInclude Include="code\utils\rapidjson\error\error.h" />
+    <ClInclude Include="code\utils\rapidjson\filereadstream.h" />
+    <ClInclude Include="code\utils\rapidjson\filewritestream.h" />
+    <ClInclude Include="code\utils\rapidjson\fwd.h" />
+    <ClInclude Include="code\utils\rapidjson\internal\biginteger.h" />
+    <ClInclude Include="code\utils\rapidjson\internal\clzll.h" />
+    <ClInclude Include="code\utils\rapidjson\internal\diyfp.h" />
+    <ClInclude Include="code\utils\rapidjson\internal\dtoa.h" />
+    <ClInclude Include="code\utils\rapidjson\internal\ieee754.h" />
+    <ClInclude Include="code\utils\rapidjson\internal\itoa.h" />
+    <ClInclude Include="code\utils\rapidjson\internal\meta.h" />
+    <ClInclude Include="code\utils\rapidjson\internal\pow10.h" />
+    <ClInclude Include="code\utils\rapidjson\internal\regex.h" />
+    <ClInclude Include="code\utils\rapidjson\internal\stack.h" />
+    <ClInclude Include="code\utils\rapidjson\internal\strfunc.h" />
+    <ClInclude Include="code\utils\rapidjson\internal\strtod.h" />
+    <ClInclude Include="code\utils\rapidjson\internal\swap.h" />
+    <ClInclude Include="code\utils\rapidjson\istreamwrapper.h" />
+    <ClInclude Include="code\utils\rapidjson\memorybuffer.h" />
+    <ClInclude Include="code\utils\rapidjson\memorystream.h" />
+    <ClInclude Include="code\utils\rapidjson\msinttypes\inttypes.h" />
+    <ClInclude Include="code\utils\rapidjson\msinttypes\stdint.h" />
+    <ClInclude Include="code\utils\rapidjson\ostreamwrapper.h" />
+    <ClInclude Include="code\utils\rapidjson\pointer.h" />
+    <ClInclude Include="code\utils\rapidjson\prettywriter.h" />
+    <ClInclude Include="code\utils\rapidjson\rapidjson.h" />
+    <ClInclude Include="code\utils\rapidjson\reader.h" />
+    <ClInclude Include="code\utils\rapidjson\schema.h" />
+    <ClInclude Include="code\utils\rapidjson\stream.h" />
+    <ClInclude Include="code\utils\rapidjson\stringbuffer.h" />
+    <ClInclude Include="code\utils\rapidjson\uri.h" />
+    <ClInclude Include="code\utils\rapidjson\writer.h" />
     <ClInclude Include="code\utils\utilities.h" />
     <ClInclude Include="code\utils\workingDirectory.h" />
     <ClInclude Include="code\windowManager\input.h" />

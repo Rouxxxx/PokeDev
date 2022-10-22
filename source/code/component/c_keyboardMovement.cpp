@@ -1,22 +1,26 @@
 #include "c_keyboardMovement.h"
 
 C_KeyboardMovement::C_KeyboardMovement(Object* owner)
-	: Component(owner), moveSpeed(1), input(nullptr), isMoving(false), reachPosition()
+	: Component(owner), moveSpeed(1), input(nullptr), collider(nullptr), isMoving(false), reachPosition()
 {}
 
 void C_KeyboardMovement::SetInput(Input* input) {
 	this->input = input;
 }
+void C_KeyboardMovement::SetCollider(Collider* collider) {
+	this->collider = collider;
+}
 void C_KeyboardMovement::SetMovementSpeed(int moveSpeed) {
 	this->moveSpeed = moveSpeed;
 }
 
+
 void C_KeyboardMovement::Update(float deltaTime) {
-	
-	if (input == nullptr)
+	if (input == nullptr || collider == nullptr)
 		return;
 
 	sf::Vector2f currentPosition = owner->transform->GetPosition();
+	sf::Vector2f currentPositionBefore = owner->transform->GetPosition();
 	AnimationState state = animation->GetAnimationState();
 
 	if (state == AnimationState::Idle)
@@ -27,7 +31,6 @@ void C_KeyboardMovement::Update(float deltaTime) {
 		Update(deltaTime);
 		return;
 	}
-	
 
 	if (isMoving) {
 		int xMove = 0;
@@ -60,33 +63,32 @@ void C_KeyboardMovement::Update(float deltaTime) {
 		return;
 	}
 
-	isMoving = true;
 	if (input->IsKeyPressed(Input::Key::Left)) {
-		animation->SetAnimationDirection(FacingDirection::Left);
 		animation->SetAnimationState(AnimationState::WalkLeft);
-		currentPosition.x -= 32;
+		if (collider->FindLeft(currentPosition) == -1)
+			currentPosition.x -= 32;
 	}
 	else if (input->IsKeyPressed(Input::Key::Right)) {
-		animation->SetAnimationDirection(FacingDirection::Right);
 		animation->SetAnimationState(AnimationState::WalkRight);
-		currentPosition.x += 32;
+		if (collider->FindRight(currentPosition) == -1)
+			currentPosition.x += 32;
 	}
 
 	else if (input->IsKeyPressed(Input::Key::Up)) {
-		animation->SetAnimationDirection(FacingDirection::Up);
 		animation->SetAnimationState(AnimationState::WalkUp);
-		currentPosition.y -= 32;
+		if (collider->FindUp(currentPosition) == -1)
+			currentPosition.y -= 32;
 	}
 	else if (input->IsKeyPressed(Input::Key::Down)) {
-		animation->SetAnimationDirection(FacingDirection::Down);
 		animation->SetAnimationState(AnimationState::WalkDown);
-		currentPosition.y += 32;
+		if (collider->FindDown(currentPosition) == -1)
+			currentPosition.y += 32;
 	}
 	else {
 		SetIdle();
 		return;
 	}
-	
+	isMoving = (currentPosition != currentPositionBefore);
 	reachPosition = currentPosition;
 
 }

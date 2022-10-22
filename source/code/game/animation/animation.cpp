@@ -42,14 +42,6 @@ void Animation::Reset() {
 	currentFrameTime = 0.f;
 }
 
-
-void Animation::SetDirection(FacingDirection dir) {
-	// Makes sure we do not flip the sprite 
-	// unless its a new direction.
-
-	if (direction == dir)
-		return;
-}
 FacingDirection Animation::GetDirection() const {
 	return direction;
 }
