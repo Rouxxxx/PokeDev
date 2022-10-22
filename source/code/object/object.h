@@ -21,8 +21,7 @@ public:
 	void LateUpdate(float deltaTime);
 	void Draw(Window& window);
 
-	template <typename T> std::shared_ptr<T> GetComponent()
-	{
+	template <typename T> std::shared_ptr<T> GetComponent() {
 		// Check that we don't already have a component of this type.
 		for (auto& exisitingComponent : components)
 			if (std::dynamic_pointer_cast<T>(exisitingComponent))

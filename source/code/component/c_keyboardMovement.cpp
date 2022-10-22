@@ -1,7 +1,7 @@
 #include "c_keyboardMovement.h"
 
 C_KeyboardMovement::C_KeyboardMovement(Object* owner)
-	: Component(owner), moveSpeed(1), input(nullptr), collider(nullptr), isMoving(false), reachPosition()
+	: Component(owner), moveSpeed(2), input(nullptr), collider(nullptr), isMoving(false), reachPosition()
 {}
 
 void C_KeyboardMovement::SetInput(Input* input) {
@@ -14,12 +14,27 @@ void C_KeyboardMovement::SetMovementSpeed(int moveSpeed) {
 	this->moveSpeed = moveSpeed;
 }
 
+bool C_KeyboardMovement::CheckIfDirectionPressed() {
+	return (input->IsKeyPressed(Input::Key::Left) ||
+		input->IsKeyPressed(Input::Key::Right) ||
+		input->IsKeyPressed(Input::Key::Up) ||
+		input->IsKeyPressed(Input::Key::Down));
+}
 
 void C_KeyboardMovement::Update(float deltaTime) {
 	if (input == nullptr || collider == nullptr)
 		return;
 
+	if (!isMoving)
+		animation->StopUpdating();
+	else
+		animation->StartUpdating();
+
 	sf::Vector2f currentPosition = owner->transform->GetPosition();
+	//std::cout << "showed on screen: (" << currentPosition.x << ", " << currentPosition.y << ")\n";
+	//currentPosition.x -= 16;
+	currentPosition.y += 8;
+	//std::cout << "in game: (" << currentPosition.x << ", " << currentPosition.y << ")\n";
 	sf::Vector2f currentPositionBefore = owner->transform->GetPosition();
 	AnimationState state = animation->GetAnimationState();
 
@@ -99,5 +114,4 @@ void C_KeyboardMovement::Awake() {
 
 void C_KeyboardMovement::SetIdle() {
 	isMoving = false;
-	animation->SetAnimationState(AnimationState::Idle);
 }

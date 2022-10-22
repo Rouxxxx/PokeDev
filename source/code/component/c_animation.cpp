@@ -4,30 +4,14 @@
 C_Animation::C_Animation(Object* owner) 
 	: Component(owner), currentAnimation(AnimationState::Idle, nullptr)
 {}
-void C_Animation::Awake()
-{
+void C_Animation::Awake() {
 	sprite = owner->GetComponent<C_Sprite>();
 }
 
 
-void C_Animation::Update(float deltaTime)
-{
-	if (currentAnimation.first == AnimationState::Idle)
+void C_Animation::Update(float deltaTime) {
+	if (currentAnimation.first == AnimationState::Idle || !ShouldUpdate)
 		return;
-
-	/*const char* AnimationStateStr[] =
-	{
-		"Idle",
-		"WalkRight",
-		"WalkLeft",
-		"WalkUp",
-		"WalkDown",
-		"RunRight",
-		"RunLeft",
-		"RunUp",
-		"RunDown"
-	};
-	std::cout << AnimationStateStr[currentAnimation.first] << std::endl;*/
 
 	bool newFrame = currentAnimation.second->UpdateFrame(deltaTime);
 	if (newFrame) {
@@ -62,3 +46,10 @@ const AnimationState& C_Animation::GetAnimationState() const {
 	// to compare the objects current state to a desired state.
 	return currentAnimation.first;
 }
+
+void C_Animation::StartUpdating() {
+	ShouldUpdate = true;
+};
+void C_Animation::StopUpdating() {
+	ShouldUpdate = false;
+};

@@ -29,7 +29,10 @@ public:
 	void SetAnimationState(AnimationState state);
 	// Returns current animation state.
 	const AnimationState& GetAnimationState() const;
+	void StartUpdating();
+	void StopUpdating();
 private:
+	bool ShouldUpdate = true;
 	std::shared_ptr<C_Sprite> sprite;
 	std::map<AnimationState, std::shared_ptr<Animation>> animations;
 	// We store a reference to the current animation so we 

@@ -1,10 +1,51 @@
 #include "sceneGame.h"
 
+#include <vector>
+
+
 using json = nlohmann::json;
 
 SceneGame::SceneGame(WorkingDirectory& workingDir, ResourceAllocator<sf::Texture>& textureAllocator)
 	: workingDir(workingDir), textureAllocator(textureAllocator), mapParser(textureAllocator), collider(Collider())
 {}
+
+FacingDirection findFacingDirection(std::string str) {
+	std::vector<std::pair<std::string, FacingDirection>> table {
+		{"idle", FacingDirection::Down},
+		{"walkRight", FacingDirection::Right},
+		{"walkLeft", FacingDirection::Left},
+		{"walkUp", FacingDirection::Up},
+		{"walkDown", FacingDirection::Down},
+		{"runRight", FacingDirection::Right},
+		{"runLeft", FacingDirection::Left},
+		{"runUp", FacingDirection::Up},
+		{"Down", FacingDirection::Down},
+	};
+
+	for (auto curr : table)
+		if (curr.first == str)
+			return curr.second;
+	return FacingDirection::Down;
+}
+
+AnimationState findAnimationState(std::string str) {
+	std::vector<std::pair<std::string, AnimationState>> table{
+		{"idle", AnimationState::Idle},
+		{"walkRight", AnimationState::WalkRight},
+		{"walkLeft", AnimationState::WalkLeft},
+		{"walkUp", AnimationState::WalkUp},
+		{"walkDown", AnimationState::WalkDown},
+		{"runRight", AnimationState::RunRight},
+		{"runLeft", AnimationState::RunLeft},
+		{"runUp", AnimationState::RunUp},
+		{"Down", AnimationState::RunDown},
+	};
+
+	for (auto curr : table)
+		if (curr.first == str)
+			return curr.second;
+	return AnimationState::Idle;
+}
 
 void SceneGame::createPlayer() {
 
@@ -13,11 +54,9 @@ void SceneGame::createPlayer() {
 
 	auto &meta = data["ethan"]["meta"];
 	auto &frames = data["ethan"]["frames"];
-	auto &states = data["ethan"]["states"];
 	int sortOrder = meta["sortOrder"];
-
-
 	std::string image = data["ethan"]["meta"]["image"];
+
 	int TextureID = textureAllocator.add(workingDir.Get() + image);
 
 
@@ -25,9 +64,9 @@ void SceneGame::createPlayer() {
 	auto sprite = player->AddComponent<C_Sprite>();
 	sprite->SetTextureAllocator(&textureAllocator);
 	sprite->SetSortOrder(sortOrder);
-	unsigned int x = 23 * 32;
+	unsigned int x = 10 * 32;
 	unsigned int y = 9 * 32;
-	player->transform->SetPosition(x, y);
+	player->transform->SetPosition(x, y - 8);
 
 	auto movement = player->AddComponent<C_KeyboardMovement>();
 	movement->SetInput(&input);
@@ -40,16 +79,10 @@ void SceneGame::createPlayer() {
 		std::string name = it.key();
 		auto currentAnimIt = *it;
 
-		AnimationState state = AnimationState::Idle;
+		AnimationState state = findAnimationState(name);
+		FacingDirection face = findFacingDirection(name);
 
-		for (auto itState = states.begin(); itState != states.end(); itState++) {
-			if (*itState == name) {
-				state = static_cast<AnimationState>(itState - states.begin());
-				break;
-			}
-		}
-
-		std::shared_ptr<Animation> currentAnimation = std::make_shared<Animation>(FacingDirection::Down);
+		std::shared_ptr<Animation> currentAnimation = std::make_shared<Animation>(face);
 
 		for (auto it2 = currentAnimIt.begin(); it2 != currentAnimIt.end(); it2++) {
 			auto currentFrameIt = *it2;
@@ -69,7 +102,7 @@ void SceneGame::createPlayer() {
 
 void SceneGame::OnCreate()
 {
-	sf::Vector2i mapOffset(0, 0);
+	sf::Vector2i mapOffset(16, 0);
 	std::vector<std::shared_ptr<Object>> levelTiles = mapParser.Parse(workingDir.Get() + "resources/map/Bourg Geon CSV.tmx", mapOffset, &collider);
 	objects.Add(levelTiles);
 

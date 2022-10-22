@@ -5,33 +5,26 @@ C_Transform::C_Transform(Object* owner)
 { }
 
 
-void C_Transform::SetPosition(float x, float y)
-{
+void C_Transform::SetPosition(float x, float y) {
 	position.x = x;
 	position.y = y;
 }
-void C_Transform::SetPosition(sf::Vector2f pos)
-{
+void C_Transform::SetPosition(sf::Vector2f pos) {
 	position = pos;
 }
-void C_Transform::AddPosition(float x, float y)
-{
+void C_Transform::AddPosition(float x, float y) {
 	position.x += x;
 	position.y += y;
 }
-void C_Transform::AddPosition(sf::Vector2f pos)
-{
+void C_Transform::AddPosition(sf::Vector2f pos) {
 	position += pos;
 }
-void C_Transform::SetX(float x)
-{
+void C_Transform::SetX(float x) {
 	position.x = x;
 }
-void C_Transform::SetY(float y)
-{
+void C_Transform::SetY(float y) {
 	position.y = y;
 }
-const sf::Vector2f& C_Transform::GetPosition() const
-{
+const sf::Vector2f& C_Transform::GetPosition() const {
 	return position;
 }

@@ -16,6 +16,7 @@ public:
 	void Update(float deltaTime) override;
 	void Awake() override;
 	void SetIdle();
+	bool CheckIfDirectionPressed();
 private:
 	int moveSpeed;
 	bool isMoving;
