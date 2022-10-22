@@ -1,6 +1,7 @@
 #pragma once
 
 #include<fstream>
+#include "../../utils/json/json.hpp"
 
 #include "../scene.h"
 #include "../../windowManager/input.h"

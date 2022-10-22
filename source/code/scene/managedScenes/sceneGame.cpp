@@ -1,8 +1,5 @@
 #include "sceneGame.h"
 
-#include <iostream>
-#include "../../utils/nlohmann/json.hpp"
-
 using json = nlohmann::json;
 
 SceneGame::SceneGame(WorkingDirectory& workingDir, ResourceAllocator<sf::Texture>& textureAllocator)
