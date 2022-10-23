@@ -1,7 +1,7 @@
 #include "animation.h"
 
 Animation::Animation(FacingDirection direction)
-	: frames(0), currentFrameIndex(0), currentFrameTime(0.f), direction(direction) 
+	: frames(std::vector<FrameData>()), currentFrameIndex(0), currentFrameTime(0.f), direction(direction)
 { }
 
 

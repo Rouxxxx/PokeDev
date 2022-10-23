@@ -4,6 +4,7 @@
 #include "../../utils/json/json.hpp"
 
 #include "../scene.h"
+#include "../../windowManager/c_camera.h"
 #include "../../windowManager/input.h"
 #include "../../utils/workingDirectory.h"
 
@@ -20,7 +21,7 @@
 class SceneGame : public Scene
 {
 public:
-	SceneGame(WorkingDirectory& workingDir, ResourceAllocator<sf::Texture>& textureAllocator);
+	SceneGame(WorkingDirectory& workingDir, ResourceAllocator<sf::Texture>& textureAllocator, Window& window);
 	void createPlayer();
 	void OnCreate() override;
 	void OnDestroy() override;
@@ -36,4 +37,5 @@ private:
 	Input input;
 	TileMapParser mapParser;
 	Collider collider;
+	Window& window;
 };

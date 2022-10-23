@@ -10,7 +10,7 @@ void C_Animation::Awake() {
 
 
 void C_Animation::Update(float deltaTime) {
-	if (currentAnimation.first == AnimationState::Idle || !ShouldUpdate)
+	if (!ShouldUpdate)
 		return;
 
 	bool newFrame = currentAnimation.second->UpdateFrame(deltaTime);
@@ -23,7 +23,7 @@ void C_Animation::Update(float deltaTime) {
 
 void C_Animation::AddAnimation(AnimationState state, std::shared_ptr<Animation> animation) {
 	auto inserted = animations.insert(std::make_pair(state, animation));
-	if (currentAnimation.first == AnimationState::Idle)
+	if (currentAnimation.first == AnimationState::Idle || animations.empty())
 		SetAnimationState(state);
 }
 

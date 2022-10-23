@@ -1,10 +1,52 @@
-#include <string>
-#include <iostream>
 #include "tileMapParser.h"
+
+using json = nlohmann::json;
+using reference = const nlohmann::json&;
+
+
 
 TileMapParser::TileMapParser(ResourceAllocator<sf::Texture>& textureAllocator)
 	: textureAllocator(textureAllocator) 
 {}
+
+#include <iostream>
+std::shared_ptr<C_Animation> getAnimation(std::shared_ptr<Object> parent, std::vector<int> map, reference animations, std::shared_ptr<TileInfo> tileInfo) {
+
+	int tileID = tileInfo->tileID;
+	auto it = std::find(map.begin(), map.end(), tileID);
+	if (it == map.end())
+		return nullptr;
+
+	auto animation = parent->AddComponent<C_Animation>();
+
+	//Loop through elems
+	for (auto it2 = animations.begin(); it2 != animations.end(); it2++) {
+		for (auto it3 = (*it2).begin(); it3 != (*it2).end(); it3++) {
+			int current = std::atoi(it3.key().c_str());
+			if (current != tileID)
+				continue;
+
+			auto currentAnimType = (*it2);
+
+			float idleAnimSeconds = currentAnimType["idleAnimSeconds"];
+
+			std::shared_ptr<Animation> currentAnimation = std::make_shared<Animation>(FacingDirection::Down);
+
+			for (auto currentAnimIt = (*it3).begin(); currentAnimIt != (*it3).end(); currentAnimIt++) {
+				auto currentFrameIt = *currentAnimIt;
+				int x = currentFrameIt["spriteSource"]["x"];
+				int y = currentFrameIt["spriteSource"]["y"];
+				int w = 16;
+				int h = 16;
+				currentAnimation->AddFrame(tileInfo->textureID, x, y, w, h, idleAnimSeconds);
+			}
+			animation->AddAnimation(AnimationState::RunDown, currentAnimation);
+
+			return animation;
+		}
+	}
+	return nullptr;
+}
 
 std::vector<std::shared_ptr<Object>> TileMapParser::Parse(const std::string& file, sf::Vector2i offset, Collider* collider) {
 	//std::cout << file << "\n";
@@ -27,8 +69,22 @@ std::vector<std::shared_ptr<Object>> TileMapParser::Parse(const std::string& fil
 	// Loads tile layers from XML.
 	std::pair<std::shared_ptr<MapTiles>, std::shared_ptr<TileSheets>> pair = BuildMapTiles(rootNode);
 	std::shared_ptr<MapTiles> tiles = pair.first;
-
 	std::pair<int, int> collisionsGid = findCollisionsGid(pair.second);
+
+	// Get animated tiles
+	std::ifstream f("resources/sprites/animations.json");
+	json data = json::parse(f);
+
+	auto animations = data["animations"];
+	auto animatedTilesGIDs = std::vector<int>();
+
+	for (auto it = animations.begin(); it != animations.end(); it++)
+		for (auto it2 = (*it).begin(); it2 != (*it).end(); it2++) {
+			int current = std::atoi(it2.key().c_str());
+			animatedTilesGIDs.push_back(current);
+	}
+	std::sort(animatedTilesGIDs.begin(), animatedTilesGIDs.end());
+	std::cout << animatedTilesGIDs.size() << " animated tiles\n";
 
 	// We need these to calculate the tiles position in world space
 	int tileSizeX = std::atoi(rootNode->first_attribute("tilewidth")->value());
@@ -50,14 +106,41 @@ std::vector<std::shared_ptr<Object>> TileMapParser::Parse(const std::string& fil
 			const unsigned int tileScale = 1;
 
 			if (layer.second->isVisible) {
-				// Allocate sprite.
+
 				auto sprite = tileObject->AddComponent<C_Sprite>();
 				sprite->SetTextureAllocator(&textureAllocator);
 				sprite->Load(tileInfo->textureID);
 				sprite->SetTextureRect(tileInfo->textureRect);
-				sprite->SetScale(tileScale, tileScale);
+				//sprite->SetScale(tileScale, tileScale);
 				sprite->SetSortOrder(layer.second->id);
+
+				std::shared_ptr<C_Animation> animation = getAnimation(tileObject, animatedTilesGIDs, animations, tileInfo);
+
+				/*if (animation == nullptr) {
+					// Allocate sprite.
+					auto sprite = tileObject->AddComponent<C_Sprite>();
+					sprite->SetTextureAllocator(&textureAllocator);
+					sprite->Load(tileInfo->textureID);
+					sprite->SetTextureRect(tileInfo->textureRect);
+					//sprite->SetScale(tileScale, tileScale);
+					sprite->SetSortOrder(layer.second->id);
+				}*/
 			}
+
+			//example for animated sprites
+			/*else {
+				auto sprite = tileObject->AddComponent<C_Sprite>();
+				sprite->SetTextureAllocator(&textureAllocator);
+				sprite->SetSortOrder(10);
+
+				auto animation = tileObject->AddComponent<C_Animation>();
+				sf::IntRect rect = tileInfo->textureRect;
+				std::shared_ptr<Animation> currentAnimation = std::make_shared<Animation>(FacingDirection::Down);
+				currentAnimation->AddFrame(tileInfo->textureID, rect.left , rect.top, rect.width, rect.height, 0.5);
+				currentAnimation->AddFrame(tileInfo->textureID, 0, 0, 16, 16, 0.5);
+
+				animation->AddAnimation(AnimationState::RunDown, currentAnimation);
+			}*/
 
 			// Calculate world position.
 			unsigned int x = tile->x * tileSizeX + offset.x;
@@ -117,7 +200,7 @@ std::shared_ptr<TileSheets> TileMapParser::BuildTileSheetData(xml_node<>* rootNo
 		tileSheetData.rows = tileCount / tileSheetData.columns;
 
 		xml_node<>* imageNode = tilesheetNode->first_node("image");
-		tileSheetData.textureId = textureAllocator.add("resources/sprites/" + std::string(imageNode->first_attribute("source")->value()));
+		tileSheetData.textureId = textureAllocator.add("resources/map/" + std::string(imageNode->first_attribute("source")->value()));
 		tileSheetData.imageSize.x = std::atoi(imageNode->first_attribute("width")->value());
 		tileSheetData.imageSize.y = std::atoi(imageNode->first_attribute("height")->value());
 

@@ -4,12 +4,15 @@
 #include <unordered_map>
 #include <sstream>
 
+#include "../../utils/json/json.hpp"
 #include "../utils/RapidXML/rapidxml.hpp"
 #include "../utils/RapidXML/rapidxml_utils.hpp"
+
 #include "tile.h"
 #include "../utils/utilities.h"
 #include "../object/object.h"
 #include "../component/c_sprite.h"
+#include "../component/c_animation.h"
 #include "collider.h"
 
 using namespace rapidxml;

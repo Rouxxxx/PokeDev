@@ -1,12 +1,9 @@
 #include "sceneGame.h"
 
-#include <vector>
-
-
 using json = nlohmann::json;
 
-SceneGame::SceneGame(WorkingDirectory& workingDir, ResourceAllocator<sf::Texture>& textureAllocator)
-	: workingDir(workingDir), textureAllocator(textureAllocator), mapParser(textureAllocator), collider(Collider())
+SceneGame::SceneGame(WorkingDirectory& workingDir, ResourceAllocator<sf::Texture>& textureAllocator, Window& window)
+	: workingDir(workingDir), textureAllocator(textureAllocator), mapParser(textureAllocator), window(window), collider(Collider())
 {}
 
 FacingDirection findFacingDirection(std::string str) {
@@ -48,7 +45,6 @@ AnimationState findAnimationState(std::string str) {
 }
 
 void SceneGame::createPlayer() {
-
 	std::ifstream f("resources/sprites/ethan/ethan.json");
 	json data = json::parse(f);
 
@@ -64,7 +60,7 @@ void SceneGame::createPlayer() {
 	auto sprite = player->AddComponent<C_Sprite>();
 	sprite->SetTextureAllocator(&textureAllocator);
 	sprite->SetSortOrder(sortOrder);
-	unsigned int x = 10 * 32;
+	unsigned int x = 15 * 32;
 	unsigned int y = 9 * 32;
 	player->transform->SetPosition(x, y - 8);
 
@@ -94,10 +90,16 @@ void SceneGame::createPlayer() {
 			currentAnimation->AddFrame(TextureID, x, y, w, h, idleAnimSeconds);
 		}
 		animation->AddAnimation(state, currentAnimation);
-
 	}
-	
+
+	auto camera = player->AddComponent<C_Camera>();
+	camera->SetWindow(&window);
+	sf::View view = window.GetView();
+	view.zoom(0.45f);
+	window.SetView(view);
+
 	objects.Add(player);
+
 }
 
 void SceneGame::OnCreate()

@@ -3,7 +3,7 @@
         "meta": {
             "image": "resources/sprites/ethan/ethan.png",
             "scale": 1,
-            "sortOrder": 10
+            "sortOrder": 7
         },
         "frames": {
             "idle": [
@@ -97,9 +97,9 @@
                 {
                     "idleAnimSeconds": 0.125,
                     "spriteSource": {
-                        "x": 36,
+                        "x": 34,
                         "y": 122,
-                        "w": 28,
+                        "w": 31,
                         "h": 34
                     }
                 },
@@ -108,25 +108,25 @@
                     "spriteSource": {
                         "x": 65,
                         "y": 124,
-                        "w": 27,
+                        "w": 31,
                         "h": 35
                     }
                 },
                 {
                     "idleAnimSeconds": 0.125,
                     "spriteSource": {
-                        "x": 36,
+                        "x": 34,
                         "y": 122,
-                        "w": 28,
+                        "w": 31,
                         "h": 34
                     }
                 },
                 {
                     "idleAnimSeconds": 0.125,
                     "spriteSource": {
-                        "x": 7,
+                        "x": 3,
                         "y": 124,
-                        "w": 27,
+                        "w": 31,
                         "h": 35
                     }
                 }
@@ -135,27 +135,27 @@
                 {
                     "idleAnimSeconds": 0.125,
                     "spriteSource": {
-                        "x": 36,
+                        "x": 34,
                         "y": 45,
-                        "w": 27,
+                        "w": 31,
                         "h": 35
                     }
                 },
                 {
                     "idleAnimSeconds": 0.125,
                     "spriteSource": {
-                        "x": 7,
+                        "x": 3,
                         "y": 46,
-                        "w": 27,
+                        "w": 31,
                         "h": 34
                     }
                 },
                 {
                     "idleAnimSeconds": 0.125,
                     "spriteSource": {
-                        "x": 36,
+                        "x": 34,
                         "y": 45,
-                        "w": 27,
+                        "w": 31,
                         "h": 35
                     }
                 },
@@ -164,7 +164,7 @@
                     "spriteSource": {
                         "x": 65,
                         "y": 47,
-                        "w": 27,
+                        "w": 31,
                         "h": 33
                     }
                 }
