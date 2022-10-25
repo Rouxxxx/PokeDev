@@ -22,7 +22,7 @@ public:
 
 	void SetTextureRect(int x, int y, int width, int height);
 	void SetTextureRect(const sf::IntRect& rect);
-	void SetScale(unsigned int scaleX, unsigned int scaleY);
+	void SetScale(float scaleX, float scaleY);
 
 private:
 	ResourceAllocator<sf::Texture>* allocator;

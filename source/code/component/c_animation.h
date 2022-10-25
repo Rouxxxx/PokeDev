@@ -6,6 +6,10 @@
 enum AnimationState
 {
 	Idle = 0,
+	IdleLeft,
+	IdleRight,
+	IdleUp,
+	IdleDown,
 	WalkRight,
 	WalkLeft,
 	WalkUp,

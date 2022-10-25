@@ -17,6 +17,50 @@
                     }
                 }
             ],
+            "idleDown": [
+                {
+                    "idleAnimSeconds": 0.125,
+                    "spriteSource": {
+                        "x": 26,
+                        "y": 4,
+                        "w": 100,
+                        "h": 100
+                    }
+                }
+            ],
+            "idleLeft": [
+                {
+                    "idleAnimSeconds": 0.125,
+                    "spriteSource": {
+                        "x": 26,
+                        "y": 33,
+                        "w": 19,
+                        "h": 25
+                    }
+                }
+            ],
+            "idleRight": [
+                {
+                    "idleAnimSeconds": 0.125,
+                    "spriteSource": {
+                        "x": 26,
+                        "y": 88,
+                        "w": 20,
+                        "h": 24
+                    }
+                }
+            ],
+            "idleUp": [
+                {
+                    "idleAnimSeconds": 0.125,
+                    "spriteSource": {
+                        "x": 27,
+                        "y": 60,
+                        "w": 17,
+                        "h": 24
+                    }
+                }
+            ],
             "walkDown": [
                 {
                     "idleAnimSeconds": 0.125,

@@ -36,6 +36,11 @@ AnimationState findAnimationState(std::string str) {
 		{"runLeft", AnimationState::RunLeft},
 		{"runUp", AnimationState::RunUp},
 		{"Down", AnimationState::RunDown},
+		{"idle", AnimationState::Idle},
+		{"idleLeft", AnimationState::IdleLeft},
+		{"idleRight", AnimationState::IdleRight},
+		{"idleUp", AnimationState::IdleUp},
+		{"idleDown", AnimationState::IdleDown}
 	};
 
 	for (auto curr : table)
@@ -60,6 +65,7 @@ void SceneGame::createPlayer() {
 	auto sprite = player->AddComponent<C_Sprite>();
 	sprite->SetTextureAllocator(&textureAllocator);
 	sprite->SetSortOrder(sortOrder);
+	sprite->SetScale(1.8f, 1.8f);
 	unsigned int x = 15 * 32;
 	unsigned int y = 9 * 32;
 	player->transform->SetPosition(x, y - 8);
@@ -91,6 +97,8 @@ void SceneGame::createPlayer() {
 		}
 		animation->AddAnimation(state, currentAnimation);
 	}
+	
+	animation->SetAnimationState(Idle);
 
 	auto camera = player->AddComponent<C_Camera>();
 	camera->SetWindow(&window);

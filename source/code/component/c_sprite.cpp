@@ -48,6 +48,6 @@ void C_Sprite::LateUpdate(float deltaTime) {
 	sprite.setPosition(owner->transform->GetPosition());
 }
 
-void C_Sprite::SetScale(unsigned int scaleX, unsigned int scaleY) {
+void C_Sprite::SetScale(float scaleX, float scaleY) {
 	sprite.setScale(scaleX, scaleY);
 }

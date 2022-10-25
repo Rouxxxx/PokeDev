@@ -31,10 +31,8 @@ void C_KeyboardMovement::Update(float deltaTime) {
 		animation->StartUpdating();
 
 	sf::Vector2f currentPosition = owner->transform->GetPosition();
-	//std::cout << "showed on screen: (" << currentPosition.x << ", " << currentPosition.y << ")\n";
 	//currentPosition.x -= 16;
 	currentPosition.y += 8;
-	//std::cout << "in game: (" << currentPosition.x << ", " << currentPosition.y << ")\n";
 	sf::Vector2f currentPositionBefore = owner->transform->GetPosition();
 	AnimationState state = animation->GetAnimationState();
 
@@ -78,27 +76,39 @@ void C_KeyboardMovement::Update(float deltaTime) {
 		return;
 	}
 
-	if (input->IsKeyPressed(Input::Key::Left)) {
-		animation->SetAnimationState(AnimationState::WalkLeft);
-		if (collider->FindLeft(currentPosition) == -1)
-			currentPosition.x -= 32;
-	}
-	else if (input->IsKeyPressed(Input::Key::Right)) {
-		animation->SetAnimationState(AnimationState::WalkRight);
-		if (collider->FindRight(currentPosition) == -1)
-			currentPosition.x += 32;
-	}
+	bool left = input->IsKeyPressed(Input::Key::Left);
+	bool right = input->IsKeyPressed(Input::Key::Right);
+	bool up = input->IsKeyPressed(Input::Key::Up);
+	bool down = input->IsKeyPressed(Input::Key::Down);
 
-	else if (input->IsKeyPressed(Input::Key::Up)) {
+	if (left && collider->FindLeft(currentPosition) == -1) {
+		animation->SetAnimationState(AnimationState::WalkLeft);
+		currentPosition.x -= 32;
+	}
+	else if (left)
+		animation->SetAnimationState(AnimationState::IdleLeft);
+
+	else if (right && collider->FindRight(currentPosition) == -1) {
+		animation->SetAnimationState(AnimationState::WalkRight);
+		currentPosition.x += 32;
+	}
+	else if (right)
+		animation->SetAnimationState(AnimationState::IdleRight);
+
+	else if (up && collider->FindUp(currentPosition) == -1) {
 		animation->SetAnimationState(AnimationState::WalkUp);
-		if (collider->FindUp(currentPosition) == -1)
-			currentPosition.y -= 32;
+		currentPosition.y -= 32;
 	}
-	else if (input->IsKeyPressed(Input::Key::Down)) {
+	else if (up)
+		animation->SetAnimationState(AnimationState::IdleUp);
+
+	else if (down && collider->FindDown(currentPosition) == -1) {
 		animation->SetAnimationState(AnimationState::WalkDown);
-		if (collider->FindDown(currentPosition) == -1)
-			currentPosition.y += 32;
+		currentPosition.y += 32;
 	}
+	else if (down)
+		animation->SetAnimationState(AnimationState::IdleDown);
+
 	else {
 		SetIdle();
 		return;

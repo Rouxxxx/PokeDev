@@ -10,7 +10,7 @@ void C_Animation::Awake() {
 
 
 void C_Animation::Update(float deltaTime) {
-	if (!ShouldUpdate)
+	if (!ShouldUpdate && currentAnimation.first > AnimationState::IdleDown)
 		return;
 
 	bool newFrame = currentAnimation.second->UpdateFrame(deltaTime);
