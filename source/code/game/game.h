@@ -3,8 +3,8 @@
 #include "../utils/workingDirectory.h"
 #include "../windowManager/input.h"
 #include "../scene/sceneStateMachine.h"
-#include "../scene/managedScenes/sceneSplashScreen.h"
-#include "../scene/managedScenes/sceneGame.h"
+#include "../scene/sceneSplashScreen/sceneSplashScreen.h"
+#include "../scene/sceneGame/sceneGame.h"
 
 class Game
 {

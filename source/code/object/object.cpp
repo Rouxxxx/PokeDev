@@ -1,7 +1,11 @@
 #include "object.h"
 
 Object::Object() 
-	: queuedForRemoval(false) {
+	: queuedForRemoval(false), isOn(true) {
+	transform = AddComponent<C_Transform>();
+}
+Object::Object(bool isOn)
+	: queuedForRemoval(false), isOn(isOn) {
 	transform = AddComponent<C_Transform>();
 }
 void Object::QueueForRemoval() {
@@ -22,14 +26,25 @@ void Object::Start() {
 }
 
 void Object::Update(float timeDelta) {
+	if (!isOn)
+		return;
 	for (int i = static_cast<int>(components.size()) - 1; i >= 0; i--)
 		components[i]->Update(timeDelta);
 }
 
 void Object::LateUpdate(float timeDelta) {
+	if (!isOn)
+		return;
 	for (int i = static_cast<int>(components.size()) - 1; i >= 0; i--)
 		components[i]->LateUpdate(timeDelta);
 }
 void Object::Draw(Window& window) {
 	drawable->Draw(window);
+}
+void Object::SetOn() {
+	isOn = true;
+}
+
+void Object::SetOff() {
+	isOn = false;
 }

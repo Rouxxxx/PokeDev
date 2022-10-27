@@ -36,12 +36,6 @@
     <ClCompile Include="code\scene\sceneStateMachine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="code\scene\managedScenes\sceneSpashScreen.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="code\scene\managedScenes\sceneGame.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="code\object\object.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -78,6 +72,21 @@
     <ClCompile Include="code\map\collider.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="code\windowManager\c_camera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="code\scene\sceneFight\sceneFight.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="code\scene\sceneGame\sceneGame.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="code\scene\sceneSplashScreen\sceneSpashScreen.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="code\component\c_sprite_popup.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="code\game\game.h">
@@ -99,12 +108,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="code\scene\sceneStateMachine.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="code\scene\managedScenes\sceneSplashScreen.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="code\scene\managedScenes\sceneGame.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="code\object\object.h">
@@ -534,6 +537,21 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="code\utils\nlohmann\ordered_map.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="code\windowManager\c_camera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="code\scene\sceneFight\sceneFight.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="code\scene\sceneGame\sceneGame.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="code\scene\sceneSplashScreen\sceneSplashScreen.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="code\component\c_sprite_popup.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

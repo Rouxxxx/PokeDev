@@ -49,13 +49,14 @@ AnimationState findAnimationState(std::string str) {
 	return AnimationState::Idle;
 }
 
-void SceneGame::createPlayer() {
+std::shared_ptr < C_Transform> SceneGame::createPlayer() {
 	std::ifstream f("resources/sprites/ethan/ethan.json");
 	json data = json::parse(f);
 
 	auto &meta = data["ethan"]["meta"];
 	auto &frames = data["ethan"]["frames"];
 	int sortOrder = meta["sortOrder"];
+
 	std::string image = data["ethan"]["meta"]["image"];
 
 	int TextureID = textureAllocator.add(workingDir.Get() + image);
@@ -105,18 +106,59 @@ void SceneGame::createPlayer() {
 	sf::View view = window.GetView();
 	view.zoom(0.45f);
 	window.SetView(view);
-
 	objects.Add(player);
 
+	return player->transform;
+}
+
+void SceneGame::createTextBox(int id, std::shared_ptr<C_Transform> playerTransform) {
+	std::shared_ptr<Object> textBox = std::make_shared<Object>();
+	std::ifstream f("resources/sprites/textBox/textBox.json");
+	json data = json::parse(f);
+
+	auto& meta = data["textBox"]["meta"];
+	std::string image = data["textBox"]["meta"]["image"];
+	int sortOrder = meta["sortOrder"];
+	float scale = data["textBox"]["meta"]["scale"];
+	auto& boxes = data["textBox"]["boxes"];
+
+	auto sprite = textBox->AddComponent<C_Sprite_Popup>();
+	sprite->SetTransform(playerTransform);
+	sprite->SetTextureAllocator(&textureAllocator);
+	sprite->SetSortOrder(sortOrder);
+	sprite->SetScale(scale, scale);
+
+	int TextureID = textureAllocator.add(workingDir.Get() + image);
+
+	for (auto it = boxes.begin(); it != boxes.end(); it++) {
+		int current = std::atoi(it.key().c_str());
+		if (current == id) {
+			auto currentFrameIt = *it;
+			int x = currentFrameIt["x"];
+			int y = currentFrameIt["y"];
+			int w = currentFrameIt["w"];
+			int h = currentFrameIt["h"];
+			sprite->SetTextureRect(x, y, w, h);
+			break;
+		}
+	}
+
+	sprite->Load(TextureID);
+	sprite->SetVectorString(window.GetView().getSize());
+	sprite->SetStrToPrint("Hello world !");
+	sprite->SetFont(font);
+	objects.Add(textBox);
 }
 
 void SceneGame::OnCreate()
 {
+	font.loadFromFile("resources/font/ds-font.ttf");
 	sf::Vector2i mapOffset(16, 0);
 	std::vector<std::shared_ptr<Object>> levelTiles = mapParser.Parse(workingDir.Get() + "resources/map/Bourg Geon CSV.tmx", mapOffset, &collider);
 	objects.Add(levelTiles);
 
-	createPlayer();
+	auto transform = createPlayer();
+	createTextBox(1, transform);
 }
 
 void SceneGame::OnDestroy()
@@ -139,3 +181,5 @@ void SceneGame::Draw(Window& window) {
 	objects.Draw(window);
 }
 
+void SceneGame::InitPlayer() {
+}

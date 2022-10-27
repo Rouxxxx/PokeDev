@@ -12,6 +12,7 @@
 #include "../../object/objectCollection.h"
 
 #include "../../component/c_sprite.h"
+#include "../../component/c_sprite_popup.h"
 #include  "../../component/c_keyboardMovement.h"
 
 #include "../../resource/resourceAllocator.h"
@@ -22,13 +23,15 @@ class SceneGame : public Scene
 {
 public:
 	SceneGame(WorkingDirectory& workingDir, ResourceAllocator<sf::Texture>& textureAllocator, Window& window);
-	void createPlayer();
+	std::shared_ptr < C_Transform> createPlayer();
+	void createTextBox(int id, std::shared_ptr<C_Transform> playerTransform);
 	void OnCreate() override;
 	void OnDestroy() override;
 	void ProcessInput() override;
 	void Update(float deltaTime) override;
 	void LateUpdate(float deltaTime) override;
 	void Draw(Window& window) override;
+	void InitPlayer();
 	
 private:
 	ResourceAllocator<sf::Texture>& textureAllocator;
@@ -38,4 +41,5 @@ private:
 	TileMapParser mapParser;
 	Collider collider;
 	Window& window;
+	sf::Font font;
 };

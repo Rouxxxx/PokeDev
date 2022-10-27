@@ -140,6 +140,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="code\component\c_animation.cpp" />
+    <ClCompile Include="code\component\c_sprite_popup.cpp" />
     <ClCompile Include="code\map\collider.cpp" />
     <ClCompile Include="code\component\c_drawable.cpp" />
     <ClCompile Include="code\component\c_keyboardMovement.cpp" />
@@ -151,18 +152,21 @@
     <ClCompile Include="code\map\tileMapParser.cpp" />
     <ClCompile Include="code\object\objectCollection.cpp" />
     <ClCompile Include="code\resource\resourseAllocator.cpp" />
-    <ClCompile Include="code\scene\managedScenes\sceneGame.cpp" />
-    <ClCompile Include="code\scene\managedScenes\sceneSpashScreen.cpp" />
+    <ClCompile Include="code\scene\sceneFight\sceneFight.cpp" />
+    <ClCompile Include="code\scene\sceneGame\sceneGame.cpp" />
+    <ClCompile Include="code\scene\sceneSplashScreen\sceneSpashScreen.cpp" />
     <ClCompile Include="code\scene\sceneStateMachine.cpp" />
     <ClCompile Include="code\utils\bitMask.cpp" />
     <ClCompile Include="code\object\object.cpp" />
     <ClCompile Include="code\utils\workingDirectory.cpp" />
+    <ClCompile Include="code\windowManager\c_camera.cpp" />
     <ClCompile Include="code\windowManager\input.cpp" />
     <ClCompile Include="code\windowManager\window.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="code\component\c_animation.h" />
+    <ClInclude Include="code\component\c_sprite_popup.h" />
     <ClInclude Include="code\map\collider.h" />
     <ClInclude Include="code\component\c_drawable.h" />
     <ClInclude Include="code\component\c_keyboardMovement.h" />
@@ -175,9 +179,10 @@
     <ClInclude Include="code\map\tileMapParser.h" />
     <ClInclude Include="code\object\objectCollection.h" />
     <ClInclude Include="code\resource\resourceAllocator.h" />
-    <ClInclude Include="code\scene\managedScenes\sceneGame.h" />
-    <ClInclude Include="code\scene\managedScenes\sceneSplashScreen.h" />
     <ClInclude Include="code\scene\scene.h" />
+    <ClInclude Include="code\scene\sceneFight\sceneFight.h" />
+    <ClInclude Include="code\scene\sceneGame\sceneGame.h" />
+    <ClInclude Include="code\scene\sceneSplashScreen\sceneSplashScreen.h" />
     <ClInclude Include="code\scene\sceneStateMachine.h" />
     <ClInclude Include="code\utils\bitMask.h" />
     <ClInclude Include="code\component\component.h" />
@@ -312,6 +317,7 @@
     <ClInclude Include="code\utils\rapidjson\writer.h" />
     <ClInclude Include="code\utils\utilities.h" />
     <ClInclude Include="code\utils\workingDirectory.h" />
+    <ClInclude Include="code\windowManager\c_camera.h" />
     <ClInclude Include="code\windowManager\input.h" />
     <ClInclude Include="code\windowManager\window.h" />
   </ItemGroup>

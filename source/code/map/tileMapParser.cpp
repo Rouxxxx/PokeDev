@@ -9,7 +9,6 @@ TileMapParser::TileMapParser(ResourceAllocator<sf::Texture>& textureAllocator)
 	: textureAllocator(textureAllocator) 
 {}
 
-#include <iostream>
 std::shared_ptr<C_Animation> getAnimation(std::shared_ptr<Object> parent, std::vector<int> map, reference animations, std::shared_ptr<TileInfo> tileInfo) {
 
 	int tileID = tileInfo->tileID;
@@ -49,9 +48,6 @@ std::shared_ptr<C_Animation> getAnimation(std::shared_ptr<Object> parent, std::v
 }
 
 std::vector<std::shared_ptr<Object>> TileMapParser::Parse(const std::string& file, sf::Vector2i offset, Collider* collider) {
-	//std::cout << file << "\n";
-	//struct stat buffer;
-	//std::cout << (stat(file.c_str(), &buffer) == 0) << "\n";
 
 	char* fileLoc = new char[file.size() + 1];
 	//TODO: make multi format version of string copy
@@ -84,7 +80,6 @@ std::vector<std::shared_ptr<Object>> TileMapParser::Parse(const std::string& fil
 			animatedTilesGIDs.push_back(current);
 	}
 	std::sort(animatedTilesGIDs.begin(), animatedTilesGIDs.end());
-	std::cout << animatedTilesGIDs.size() << " animated tiles\n";
 
 	// We need these to calculate the tiles position in world space
 	int tileSizeX = std::atoi(rootNode->first_attribute("tilewidth")->value());

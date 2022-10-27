@@ -16,7 +16,8 @@ public:
     const sf::View& GetView() const;
     void SetView(const sf::View& view);
     sf::FloatRect GetViewSpace() const;
-private:
     sf::RenderWindow window;
+private:
     sf::Vector2u centre;
+    sf::Vector2f size;
 };

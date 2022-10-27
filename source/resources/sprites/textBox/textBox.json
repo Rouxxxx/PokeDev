@@ -1,0 +1,18 @@
+{
+    "textBox": {
+        "meta": {
+            "image": "resources/sprites/textBox/textBox.png",
+            "scale": 1.8,
+            "sortOrder": 15
+        },
+        "boxes": {
+            "1": {
+                "x": 2,
+                "y": 2,
+                "w": 252,
+                "h": 46
+            }
+        }
+    }
+}
+

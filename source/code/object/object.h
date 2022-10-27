@@ -11,15 +11,18 @@ class Object
 {
 public:
 	Object();
+	Object(bool isOn);
 	std::shared_ptr<C_Transform> transform;
 	// Awake is called when object created. Use to ensure 
 	// required components are present.
 	void Awake();
-	// Start is called after Awake method. Use to initialise variables.
 	void Start();
 	void Update(float deltaTime);
 	void LateUpdate(float deltaTime);
 	void Draw(Window& window);
+
+	void SetOn();
+	void SetOff();
 
 	template <typename T> std::shared_ptr<T> GetComponent() {
 		// Check that we don't already have a component of this type.
@@ -54,4 +57,5 @@ private:
 	std::vector<std::shared_ptr<Component>> components;
 	std::shared_ptr<C_Drawable> drawable;
 	bool queuedForRemoval;
+	bool isOn;
 };
