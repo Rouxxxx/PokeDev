@@ -51,3 +51,15 @@ int Collider::Find(float x, float y) {
 void Collider::Empty() {
 	map.clear();
 }
+
+void Collider::SetY(float newY) {
+	y = newY;
+}
+float Collider::GetY() {
+	return y;
+}
+
+
+bool Collider::playerAbove(float yCmp) {
+	return y > yCmp;
+}

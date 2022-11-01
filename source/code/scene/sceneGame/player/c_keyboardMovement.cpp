@@ -25,56 +25,41 @@ void C_KeyboardMovement::Update(float deltaTime) {
 	if (input == nullptr || collider == nullptr)
 		return;
 
-	if (!isMoving)
-		animation->StopUpdating();
-	else
-		animation->StartUpdating();
-
-	sf::Vector2f currentPosition = owner->transform->GetPosition();
-	//currentPosition.x -= 16;
-	currentPosition.y += 8;
-	sf::Vector2f currentPositionBefore = owner->transform->GetPosition();
+	sf::Vector2f currentPosition = owner->transform->GetPositionTrainer();
 	AnimationState state = animation->GetAnimationState();
+
+	if (isMoving)
+		animation->StartUpdating();
+	else
+		animation->StopUpdating();
 
 	if (state == AnimationState::Idle)
 		SetIdle();
 
 	if (isMoving && currentPosition == reachPosition) {
-		SetIdle();
+		collider->Delete(oldPosition);
+		oldPosition = animToReachPosition(oldPosition, state);
+		collider->Add(oldPosition, 2);
+
+		collider->SetY(reachPosition.y);
+		isMoving = false;
+
 		Update(deltaTime);
 		return;
 	}
 
 	if (isMoving) {
-		int xMove = 0;
-		int yMove = 0;
-		
-		if (state == AnimationState::RunDown)
-			yMove = moveSpeed * 2;
-		else if (state == AnimationState::WalkDown)
-			yMove = moveSpeed;
-
-		else if (state == AnimationState::RunUp)
-			yMove = -moveSpeed * 2;
-		else if (state == AnimationState::WalkUp)
-			yMove = -moveSpeed;
-
-		else if (state == AnimationState::RunLeft)
-			xMove = -moveSpeed * 2;
-		else if (state == AnimationState::WalkLeft)
-			xMove = -moveSpeed;
-
-		else if (state == AnimationState::RunRight)
-			xMove = moveSpeed * 2;
-		else if (state == AnimationState::WalkRight)
-			xMove = moveSpeed;
-
-		float xFrameMove = xMove;
-		float yFrameMove = yMove;
-		owner->transform->AddPosition(xFrameMove, yFrameMove);
+		sf::Vector2f move = animToNewPosition(state, moveSpeed);
+		owner->transform->AddPosition(move);
 
 		return;
 	}
+
+	KeysToMovement(currentPosition);
+}
+
+void C_KeyboardMovement::KeysToMovement(sf::Vector2f currentPosition) {
+	sf::Vector2f currentPositionBefore = currentPosition;
 
 	bool left = input->IsKeyPressed(Input::Key::Left);
 	bool right = input->IsKeyPressed(Input::Key::Right);
@@ -82,28 +67,28 @@ void C_KeyboardMovement::Update(float deltaTime) {
 	bool down = input->IsKeyPressed(Input::Key::Down);
 
 	if (left && collider->FindLeft(currentPosition) == -1) {
-		animation->SetAnimationState(AnimationState::WalkLeft);
+		SetAnimationState(AnimationState::WalkLeft);
 		currentPosition.x -= 32;
 	}
 	else if (left)
-		animation->SetAnimationState(AnimationState::IdleLeft);
+		SetAnimationState(AnimationState::IdleLeft);
 
 	else if (right && collider->FindRight(currentPosition) == -1) {
-		animation->SetAnimationState(AnimationState::WalkRight);
+		SetAnimationState(AnimationState::WalkRight);
 		currentPosition.x += 32;
 	}
 	else if (right)
-		animation->SetAnimationState(AnimationState::IdleRight);
+		SetAnimationState(AnimationState::IdleRight);
 
 	else if (up && collider->FindUp(currentPosition) == -1) {
-		animation->SetAnimationState(AnimationState::WalkUp);
+		SetAnimationState(AnimationState::WalkUp);
 		currentPosition.y -= 32;
 	}
 	else if (up)
 		animation->SetAnimationState(AnimationState::IdleUp);
 
 	else if (down && collider->FindDown(currentPosition) == -1) {
-		animation->SetAnimationState(AnimationState::WalkDown);
+		SetAnimationState(AnimationState::WalkDown);
 		currentPosition.y += 32;
 	}
 	else if (down)
@@ -115,7 +100,6 @@ void C_KeyboardMovement::Update(float deltaTime) {
 	}
 	isMoving = (currentPosition != currentPositionBefore);
 	reachPosition = currentPosition;
-
 }
 
 void C_KeyboardMovement::Awake() {
@@ -124,4 +108,14 @@ void C_KeyboardMovement::Awake() {
 
 void C_KeyboardMovement::SetIdle() {
 	isMoving = false;
+}
+
+void C_KeyboardMovement::SetAnimationState(AnimationState state) {
+	animation->SetAnimationState(state);
+}
+void C_KeyboardMovement::SetOldPosition(float x, float y) {
+	SetOldPosition(sf::Vector2f(x, y));
+}
+void C_KeyboardMovement::SetOldPosition(sf::Vector2f pos) {
+	oldPosition = pos;
 }

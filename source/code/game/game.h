@@ -5,6 +5,7 @@
 #include "../scene/sceneStateMachine.h"
 #include "../scene/sceneSplashScreen/sceneSplashScreen.h"
 #include "../scene/sceneGame/sceneGame.h"
+#include "../Logger/logger.h"
 
 class Game
 {

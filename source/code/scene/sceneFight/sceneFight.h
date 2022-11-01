@@ -12,7 +12,7 @@
 #include "../../object/objectCollection.h"
 
 #include "../../component/c_sprite.h"
-#include  "../../component/c_keyboardMovement.h"
+#include "../../component/c_keyboardMovement.h"
 
 #include "../../resource/resourceAllocator.h"
 

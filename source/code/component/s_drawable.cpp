@@ -19,7 +19,34 @@ void S_Drawable::Sort() {
 	);
 }
 
+void S_Drawable::SortPNJs() {
+	std::sort(pnjBegin, pnjEnd,
+		[](std::shared_ptr<Object> a, std::shared_ptr<Object> b) -> bool {
+			return a->GetDrawable()->GetSortOrder()
+				< b->GetDrawable()->GetSortOrder();
+		}
+	);
+}
+
+
 void S_Drawable::Draw(Window& window) {
+	if (firstDraw) {
+		int res = _putenv("needTileSort=yes");
+		firstDraw = false;
+		pnjBegin = std::find_if(drawables.begin(), drawables.end(), [](std::shared_ptr<Object> a) -> bool { return a->GetDrawable()->GetSortOrder() > 6; });
+		pnjEnd = std::find_if(pnjBegin, drawables.end(), [](std::shared_ptr<Object> a) -> bool { return a->GetDrawable()->GetSortOrder() > 9; });
+	}
+	else {
+		char* pValue;
+		std::size_t len;
+		errno_t err = _dupenv_s(&pValue, &len, "needTileSort");
+
+		if (pValue[0] == 'y') {
+			int res = _putenv("needTileSort=no");
+			SortPNJs();
+		}
+		
+	}
 	for (auto& d : drawables)
 		d->Draw(window);
 }

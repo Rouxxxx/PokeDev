@@ -43,3 +43,47 @@ private:
 	// can quickly update and draw it.
 	std::pair<AnimationState, std::shared_ptr<Animation>> currentAnimation;
 };
+
+
+inline sf::Vector2f animToReachPosition(sf::Vector2f vec, AnimationState state) {
+	switch (state) {
+	case (WalkDown): case (RunDown):
+		vec.y += 32;
+		break;
+	case (WalkUp): case (RunUp):
+		vec.y -= 32;
+		break;
+	case (WalkLeft): case (RunLeft):
+		vec.x -= 32;
+		break;
+	case (WalkRight): case (RunRight):
+		vec.x += 32;
+		break;
+	}
+	return vec;
+}
+
+inline sf::Vector2f animToNewPosition(AnimationState state, int moveSpeed) {
+	sf::Vector2f vec(0, 0);
+
+	switch (state) {
+	case (WalkDown): case (RunDown):
+		vec.y += 1;
+		break;
+	case (WalkUp): case (RunUp):
+		vec.y -= 1;
+		break;
+	case (WalkLeft): case (RunLeft):
+		vec.x -= 1;
+		break;
+	case (WalkRight): case (RunRight):
+		vec.x += 1;
+		break;
+	}
+
+	if (state == RunDown || state == RunUp || state == RunRight || state == RunLeft)
+		vec *= 2.0f;
+
+	vec *= moveSpeed / 1.0f;
+	return vec;
+}

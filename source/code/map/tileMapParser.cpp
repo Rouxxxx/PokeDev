@@ -4,7 +4,7 @@ using json = nlohmann::json;
 using reference = const nlohmann::json&;
 
 TileMapParser::TileMapParser(ResourceAllocator<sf::Texture>& textureAllocator)
-	: textureAllocator(textureAllocator) 
+	: textureAllocator(textureAllocator), className(typeid(this).name())
 {}
 
 std::shared_ptr<C_Animation> getAnimation(std::shared_ptr<Object> parent, std::vector<int> map, reference animations, std::shared_ptr<TileInfo> tileInfo) {
@@ -58,6 +58,7 @@ std::vector<std::shared_ptr<Object>> TileMapParser::Parse(const std::string& fil
 	rapidxml::file<> xmlFile(fileLoc);
 	rapidxml::xml_document<> doc;
 	doc.parse<0>(xmlFile.data());
+	Logger::debug_info(className, __func__, "Parsed tilemap XML (" + file + ")");
 	xml_node<>* rootNode = doc.first_node("map");
 
 	// Loads tile layers from XML.
@@ -68,6 +69,7 @@ std::vector<std::shared_ptr<Object>> TileMapParser::Parse(const std::string& fil
 	// Get animated tiles
 	std::ifstream f("resources/sprites/animations.json");
 	json data = json::parse(f);
+	Logger::debug_info(className, __func__, "Parsed animations JSON");
 
 	auto animations = data["animations"];
 	auto animatedTilesGIDs = std::vector<int>();
@@ -78,17 +80,16 @@ std::vector<std::shared_ptr<Object>> TileMapParser::Parse(const std::string& fil
 			animatedTilesGIDs.push_back(current);
 	}
 	std::sort(animatedTilesGIDs.begin(), animatedTilesGIDs.end());
+	Logger::debug_info(className, __func__, "Found " + std::to_string(animatedTilesGIDs.size()) + " animated tiles");
 
-	// We need these to calculate the tiles position in world space
+	// tiles position in world space
 	int tileSizeX = std::atoi(rootNode->first_attribute("tilewidth")->value());
 	int tileSizeY = std::atoi(rootNode->first_attribute("tileheight")->value());
 	int mapsizeX = std::atoi(rootNode->first_attribute("width")->value());
 	int mapsizeY = std::atoi(rootNode->first_attribute("height")->value());
 
-	// This will contain all of our tiles as objects.
 	std::vector<std::shared_ptr<Object>> tileObjects;
 
-	// We iterate through each layer in the tile map
 	for (const auto& layer : *tiles) {
 
 		for (const auto& tile : *layer.second->layer) {
@@ -104,36 +105,13 @@ std::vector<std::shared_ptr<Object>> TileMapParser::Parse(const std::string& fil
 				sprite->SetTextureAllocator(&textureAllocator);
 				sprite->Load(tileInfo->textureID);
 				sprite->SetTextureRect(tileInfo->textureRect);
+				
 				//sprite->SetScale(tileScale, tileScale);
+
 				sprite->SetSortOrder(layer.second->id);
 
 				std::shared_ptr<C_Animation> animation = getAnimation(tileObject, animatedTilesGIDs, animations, tileInfo);
-
-				/*if (animation == nullptr) {
-					// Allocate sprite.
-					auto sprite = tileObject->AddComponent<C_Sprite>();
-					sprite->SetTextureAllocator(&textureAllocator);
-					sprite->Load(tileInfo->textureID);
-					sprite->SetTextureRect(tileInfo->textureRect);
-					//sprite->SetScale(tileScale, tileScale);
-					sprite->SetSortOrder(layer.second->id);
-				}*/
 			}
-
-			//example for animated sprites
-			/*else {
-				auto sprite = tileObject->AddComponent<C_Sprite>();
-				sprite->SetTextureAllocator(&textureAllocator);
-				sprite->SetSortOrder(10);
-
-				auto animation = tileObject->AddComponent<C_Animation>();
-				sf::IntRect rect = tileInfo->textureRect;
-				std::shared_ptr<Animation> currentAnimation = std::make_shared<Animation>(FacingDirection::Down);
-				currentAnimation->AddFrame(tileInfo->textureID, rect.left , rect.top, rect.width, rect.height, 0.5);
-				currentAnimation->AddFrame(tileInfo->textureID, 0, 0, 16, 16, 0.5);
-
-				animation->AddAnimation(AnimationState::RunDown, currentAnimation);
-			}*/
 
 			// Calculate world position.
 			unsigned int x = tile->x * tileSizeX + offset.x;
@@ -143,12 +121,12 @@ std::vector<std::shared_ptr<Object>> TileMapParser::Parse(const std::string& fil
 			if (tileID >= collisionsGid.first && tileID <= collisionsGid.second)
 				collider->Add((float)x, (float)y, tileID - collisionsGid.first);
 
-			
 			tileObject->transform->SetPosition(x, y);
-			// Add new tile Object to the collection.
 			tileObjects.emplace_back(tileObject);
 		}
 	}
+	;
+	Logger::debug_info(className, __func__, "Loaded " +std::to_string(tileObjects.size()) + " tiles");
 	return tileObjects;
 }
 
@@ -200,6 +178,7 @@ std::shared_ptr<TileSheets> TileMapParser::BuildTileSheetData(xml_node<>* rootNo
 		// We store the tile sheets firstid.
 		tileSheets.insert(std::make_pair(firstid, std::make_shared<TileSheetData>(tileSheetData)));
 	}
+	Logger::debug_info(className, __func__, "Built TileSheet");
 	return std::make_shared<TileSheets>(tileSheets);
 }
 
@@ -250,9 +229,10 @@ std::pair<std::string, std::shared_ptr<LayerStruct>> TileMapParser::BuildLayer(x
                     }
                 }
 
-                if (!tileSheet)
-                    //TODO: output error message.
-                    continue;
+				if (!tileSheet) {
+					Logger::warn(className, __func__, "Didn't find TileSheet for tileID " + std::to_string(tileId) + ". Skipping");
+					continue;
+				}
 
                 int textureX = tileId % tileSheet->columns - 1;
                 int textureY = tileId / tileSheet->columns;
@@ -284,5 +264,6 @@ std::pair<std::string, std::shared_ptr<LayerStruct>> TileMapParser::BuildLayer(x
 	layerStruct->layer = layer;
 
     const std::string layerName = layerNode->first_attribute("name")->value();
+	Logger::debug_info(className, __func__, "Built layer " + layerName);
     return std::make_pair(layerName, layerStruct);
 }

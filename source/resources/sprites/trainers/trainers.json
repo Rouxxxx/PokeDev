@@ -1,0 +1,221 @@
+{
+    "trainers": {
+        "meta": {
+            "image": "resources/sprites/trainers/trainers.png",
+            "scale": 1.8,
+            "sortOrder": 7
+        },
+
+        "trainersList": {
+            "1": {
+                "idle": [
+                    {
+                        "idleAnimSeconds": 0.125,
+                        "spriteSource": {
+                            "x": 71,
+                            "y": 38,
+                            "w": 19,
+                            "h": 24
+                        }
+                    }
+                ],
+                "idleDown": [
+                    {
+                        "idleAnimSeconds": 0.125,
+                        "spriteSource": {
+                            "x": 71,
+                            "y": 38,
+                            "w": 19,
+                            "h": 24
+                        }
+                    }
+                ],
+                "idleLeft": [
+                    {
+                        "idleAnimSeconds": 0.125,
+                        "spriteSource": {
+                            "x": 8,
+                            "y": 70,
+                            "w": 19,
+                            "h": 25
+                        }
+                    }
+                ],
+                "idleRight": [
+                    {
+                        "idleAnimSeconds": 0.125,
+                        "spriteSource": {
+                            "x": 38,
+                            "y": 6,
+                            "w": 16,
+                            "h": 26
+                        }
+                    }
+                ],
+                "idleUp": [
+                    {
+                        "idleAnimSeconds": 0.125,
+                        "spriteSource": {
+                            "x": 7,
+                            "y": 7,
+                            "w": 17,
+                            "h": 24
+                        }
+                    }
+                ],
+                "walkDown": [
+                    {
+                        "idleAnimSeconds": 0.125,
+                        "spriteSource": {
+                            "x": 71,
+                            "y": 38,
+                            "w": 19,
+                            "h": 24
+                        }
+                    },
+                    {
+                        "idleAnimSeconds": 0.125,
+                        "spriteSource": {
+                            "x": 71,
+                            "y": 69,
+                            "w": 17,
+                            "h": 26
+                        }
+                    },
+                    {
+                        "idleAnimSeconds": 0.125,
+                        "spriteSource": {
+                            "x": 71,
+                            "y": 38,
+                            "w": 19,
+                            "h": 24
+                        }
+                    },
+                    {
+                        "idleAnimSeconds": 0.125,
+                        "spriteSource": {
+                            "x": 70,
+                            "y": 100,
+                            "w": 17,
+                            "h": 26
+                        }
+                    }
+                ],
+                "walkUp": [
+                    {
+                        "idleAnimSeconds": 0.125,
+                        "spriteSource": {
+                            "x": 27,
+                            "y": 60,
+                            "w": 17,
+                            "h": 24
+                        }
+                    },
+                    {
+                        "idleAnimSeconds": 0.125,
+                        "spriteSource": {
+                            "x": 49,
+                            "y": 61,
+                            "w": 17,
+                            "h": 25
+                        }
+                    },
+                    {
+                        "idleAnimSeconds": 0.125,
+                        "spriteSource": {
+                            "x": 27,
+                            "y": 60,
+                            "w": 17,
+                            "h": 24
+                        }
+                    },
+                    {
+                        "idleAnimSeconds": 0.125,
+                        "spriteSource": {
+                            "x": 6,
+                            "y": 61,
+                            "w": 17,
+                            "h": 25
+                        }
+                    }
+                ],
+                "walkRight": [
+                    {
+                        "idleAnimSeconds": 0.125,
+                        "spriteSource": {
+                            "x": 38,
+                            "y": 6,
+                            "w": 16,
+                            "h": 26
+                        }
+                    },
+                    {
+                        "idleAnimSeconds": 0.125,
+                        "spriteSource": {
+                            "x": 38,
+                            "y": 36,
+                            "w": 17,
+                            "h": 26
+                        }
+                    },
+                    {
+                        "idleAnimSeconds": 0.125,
+                        "spriteSource": {
+                            "x": 38,
+                            "y": 6,
+                            "w": 16,
+                            "h": 26
+                        }
+                    },
+                    {
+                        "idleAnimSeconds": 0.125,
+                        "spriteSource": {
+                            "x": 38,
+                            "y": 68,
+                            "w": 17,
+                            "h": 28
+                        }
+                    }
+                ],
+                "walkLeft": [
+                    {
+                        "idleAnimSeconds": 0.125,
+                        "spriteSource": {
+                            "x": 8,
+                            "y": 69,
+                            "w": 19,
+                            "h": 25
+                        }
+                    },
+                    {
+                        "idleAnimSeconds": 0.125,
+                        "spriteSource": {
+                            "x": 8,
+                            "y": 37,
+                            "w": 17,
+                            "h": 25
+                        }
+                    },
+                    {
+                        "idleAnimSeconds": 0.125,
+                        "spriteSource": {
+                            "x": 8,
+                            "y": 69,
+                            "w": 19,
+                            "h": 25
+                        }
+                    },
+                    {
+                        "idleAnimSeconds": 0.125,
+                        "spriteSource": {
+                            "x": 8,
+                            "y": 101,
+                            "w": 17,
+                            "h": 25
+                        }
+                    }
+                ]
+            }
+        }
+    }
+}

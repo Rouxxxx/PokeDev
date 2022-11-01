@@ -1,0 +1,17 @@
+{
+    "map": {
+        "meta": {
+            "type": "town",
+            "tilemap": "resources/map/Bourg_Geon/Bourg_Geon.tmx"
+        },
+        "players": [
+            {
+                "id": 1,
+                "style": "static_around",
+                "trainer": "no",
+                "x": 13,
+                "y": 10
+            }
+        ]
+    }
+}

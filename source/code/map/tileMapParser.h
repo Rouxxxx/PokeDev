@@ -4,6 +4,7 @@
 #include <unordered_map>
 #include <sstream>
 
+#include "../../utils/Logger/logger.h"
 #include "../../utils/json/json.hpp"
 #include "../utils/RapidXML/rapidxml.hpp"
 #include "../utils/RapidXML/rapidxml_utils.hpp"
@@ -56,4 +57,6 @@ private:
 	std::pair<std::string, std::shared_ptr<LayerStruct>> BuildLayer(xml_node<>* layerNode, std::shared_ptr<TileSheets> tileSheets);
 	std::pair <std::shared_ptr<MapTiles>, std::shared_ptr<TileSheets>> BuildMapTiles(xml_node<>* rootNode);
 	ResourceAllocator<sf::Texture>& textureAllocator;
+
+	const std::string className;
 };

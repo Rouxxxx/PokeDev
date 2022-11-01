@@ -24,6 +24,10 @@ public:
 	int Find(float x, float y);
 	int Find(sf::Vector2f vec);
 	void Empty();
+	void SetY(float);
+	float GetY();
+	bool playerAbove(float);
 private:
 	std::map<std::pair<float, float>, int> map;
+	float y;
 };
