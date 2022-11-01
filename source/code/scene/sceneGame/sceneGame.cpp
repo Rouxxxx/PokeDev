@@ -3,8 +3,23 @@
 using json = nlohmann::json;
 
 SceneGame::SceneGame(WorkingDirectory& workingDir, ResourceAllocator<sf::Texture>& textureAllocator, Window& window)
-	: workingDir(workingDir), textureAllocator(textureAllocator), mapParser(textureAllocator), window(window), collider(Collider())
+	: workingDir(workingDir), textureAllocator(textureAllocator), mapParser(textureAllocator), window(window), collider(Collider()) 
 {}
+
+void SceneGame::initTextClass(std::string path) {
+	std::ifstream f(path);
+	json data = json::parse(f);
+
+	auto& meta = data["font"]["meta"];
+	auto& colors = data["font"]["colors"];
+
+	int size = meta["size"];
+	int opacityShadow = meta["opacityShadow"];
+	std::string file = meta["file"];
+	std::string fileShadow = meta["fileShadow"];
+
+	textClass = TextClass(colors, std::make_pair(file, fileShadow), opacityShadow, size);
+}
 
 FacingDirection findFacingDirection(std::string str) {
 	std::vector<std::pair<std::string, FacingDirection>> table {
@@ -111,6 +126,7 @@ std::shared_ptr < C_Transform> SceneGame::createPlayer() {
 	return player->transform;
 }
 
+
 void SceneGame::createTextBox(int id, std::shared_ptr<C_Transform> playerTransform) {
 	std::shared_ptr<Object> textBox = std::make_shared<Object>();
 	std::ifstream f("resources/sprites/textBox/textBox.json");
@@ -121,6 +137,7 @@ void SceneGame::createTextBox(int id, std::shared_ptr<C_Transform> playerTransfo
 	int sortOrder = meta["sortOrder"];
 	float scale = data["textBox"]["meta"]["scale"];
 	auto& boxes = data["textBox"]["boxes"];
+	std::string str = meta["str"];
 
 	auto sprite = textBox->AddComponent<C_Sprite_Popup>();
 	sprite->SetTransform(playerTransform);
@@ -145,14 +162,16 @@ void SceneGame::createTextBox(int id, std::shared_ptr<C_Transform> playerTransfo
 
 	sprite->Load(TextureID);
 	sprite->SetVectorString(window.GetView().getSize());
-	sprite->SetStrToPrint("Hello world !");
-	sprite->SetFont(font);
+	sprite->SetStrToPrint(str);
+	sprite->SetFonts(textClass.getFonts());
+	sprite->SetSize(textClass.getSize());
+	sprite->SetColor(textClass.getColor(textColor::Default));
 	objects.Add(textBox);
 }
 
 void SceneGame::OnCreate()
 {
-	font.loadFromFile("resources/font/ds-font.ttf");
+	initTextClass("resources/font/font.json");
 	sf::Vector2i mapOffset(16, 0);
 	std::vector<std::shared_ptr<Object>> levelTiles = mapParser.Parse(workingDir.Get() + "resources/map/Bourg Geon CSV.tmx", mapOffset, &collider);
 	objects.Add(levelTiles);

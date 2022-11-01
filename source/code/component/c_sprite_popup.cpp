@@ -55,12 +55,11 @@ void C_Sprite_Popup::UpdateRects() {
 	vec.x -= vectorString.x;
 	owner->transform->SetPosition(vec);
 
-	sf::Vector2f vecStr = vec + sf::Vector2f(20, 0);
-	sf::Vector2f vecStrShadow = vecStr + sf::Vector2f(2, 2);
+	sf::Vector2f vecStr = vec + sf::Vector2f(25, 7);
 	currentState.setPosition(vecStr);
-	currentStateShadow.setPosition(vecStrShadow);
+	currentStateShadow.setPosition(vecStr);
 
-	sprite.setPosition(owner->transform->GetPosition());
+	sprite.setPosition(vec);
 }
 
 void C_Sprite_Popup::UpdateStrings() {
@@ -83,24 +82,13 @@ void C_Sprite_Popup::SetScale(float scaleX, float scaleY) {
 	sprite.setScale(scaleX, scaleY);
 }
 
-void C_Sprite_Popup::SetFont(sf::Font newFont) {
-	std::string str = "505159";
-	int r, g, b;
-	int res = sscanf_s(str.c_str(), "%02x%02x%02x", &r, &g, &b);
 
-	font = newFont;
-	currentState.setFont(font);
-	currentState.setFillColor(sf::Color(r, g, b));
-	currentState.setCharacterSize(50);
-
-	std::string str2 = "a1a1a8";
-	int r2, g2, b2;
-	res = sscanf_s(str2.c_str(), "%02x%02x%02x", &r2, &g2, &b2);
-
-	currentStateShadow.setFont(font);
-	currentStateShadow.setFillColor(sf::Color(r2, g2, b2));
-	currentStateShadow.setCharacterSize(50);
+void C_Sprite_Popup::SetFonts(std::pair<sf::Font, sf::Font> newFonts) {
+	fonts = newFonts;
+	currentState.setFont(fonts.first);
+	currentStateShadow.setFont(fonts.second);
 }
+
 void C_Sprite_Popup::SetStrToPrint(std::string str) {
 	stringToPrint = str;
 }
@@ -109,4 +97,14 @@ void C_Sprite_Popup::SetVectorString(sf::Vector2f vec) {
 	newVec.y = (vec.y / 2) - 85;
 	newVec.x = (vec.x / 2) - 5;
 	vectorString = newVec;
+}
+
+void C_Sprite_Popup::SetSize(int size) {
+	currentState.setCharacterSize(size);
+	currentStateShadow.setCharacterSize(size);
+}
+
+void C_Sprite_Popup::SetColor(std::pair<sf::Color, sf::Color> colors) {
+	currentState.setFillColor(colors.first);
+	currentStateShadow.setFillColor(colors.second);
 }

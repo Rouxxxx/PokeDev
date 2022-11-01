@@ -1,0 +1,17 @@
+{
+    "font": {
+        "meta": {
+            "file": "resources/font/ds-font.ttf",
+            "fileShadow": "resources/font/ds-font2.ttf",
+            "size": 32,
+            "opacityShadow": 200
+        },
+        "colors": {
+            "Default": {
+                "color": "505159",
+                "colorShadow": "a1a1a8"
+            }
+        }
+    }
+}
+

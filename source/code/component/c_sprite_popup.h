@@ -25,9 +25,11 @@ public:
 	void SetTransform(std::shared_ptr<C_Transform> transform);
 	void SetScale(float scaleX, float scaleY);
 
-	void SetFont(sf::Font font);
+	void SetFonts(std::pair<sf::Font, sf::Font> newFonts);
 	void SetStrToPrint(std::string strToPrint);
 	void SetVectorString(sf::Vector2f vec);
+	void SetSize(int size);
+	void SetColor(std::pair<sf::Color, sf::Color> colors);
 
 private:
 	std::shared_ptr<C_Transform> playerTransform;
@@ -35,7 +37,7 @@ private:
 	sf::Sprite sprite;
 	int currentTextureID;
 	std::string stringToPrint;
-	sf::Font font;
+	std::pair<sf::Font, sf::Font> fonts;
 	sf::Text currentState;
 	sf::Text currentStateShadow;
 	sf::Vector2f vectorString;

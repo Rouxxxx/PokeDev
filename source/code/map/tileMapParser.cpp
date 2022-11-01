@@ -3,8 +3,6 @@
 using json = nlohmann::json;
 using reference = const nlohmann::json&;
 
-
-
 TileMapParser::TileMapParser(ResourceAllocator<sf::Texture>& textureAllocator)
 	: textureAllocator(textureAllocator) 
 {}

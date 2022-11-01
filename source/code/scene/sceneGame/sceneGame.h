@@ -19,11 +19,14 @@
 
 #include "../../map/tileMapParser.h"
 
+#include "textClass.h"
+
 class SceneGame : public Scene
 {
 public:
 	SceneGame(WorkingDirectory& workingDir, ResourceAllocator<sf::Texture>& textureAllocator, Window& window);
 	std::shared_ptr < C_Transform> createPlayer();
+	void initTextClass(std::string path);
 	void createTextBox(int id, std::shared_ptr<C_Transform> playerTransform);
 	void OnCreate() override;
 	void OnDestroy() override;
@@ -41,5 +44,5 @@ private:
 	TileMapParser mapParser;
 	Collider collider;
 	Window& window;
-	sf::Font font;
+	TextClass textClass;
 };

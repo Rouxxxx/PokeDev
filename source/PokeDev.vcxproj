@@ -154,6 +154,7 @@
     <ClCompile Include="code\resource\resourseAllocator.cpp" />
     <ClCompile Include="code\scene\sceneFight\sceneFight.cpp" />
     <ClCompile Include="code\scene\sceneGame\sceneGame.cpp" />
+    <ClCompile Include="code\scene\sceneGame\textClass.cpp" />
     <ClCompile Include="code\scene\sceneSplashScreen\sceneSpashScreen.cpp" />
     <ClCompile Include="code\scene\sceneStateMachine.cpp" />
     <ClCompile Include="code\utils\bitMask.cpp" />
@@ -182,6 +183,7 @@
     <ClInclude Include="code\scene\scene.h" />
     <ClInclude Include="code\scene\sceneFight\sceneFight.h" />
     <ClInclude Include="code\scene\sceneGame\sceneGame.h" />
+    <ClInclude Include="code\scene\sceneGame\textClass.h" />
     <ClInclude Include="code\scene\sceneSplashScreen\sceneSplashScreen.h" />
     <ClInclude Include="code\scene\sceneStateMachine.h" />
     <ClInclude Include="code\utils\bitMask.h" />
