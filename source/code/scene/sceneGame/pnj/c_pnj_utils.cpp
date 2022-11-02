@@ -10,6 +10,9 @@ void C_pnj::SetMovementSpeed(int moveSpeed) {
 void C_pnj::SetAnimationState(AnimationState state) {
 	animation->SetAnimationState(state);
 }
+AnimationState C_pnj::GetAnimationState() {
+	return animation->GetAnimationState();
+}
 
 void C_pnj::SetSpritePtr(std::shared_ptr<C_Sprite> newSpritePtr) {
 	spritePtr = newSpritePtr;

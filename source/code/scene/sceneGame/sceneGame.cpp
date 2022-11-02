@@ -35,7 +35,7 @@ void SceneGame::OnCreate()
 	InitMap("resources/map/Bourg_Geon/Bourg_Geon.json");
 
 	auto transform = createPlayer();
-	createTextBox(1, transform);
+	//createTextBox(1, transform);
 }
 
 void SceneGame::OnDestroy()

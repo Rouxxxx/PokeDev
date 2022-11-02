@@ -1,8 +1,8 @@
 #include "c_pnj.h"
 
 C_pnj::C_pnj(Object* owner)
-	: Component(owner), moveSpeed(2), collider(nullptr), isMoving(false), reachPosition()
-{}
+	: Component(owner), moveSpeed(2), collider(nullptr), isMoving(false), reachPosition(), behavior(nullptr), waitingTime(0) {
+}
 
 void C_pnj::UpdateMove(float deltaTime, sf::Vector2f currentPosition) {
 	AnimationState state = animation->GetAnimationState();
@@ -34,7 +34,11 @@ void C_pnj::UpdateMove(float deltaTime, sf::Vector2f currentPosition) {
 void C_pnj::Update(float deltaTime) {
 	sf::Vector2f currentPosition = owner->transform->GetPositionTrainer();
 	UpdateSortOrder(currentPosition);
-	UpdateMove(deltaTime, currentPosition);
+
+	if (hasBeenSpokenTo)
+		return;
+
+	(this->*(this->behavior))(deltaTime);
 }
 
 

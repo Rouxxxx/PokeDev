@@ -46,6 +46,7 @@ void SceneGame::InitPNJs(reference players) {
 			c_pnj->SetOldPosition(x, y);
 			c_pnj->SetCollider(&collider);
 			c_pnj->SetSpritePtr(sprite);
+			c_pnj->SetBehavior(style);
 
 			auto animation = pnj->AddComponent<C_Animation>();
 

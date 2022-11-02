@@ -45,7 +45,7 @@
     <ClCompile Include="code\component\c_transform.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="code\component\c_keyboardMovement.cpp">
+    <ClCompile Include="code\scene\sceneGame\player\c_keyboardMovement.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="code\resource\resourseAllocator.cpp">
@@ -90,6 +90,30 @@
     <ClCompile Include="code\scene\sceneGame\textClass.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="code\scene\sceneGame\player\initPlayer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="code\scene\sceneGame\initText.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="code\utils\Logger\logger.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="code\scene\sceneGame\initMap.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="code\scene\sceneGame\pnj\initPNJ.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="code\scene\sceneGame\pnj\c_pnj.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="code\scene\sceneGame\pnj\c_pnj_utils.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="code\scene\sceneGame\pnj\c_pnj_behavior.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="code\game\game.h">
@@ -125,7 +149,7 @@
     <ClInclude Include="code\component\c_transform.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="code\component\c_keyboardMovement.h">
+    <ClInclude Include="code\scene\sceneGame\player\c_keyboardMovement.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="code\resource\resourceAllocator.h">
@@ -558,6 +582,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="code\scene\sceneGame\textClass.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="code\utils\Logger\logger.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="code\scene\sceneGame\pnj\c_pnj.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

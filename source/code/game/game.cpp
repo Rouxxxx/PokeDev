@@ -3,6 +3,7 @@
 Game::Game()
     : window("Pokemon")
 {
+    srand(time(NULL));
     std::shared_ptr<SceneSplashScreen> splashScreen = std::make_shared<SceneSplashScreen>(workingDir, sceneStateMachine, window, textureAllocator);
     std::shared_ptr<SceneGame> gameScene = std::make_shared<SceneGame>(workingDir, textureAllocator, window);
 

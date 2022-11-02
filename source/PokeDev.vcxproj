@@ -141,9 +141,14 @@
   <ItemGroup>
     <ClCompile Include="code\component\c_animation.cpp" />
     <ClCompile Include="code\component\c_sprite_popup.cpp" />
+    <ClCompile Include="code\scene\sceneGame\pnj\c_pnj.cpp" />
+    <ClCompile Include="code\scene\sceneGame\pnj\c_pnj_behavior.cpp" />
+    <ClCompile Include="code\scene\sceneGame\pnj\c_pnj_utils.cpp" />
+    <ClCompile Include="code\scene\sceneGame\pnj\initPNJ.cpp" />
+    <ClCompile Include="code\utils\Logger\logger.cpp" />
     <ClCompile Include="code\map\collider.cpp" />
     <ClCompile Include="code\component\c_drawable.cpp" />
-    <ClCompile Include="code\component\c_keyboardMovement.cpp" />
+    <ClCompile Include="code\scene\sceneGame\player\c_keyboardMovement.cpp" />
     <ClCompile Include="code\component\c_sprite.cpp" />
     <ClCompile Include="code\component\c_transform.cpp" />
     <ClCompile Include="code\component\s_drawable.cpp" />
@@ -153,6 +158,9 @@
     <ClCompile Include="code\object\objectCollection.cpp" />
     <ClCompile Include="code\resource\resourseAllocator.cpp" />
     <ClCompile Include="code\scene\sceneFight\sceneFight.cpp" />
+    <ClCompile Include="code\scene\sceneGame\initMap.cpp" />
+    <ClCompile Include="code\scene\sceneGame\player\initPlayer.cpp" />
+    <ClCompile Include="code\scene\sceneGame\initText.cpp" />
     <ClCompile Include="code\scene\sceneGame\sceneGame.cpp" />
     <ClCompile Include="code\scene\sceneGame\textClass.cpp" />
     <ClCompile Include="code\scene\sceneSplashScreen\sceneSpashScreen.cpp" />
@@ -168,9 +176,11 @@
   <ItemGroup>
     <ClInclude Include="code\component\c_animation.h" />
     <ClInclude Include="code\component\c_sprite_popup.h" />
+    <ClInclude Include="code\scene\sceneGame\pnj\c_pnj.h" />
+    <ClInclude Include="code\utils\Logger\logger.h" />
     <ClInclude Include="code\map\collider.h" />
     <ClInclude Include="code\component\c_drawable.h" />
-    <ClInclude Include="code\component\c_keyboardMovement.h" />
+    <ClInclude Include="code\scene\sceneGame\player\c_keyboardMovement.h" />
     <ClInclude Include="code\component\c_sprite.h" />
     <ClInclude Include="code\component\c_transform.h" />
     <ClInclude Include="code\component\s_drawable.h" />

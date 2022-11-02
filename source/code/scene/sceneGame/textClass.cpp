@@ -1,7 +1,7 @@
 #include "textClass.h"
 
 textColor strToColor(std::string color) {
-	std::vector<std::pair<std::string, textColor>> table{
+	std::vector<std::pair<std::string, textColor>> table {
 		{"Default", textColor::Default}
 	};
 
