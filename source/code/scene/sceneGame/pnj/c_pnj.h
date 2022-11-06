@@ -54,7 +54,7 @@ public:
 	void SetOldPosition(sf::Vector2f);
 	
 	void SetSpritePtr(std::shared_ptr<C_Sprite>);
-	void SetBehavior(std::string str, std::vector<std::string> strings = std::vector<std::string>());
+	void SetBehavior(std::string str, std::vector<std::string> = std::vector<std::string>(), std::vector<float> = std::vector<float>());
 
 private:
 	bool move(FacingDirection);
@@ -81,6 +81,7 @@ private:
 	float currentWait;
 
 	std::vector<bool(C_pnj::*) ()> functions;
+	std::vector<float> waits;
 	void (C_pnj::*behavior)();
 
 	void fillActions(std::vector<std::string> strings);

@@ -68,16 +68,18 @@ void C_pnj::IdleAround() {
 void C_pnj::MultipleActionsFunc() {
 	if (currentWait < waitingTime)
 		return;
-	if (currentActionId == functions.size())
-		currentActionId = 0;
 
 	currentWait = 0.0f;
-	waitingTime = 0.5f;
-	if ((this->*(functions.at(currentActionId)))())
-		currentActionId++;
+	if ((this->*(functions.at(currentActionId)))()) {
+		waitingTime = waits.at(currentActionId);
+		int size = (functions.size() < waits.size()) ? functions.size() : waits.size();
+		currentActionId = (currentActionId + 1) % size;
+	}
+	else
+		animation->StopUpdating();
 }
 
-void C_pnj::SetBehavior(std::string str, std::vector<std::string> strings) {
+void C_pnj::SetBehavior(std::string str, std::vector<std::string> strings, std::vector<float> floats) {
 	pnjBehavior behaviorObj = findPNJBehavior(str);
 
 	switch (behaviorObj) {
@@ -102,6 +104,7 @@ void C_pnj::SetBehavior(std::string str, std::vector<std::string> strings) {
 	case pnjBehavior::Multiple:
 		behavior = &C_pnj::MultipleActionsFunc;
 		fillActions(strings);
+		waits = floats;
 		break;
 	}
 }

@@ -37,11 +37,6 @@ void C_KeyboardMovement::Update(float deltaTime) {
 		SetIdle();
 
 	if (isMoving && currentPosition == reachPosition) {
-		collider->Delete(oldPosition);
-		oldPosition = animToReachPosition(oldPosition, state);
-		collider->Add(oldPosition, 2);
-
-		collider->SetY(reachPosition.y);
 		isMoving = false;
 
 		Update(deltaTime);
@@ -51,6 +46,7 @@ void C_KeyboardMovement::Update(float deltaTime) {
 	if (isMoving) {
 		sf::Vector2f move = animToNewPosition(state, moveSpeed);
 		owner->transform->AddPosition(move);
+		collider->SetY(owner->transform->GetPosition().y);
 
 		return;
 	}
@@ -98,8 +94,13 @@ void C_KeyboardMovement::KeysToMovement(sf::Vector2f currentPosition) {
 		SetIdle();
 		return;
 	}
+
 	isMoving = (currentPosition != currentPositionBefore);
 	reachPosition = currentPosition;
+	if (isMoving) {
+		collider->Delete(currentPositionBefore);
+		collider->Add(reachPosition, 2);
+	}
 }
 
 void C_KeyboardMovement::Awake() {
@@ -112,6 +113,9 @@ void C_KeyboardMovement::SetIdle() {
 
 void C_KeyboardMovement::SetAnimationState(AnimationState state) {
 	animation->SetAnimationState(state);
+}
+AnimationState C_KeyboardMovement::GetAnimationState() {
+	return animation->GetAnimationState();
 }
 void C_KeyboardMovement::SetOldPosition(float x, float y) {
 	SetOldPosition(sf::Vector2f(x, y));

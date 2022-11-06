@@ -2,10 +2,19 @@
 #include "c_pnj.h"
 
 void SceneGame::InitPNJs(reference players) {
-	std::ifstream f2("resources/sprites/trainers/trainers.json");
-	json data2 = json::parse(f2);
-	auto& meta2 = data2["trainers"]["meta"];
-	auto moves = data2["trainers"]["moves"];
+	std::string filePath = "resources/sprites/trainers/trainers.json";
+	std::ifstream f2(filePath);
+	json data;
+	try {
+		data = json::parse(f2);
+	}
+	catch (...) {
+		Logger::error(className, __func__, "couldn't load and parse " + filePath + ". No PNJ loaded");
+		return;
+	}
+	auto& meta2 = data["trainers"]["meta"];
+	auto moves = data["trainers"]["moves"];
+
 
 	int width = meta2["width"];
 	int height = meta2["height"];
@@ -19,11 +28,17 @@ void SceneGame::InitPNJs(reference players) {
 
 	int offsetWidth = meta2["offsetWidth"];
 	int offsetHeight = meta2["offsetHeight"];
+	int loadedPNJs = 0;
 
 
 	for (auto it = players.begin(); it != players.end(); it++) {
 		auto currentPlayerIt = *it;
 		int idPNJ = currentPlayerIt["id"];
+
+		if (idPNJ >= width * height) {
+			Logger::error(className, __func__, "couldn't load PNJ with id " + std::to_string(idPNJ) + ". Skipping");
+			continue;
+		}
 
 		int currentWidth = idPNJ % width;
 		int currentHeight = idPNJ / width;
@@ -54,10 +69,18 @@ void SceneGame::InitPNJs(reference players) {
 
 		if (style == "moving") {
 			auto strings = currentPlayerIt["moves"];
+			auto waits = currentPlayerIt["waits"];
 			std::vector<std::string> vectorStrings;
-			for (auto itStrings = strings.begin(); itStrings != strings.end(); itStrings++)
+			std::vector<float> vectorWaits;
+			
+			for (auto itStrings = strings.begin() ; itStrings != strings.end(); itStrings++)
 				vectorStrings.push_back(*itStrings);
-			c_pnj->SetBehavior(style, vectorStrings);
+			for (auto itWaits = waits.begin();itWaits != waits.end(); itWaits++)
+				vectorWaits.push_back(*itWaits);
+
+			if (vectorStrings.size() != vectorWaits.size())
+				Logger::error(className, __func__, "waiting times and functions don't have the same size");
+			c_pnj->SetBehavior(style, vectorStrings, vectorWaits);
 		}
 		else
 			c_pnj->SetBehavior(style);
@@ -69,8 +92,8 @@ void SceneGame::InitPNJs(reference players) {
 
 		objects.Add(pnj);
 		collider.Add(x, y, 5);
+		loadedPNJs++;
 	}
-	__int64 loadedPNJs = players.end() - players.begin();
 
 	std::string pnjSTr = (loadedPNJs == 1) ? " PNJ" : " PNJs";
 

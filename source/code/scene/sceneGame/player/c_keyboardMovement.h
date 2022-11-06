@@ -21,6 +21,7 @@ public:
 	void SetOldPosition(sf::Vector2f);
 	bool CheckIfDirectionPressed();
 private:
+	AnimationState GetAnimationState();
 	void SetAnimationState(AnimationState state);
 	int moveSpeed;
 	bool isMoving;

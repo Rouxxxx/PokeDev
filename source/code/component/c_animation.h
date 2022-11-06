@@ -63,6 +63,24 @@ inline sf::Vector2f animToReachPosition(sf::Vector2f vec, AnimationState state) 
 	return vec;
 }
 
+inline sf::Vector2f facingToReachPosition(sf::Vector2f vec, FacingDirection dir) {
+	switch (dir) {
+	case (FacingDirection::Down):
+		vec.y += 32;
+		break;
+	case (FacingDirection::Up):
+		vec.y -= 32;
+		break;
+	case (FacingDirection::Left):
+		vec.x -= 32;
+		break;
+	case (FacingDirection::Right):
+		vec.x += 32;
+		break;
+	}
+	return vec;
+}
+
 inline sf::Vector2f animToNewPosition(AnimationState state, int moveSpeed) {
 	sf::Vector2f vec(0, 0);
 

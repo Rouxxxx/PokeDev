@@ -1,9 +1,8 @@
 #include "c_pnj.h"
 
-
+#include <iostream>
 void C_pnj::UpdateMove(float deltaTime) {
 	if (!isMoving) {
-		animation->StopUpdating();
 		return;
 	}
 
@@ -12,11 +11,9 @@ void C_pnj::UpdateMove(float deltaTime) {
 	animation->StartUpdating();
 
 	if (currentPosition == reachPosition) {
-		collider->Delete(oldPosition);
-		oldPosition = animToReachPosition(oldPosition, state);
-		collider->Add(oldPosition, 2);
 		isMoving = false;
-		//Update(deltaTime);
+		if (waits.at(currentActionId) <= 0.0f)
+			(this->*(this->behavior))();
 		return;
 	}
 
@@ -43,8 +40,12 @@ bool C_pnj::move(FacingDirection dir) {
 		break;
 	}
 
-	if (reachPosition != currentPosition)
+	if (reachPosition != currentPosition) {
+		collider->Delete(oldPosition);
+		oldPosition = animToReachPosition(oldPosition, GetAnimationState());
+		collider->Add(oldPosition, 2);
 		isMoving = true;
+	}
 
 	return (reachPosition != currentPosition);
 }
