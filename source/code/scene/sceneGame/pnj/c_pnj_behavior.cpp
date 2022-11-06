@@ -7,6 +7,28 @@ int generateRandomInt(int low, int high) {
 	return low + static_cast<int>(rand()) * static_cast<int>(high - low) / RAND_MAX;
 }
 
+void C_pnj::fillActions(std::vector<std::string> strings) {
+	for (auto currentStr : strings) {
+		if		(currentStr == "moveLeft")
+			functions.push_back(&C_pnj::moveLeft);
+		else if (currentStr == "moveRight")
+			functions.push_back(&C_pnj::moveRight);
+		else if (currentStr == "moveUp")
+			functions.push_back(&C_pnj::moveUp);
+		else if (currentStr == "moveDown")
+			functions.push_back(&C_pnj::moveDown);
+
+		else if (currentStr == "idleLeft")
+			functions.push_back(&C_pnj::IdleLeftBool);
+		else if (currentStr == "idleRight")
+			functions.push_back(&C_pnj::IdleRightBool);
+		else if (currentStr == "idleUp")
+			functions.push_back(&C_pnj::IdleUpBool);
+		else if (currentStr == "idleDown")
+			functions.push_back(&C_pnj::IdleDownBool);
+	}
+}
+
 
 AnimationState intToState(int integer, AnimationState oldAnim) {
 	std::vector<AnimationState> anims = {
@@ -34,26 +56,52 @@ AnimationState intToState(int integer, AnimationState oldAnim) {
 	}
 }
 
-void C_pnj::Idle(float deltaTime) {
+void C_pnj::IdleAround() {
+	if (currentWait < waitingTime)
+		return;
+
+	currentWait = 0.0f;
+	waitingTime = generateRandomfloat(2, 4);
+	SetAnimationState(intToState(generateRandomInt(0, 2), GetAnimationState()));
 }
-void C_pnj::IdleAround(float deltaTime) {
-	currentWait += deltaTime;
-	if (currentWait >= waitingTime) {
-		currentWait = 0.0f;
-		waitingTime = generateRandomfloat(2, 4);
-		SetAnimationState(intToState(generateRandomInt(0, 2), GetAnimationState()));
-	}
+
+void C_pnj::MultipleActionsFunc() {
+	if (currentWait < waitingTime)
+		return;
+	if (currentActionId == functions.size())
+		currentActionId = 0;
+
+	currentWait = 0.0f;
+	waitingTime = 0.5f;
+	if ((this->*(functions.at(currentActionId)))())
+		currentActionId++;
 }
-void C_pnj::SetBehavior(std::string str) {
+
+void C_pnj::SetBehavior(std::string str, std::vector<std::string> strings) {
 	pnjBehavior behaviorObj = findPNJBehavior(str);
 
 	switch (behaviorObj) {
-	case pnjBehavior::IdleLeft: case pnjBehavior::IdleRight: case pnjBehavior::IdleUp: case pnjBehavior::IdleDown:
-		behavior = &C_pnj::Idle;
+	case pnjBehavior::IdleLeft:
+		behavior = &C_pnj::IdleLeft;
 		break;
+	case pnjBehavior::IdleRight:
+		behavior = &C_pnj::IdleRight;
+		break;
+	case pnjBehavior::IdleUp:
+		behavior = &C_pnj::IdleUp;
+		break;
+	case pnjBehavior::IdleDown:
+		behavior = &C_pnj::IdleDown;
+		break;
+
 
 	case pnjBehavior::IdleAround:
 		behavior = &C_pnj::IdleAround;
+		break;
+
+	case pnjBehavior::Multiple:
+		behavior = &C_pnj::MultipleActionsFunc;
+		fillActions(strings);
 		break;
 	}
 }

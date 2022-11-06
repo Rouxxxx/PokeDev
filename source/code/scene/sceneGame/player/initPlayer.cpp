@@ -19,8 +19,8 @@ std::shared_ptr < C_Transform> SceneGame::createPlayer() {
 	sprite->SetTextureAllocator(&textureAllocator);
 	sprite->SetSortOrder(sortOrder);
 	sprite->SetScale(scale, scale);
-	unsigned int x = 15 * 32;
-	unsigned int y = 9 * 32;
+	float x = 15 * 32;
+	float y = 11 * 32;
 	player->transform->SetPositionTrainer(x, y);
 
 	auto movement = player->AddComponent<C_KeyboardMovement>();

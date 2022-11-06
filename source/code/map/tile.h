@@ -18,6 +18,6 @@ struct TileInfo
 
 struct Tile {
 	std::shared_ptr<TileInfo> properties;
-	int x;
-	int y;
+	int x = 0;
+	int y = 0;
 };

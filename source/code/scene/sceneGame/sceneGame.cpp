@@ -6,7 +6,7 @@ SceneGame::SceneGame(WorkingDirectory& workingDir, ResourceAllocator<sf::Texture
 	: workingDir(workingDir), textureAllocator(textureAllocator), mapParser(textureAllocator), window(window), collider(Collider()), className(typeid(this).name())
 {}
 
-void SceneGame::loadAnimations(reference frames, std::shared_ptr<C_Animation> animation, int TextureID) {
+void SceneGame::loadAnimations(reference frames, std::shared_ptr<C_Animation> animation, int TextureID, sf::Vector2i offset) {
 	for (auto it = frames.begin(); it != frames.end(); it++) {
 		std::string name = it.key();
 		auto currentAnimIt = *it;
@@ -19,10 +19,19 @@ void SceneGame::loadAnimations(reference frames, std::shared_ptr<C_Animation> an
 		for (auto it2 = currentAnimIt.begin(); it2 != currentAnimIt.end(); it2++) {
 			auto currentFrameIt = *it2;
 			float idleAnimSeconds = currentFrameIt["idleAnimSeconds"];
-			int x = currentFrameIt["spriteSource"]["x"];
-			int y = currentFrameIt["spriteSource"]["y"];
-			int w = currentFrameIt["spriteSource"]["w"];
-			int h = currentFrameIt["spriteSource"]["h"];
+			
+			int x = currentFrameIt["spriteSource"]["x"] + offset.x;
+			int y = currentFrameIt["spriteSource"]["y"] + offset.y;
+			int w;
+			int h;
+			try {
+				w = currentFrameIt["spriteSource"]["w"];
+				h = currentFrameIt["spriteSource"]["h"];
+			}
+			catch (...) {
+				w = pnjWidth;
+				h = pnjHeight;
+			}
 			currentAnimation->AddFrame(TextureID, x, y, w, h, idleAnimSeconds);
 		}
 		animation->AddAnimation(state, currentAnimation);

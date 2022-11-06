@@ -114,6 +114,9 @@
     <ClCompile Include="code\scene\sceneGame\pnj\c_pnj_behavior.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="code\scene\sceneGame\pnj\c_pnj_move.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="code\game\game.h">

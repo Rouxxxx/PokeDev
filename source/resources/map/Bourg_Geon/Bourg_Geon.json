@@ -6,11 +6,11 @@
         },
         "players": [
             {
-                "id": 1,
-                "style": "idleAround",
+                "id": 2,
+                "style": "idle",
                 "trainer": "no",
                 "x": 13,
-                "y": 10
+                "y": 8
             }
         ]
     }

@@ -13,6 +13,29 @@ void C_Transform::SetPositionTrainer(sf::Vector2f pos) {
 	pos.y -= 8;
 	position = pos;
 }
+const sf::Vector2f& C_Transform::GetPosition() const {
+	return position;
+}
+const sf::Vector2f& C_Transform::GetPositionTrainer() const {
+	return position + sf::Vector2f(0, 8);
+}
+
+
+void C_Transform::SetPositionPNJ(float x, float y) {
+	position.x = x - 7;
+	position.y = y - 14;
+}
+void C_Transform::SetPositionPNJ(sf::Vector2f pos) {
+	pos.x -= 7;
+	pos.y -= 14;
+	position = pos;
+}
+const sf::Vector2f& C_Transform::GetPositionPNJ() const {
+	return position + sf::Vector2f(7, 14);
+}
+
+
+
 void C_Transform::SetPosition(float x, float y) {
 	position.x = x;
 	position.y = y;
@@ -33,10 +56,5 @@ void C_Transform::SetX(float x) {
 void C_Transform::SetY(float y) {
 	position.y = y;
 }
-const sf::Vector2f& C_Transform::GetPosition() const {
-	return position;
-}
-const sf::Vector2f& C_Transform::GetPositionTrainer() const {
-	return position + sf::Vector2f(0, 8);
-}
+
 

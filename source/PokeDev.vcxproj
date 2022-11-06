@@ -143,6 +143,7 @@
     <ClCompile Include="code\component\c_sprite_popup.cpp" />
     <ClCompile Include="code\scene\sceneGame\pnj\c_pnj.cpp" />
     <ClCompile Include="code\scene\sceneGame\pnj\c_pnj_behavior.cpp" />
+    <ClCompile Include="code\scene\sceneGame\pnj\c_pnj_move.cpp" />
     <ClCompile Include="code\scene\sceneGame\pnj\c_pnj_utils.cpp" />
     <ClCompile Include="code\scene\sceneGame\pnj\initPNJ.cpp" />
     <ClCompile Include="code\utils\Logger\logger.cpp" />

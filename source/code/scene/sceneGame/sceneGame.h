@@ -43,7 +43,7 @@ private:
 	void InitPlayer();
 	std::shared_ptr <C_Transform> createPlayer();
 	void createTextBox(int id, std::shared_ptr<C_Transform>);
-	void loadAnimations(reference frames, std::shared_ptr<C_Animation> animation, int TextureID);
+	void loadAnimations(reference frames, std::shared_ptr<C_Animation> animation, int TextureID, sf::Vector2i = sf::Vector2i());
 
 	ResourceAllocator<sf::Texture>& textureAllocator;
 	ObjectCollection objects;
@@ -55,6 +55,9 @@ private:
 	TextClass textClass;
 
 	const std::string className;
+
+	int pnjWidth;
+	int pnjHeight;
 };
 
 inline FacingDirection findFacingDirection(std::string str) {

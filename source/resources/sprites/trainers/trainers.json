@@ -1,221 +1,182 @@
 {
     "trainers": {
         "meta": {
-            "image": "resources/sprites/trainers/trainers.png",
+            "image": "resources/sprites/trainers/trainers2.png",
             "scale": 1.8,
-            "sortOrder": 7
+            "sortOrder": 7,
+            "width": 10,
+            "height": 8,
+            "pnjWidth": 25,
+            "pnjHeight": 31,
+            "offsetWidth": 96,
+            "offsetHeight": 128
         },
-
-        "trainersList": {
-            "1": {
-                "idle": [
-                    {
-                        "idleAnimSeconds": 0.125,
-                        "spriteSource": {
-                            "x": 71,
-                            "y": 38,
-                            "w": 19,
-                            "h": 24
-                        }
+        "moves": {
+            "idle": [
+                {
+                    "idleAnimSeconds": 0.125,
+                    "spriteSource": {
+                        "x": 67,
+                        "y": 34
                     }
-                ],
-                "idleDown": [
-                    {
-                        "idleAnimSeconds": 0.125,
-                        "spriteSource": {
-                            "x": 71,
-                            "y": 38,
-                            "w": 19,
-                            "h": 24
-                        }
+                }
+            ],
+            "idleDown": [
+                {
+                    "idleAnimSeconds": 0.125,
+                    "spriteSource": {
+                        "x": 67,
+                        "y": 34
                     }
-                ],
-                "idleLeft": [
-                    {
-                        "idleAnimSeconds": 0.125,
-                        "spriteSource": {
-                            "x": 8,
-                            "y": 70,
-                            "w": 19,
-                            "h": 25
-                        }
+                }
+            ],
+            "idleLeft": [
+                {
+                    "idleAnimSeconds": 0.125,
+                    "spriteSource": {
+                        "x": 4,
+                        "y": 66
                     }
-                ],
-                "idleRight": [
-                    {
-                        "idleAnimSeconds": 0.125,
-                        "spriteSource": {
-                            "x": 38,
-                            "y": 6,
-                            "w": 16,
-                            "h": 26
-                        }
+                }
+            ],
+            "idleRight": [
+                {
+                    "idleAnimSeconds": 0.125,
+                    "spriteSource": {
+                        "x": 34,
+                        "y": 2
                     }
-                ],
-                "idleUp": [
-                    {
-                        "idleAnimSeconds": 0.125,
-                        "spriteSource": {
-                            "x": 7,
-                            "y": 7,
-                            "w": 17,
-                            "h": 24
-                        }
+                }
+            ],
+            "idleUp": [
+                {
+                    "idleAnimSeconds": 0.125,
+                    "spriteSource": {
+                        "x": 3,
+                        "y": 1
                     }
-                ],
-                "walkDown": [
-                    {
-                        "idleAnimSeconds": 0.125,
-                        "spriteSource": {
-                            "x": 71,
-                            "y": 38,
-                            "w": 19,
-                            "h": 24
-                        }
-                    },
-                    {
-                        "idleAnimSeconds": 0.125,
-                        "spriteSource": {
-                            "x": 71,
-                            "y": 69,
-                            "w": 17,
-                            "h": 26
-                        }
-                    },
-                    {
-                        "idleAnimSeconds": 0.125,
-                        "spriteSource": {
-                            "x": 71,
-                            "y": 38,
-                            "w": 19,
-                            "h": 24
-                        }
-                    },
-                    {
-                        "idleAnimSeconds": 0.125,
-                        "spriteSource": {
-                            "x": 70,
-                            "y": 100,
-                            "w": 17,
-                            "h": 26
-                        }
+                }
+            ],
+            "walkDown": [
+                {
+                    "idleAnimSeconds": 0.125,
+                    "spriteSource": {
+                        "x": 67,
+                        "y": 34
                     }
-                ],
-                "walkUp": [
-                    {
-                        "idleAnimSeconds": 0.125,
-                        "spriteSource": {
-                            "x": 27,
-                            "y": 60,
-                            "w": 17,
-                            "h": 24
-                        }
-                    },
-                    {
-                        "idleAnimSeconds": 0.125,
-                        "spriteSource": {
-                            "x": 49,
-                            "y": 61,
-                            "w": 17,
-                            "h": 25
-                        }
-                    },
-                    {
-                        "idleAnimSeconds": 0.125,
-                        "spriteSource": {
-                            "x": 27,
-                            "y": 60,
-                            "w": 17,
-                            "h": 24
-                        }
-                    },
-                    {
-                        "idleAnimSeconds": 0.125,
-                        "spriteSource": {
-                            "x": 6,
-                            "y": 61,
-                            "w": 17,
-                            "h": 25
-                        }
+                },
+                {
+                    "idleAnimSeconds": 0.125,
+                    "spriteSource": {
+                        "x": 67,
+                        "y": 64
                     }
-                ],
-                "walkRight": [
-                    {
-                        "idleAnimSeconds": 0.125,
-                        "spriteSource": {
-                            "x": 38,
-                            "y": 6,
-                            "w": 16,
-                            "h": 26
-                        }
-                    },
-                    {
-                        "idleAnimSeconds": 0.125,
-                        "spriteSource": {
-                            "x": 38,
-                            "y": 36,
-                            "w": 17,
-                            "h": 26
-                        }
-                    },
-                    {
-                        "idleAnimSeconds": 0.125,
-                        "spriteSource": {
-                            "x": 38,
-                            "y": 6,
-                            "w": 16,
-                            "h": 26
-                        }
-                    },
-                    {
-                        "idleAnimSeconds": 0.125,
-                        "spriteSource": {
-                            "x": 38,
-                            "y": 68,
-                            "w": 17,
-                            "h": 28
-                        }
+                },
+                {
+                    "idleAnimSeconds": 0.125,
+                    "spriteSource": {
+                        "x": 67,
+                        "y": 34
                     }
-                ],
-                "walkLeft": [
-                    {
-                        "idleAnimSeconds": 0.125,
-                        "spriteSource": {
-                            "x": 8,
-                            "y": 69,
-                            "w": 19,
-                            "h": 25
-                        }
-                    },
-                    {
-                        "idleAnimSeconds": 0.125,
-                        "spriteSource": {
-                            "x": 8,
-                            "y": 37,
-                            "w": 17,
-                            "h": 25
-                        }
-                    },
-                    {
-                        "idleAnimSeconds": 0.125,
-                        "spriteSource": {
-                            "x": 8,
-                            "y": 69,
-                            "w": 19,
-                            "h": 25
-                        }
-                    },
-                    {
-                        "idleAnimSeconds": 0.125,
-                        "spriteSource": {
-                            "x": 8,
-                            "y": 101,
-                            "w": 17,
-                            "h": 25
-                        }
+                },
+                {
+                    "idleAnimSeconds": 0.125,
+                    "spriteSource": {
+                        "x": 67,
+                        "y": 96
                     }
-                ]
-            }
+                }
+            ],
+            "walkUp": [
+                {
+                    "idleAnimSeconds": 0.125,
+                    "spriteSource": {
+                        "x": 3,
+                        "y": 2
+                    }
+                },
+                {
+                    "idleAnimSeconds": 0.125,
+                    "spriteSource": {
+                        "x": 67,
+                        "y": 2
+                    }
+                },
+                {
+                    "idleAnimSeconds": 0.125,
+                    "spriteSource": {
+                        "x": 3,
+                        "y": 2
+                    }
+                },
+                {
+                    "idleAnimSeconds": 0.125,
+                    "spriteSource": {
+                        "x": 35,
+                        "y": 97
+                    }
+                }
+            ],
+            "walkRight": [
+                {
+                    "idleAnimSeconds": 0.125,
+                    "spriteSource": {
+                        "x": 34,
+                        "y": 2
+                    }
+                },
+                {
+                    "idleAnimSeconds": 0.125,
+                    "spriteSource": {
+                        "x": 34,
+                        "y": 32
+                    }
+                },
+                {
+                    "idleAnimSeconds": 0.125,
+                    "spriteSource": {
+                        "x": 34,
+                        "y": 2
+                    }
+                },
+                {
+                    "idleAnimSeconds": 0.125,
+                    "spriteSource": {
+                        "x": 34,
+                        "y": 64
+                    }
+                }
+            ],
+            "walkLeft": [
+                {
+                    "idleAnimSeconds": 0.125,
+                    "spriteSource": {
+                        "x": 4,
+                        "y": 65
+                    }
+                },
+                {
+                    "idleAnimSeconds": 0.125,
+                    "spriteSource": {
+                        "x": 4,
+                        "y": 33
+                    }
+                },
+                {
+                    "idleAnimSeconds": 0.125,
+                    "spriteSource": {
+                        "x": 4,
+                        "y": 65
+                    }
+                },
+                {
+                    "idleAnimSeconds": 0.125,
+                    "spriteSource": {
+                        "x": 4,
+                        "y": 97
+                    }
+                }
+            ]
         }
     }
 }

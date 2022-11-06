@@ -18,7 +18,8 @@ enum class pnjBehavior {
 	IdleRight,
 	IdleUp,
 	IdleDown,
-	IdleAround
+	IdleAround,
+	Multiple
 };
 
 
@@ -26,9 +27,10 @@ inline pnjBehavior findPNJBehavior(std::string str) {
 	std::vector<std::pair<std::string, pnjBehavior>> table{
 		{"idleLeft", pnjBehavior::IdleLeft},
 		{"idleRight", pnjBehavior::IdleRight},
-		{"idleLeft", pnjBehavior::IdleUp},
-		{"idleUp", pnjBehavior::IdleDown},
-		{"idleAround", pnjBehavior::IdleAround}
+		{"idleUp", pnjBehavior::IdleUp},
+		{"idleDown", pnjBehavior::IdleDown},
+		{"idleAround", pnjBehavior::IdleAround},
+		{"moving", pnjBehavior::Multiple}
 	};
 
 	for (auto curr : table)
@@ -43,23 +45,28 @@ class C_pnj : public Component
 {
 public:
 	C_pnj(Object* owner);
-	void SetCollider(Collider* collider);
-	void UpdateSortOrder(sf::Vector2f);
-	void SetMovementSpeed(int moveSpeed);
-	void Update(float deltaTime) override;
-	void UpdateMove(float, sf::Vector2f pos);
 	void Awake() override;
-	void SetIdle();
-	void SetSpritePtr(std::shared_ptr<C_Sprite>);
-	bool move(FacingDirection, sf::Vector2f);
+	void Update(float deltaTime) override;
+
+	void SetCollider(Collider* collider);
+	void SetMovementSpeed(int moveSpeed);
 	void SetOldPosition(float, float);
 	void SetOldPosition(sf::Vector2f);
-	void SetBehavior(std::string str);
+	
+	void SetSpritePtr(std::shared_ptr<C_Sprite>);
+	void SetBehavior(std::string str, std::vector<std::string> strings = std::vector<std::string>());
+
 private:
-	void moveLeft(sf::Vector2f);
-	void moveRight(sf::Vector2f);
-	void moveUp(sf::Vector2f);
-	void moveDown(sf::Vector2f);
+	bool move(FacingDirection);
+	void UpdateMove(float);
+
+	void movementLeft();
+	void movementRight();
+	void movementUp();
+	void movementDown();
+
+	void UpdateSortOrder();
+
 	AnimationState GetAnimationState();
 	void SetAnimationState(AnimationState state);
 	int moveSpeed;
@@ -73,7 +80,28 @@ private:
 	float waitingTime;
 	float currentWait;
 
-	void (C_pnj::*behavior)(float);
-	void Idle(float);
-	void IdleAround(float);
+	std::vector<bool(C_pnj::*) ()> functions;
+	void (C_pnj::*behavior)();
+
+	void fillActions(std::vector<std::string> strings);
+	void MultipleActionsFunc();
+	void Idle();
+	void IdleAround();
+
+	bool moveLeft();
+	bool moveRight();
+	bool moveUp();
+	bool moveDown();
+	bool IdleLeftBool();
+	bool IdleRightBool();
+	bool IdleUpBool();
+	bool IdleDownBool();
+
+	void IdleLeft();
+	void IdleRight();
+	void IdleUp();
+	void IdleDown();
+
+	int currentActionId = 0;
+	sf::Vector2f currentPosition;
 };

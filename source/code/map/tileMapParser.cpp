@@ -114,8 +114,8 @@ std::vector<std::shared_ptr<Object>> TileMapParser::Parse(const std::string& fil
 			}
 
 			// Calculate world position.
-			unsigned int x = tile->x * tileSizeX + offset.x;
-			unsigned int y = tile->y * tileSizeY + offset.y;
+			float x = (tile->x * tileSizeX + offset.x) * 1.0f;
+			float y = (tile->y * tileSizeY + offset.y) * 1.0f;
 
 			int tileID = tileInfo->tileID;
 			if (tileID >= collisionsGid.first && tileID <= collisionsGid.second)
