@@ -72,7 +72,7 @@ void C_pnj::MultipleActionsFunc() {
 	currentWait = 0.0f;
 	if ((this->*(functions.at(currentActionId)))()) {
 		waitingTime = waits.at(currentActionId);
-		int size = (functions.size() < waits.size()) ? functions.size() : waits.size();
+		size_t size = (functions.size() < waits.size()) ? functions.size() : waits.size();
 		currentActionId = (currentActionId + 1) % size;
 	}
 	else

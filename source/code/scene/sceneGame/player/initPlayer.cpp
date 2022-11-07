@@ -26,7 +26,7 @@ std::shared_ptr < C_Transform> SceneGame::createPlayer() {
 	auto movement = player->AddComponent<C_KeyboardMovement>();
 	movement->SetInput(&input);
 	movement->SetCollider(&collider);
-	collider.Add(x, y, 2);
+	collider.Add(x, y, player);
 	movement->SetOldPosition(x, y);
 
 	auto animation = player->AddComponent<C_Animation>();

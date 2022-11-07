@@ -14,11 +14,8 @@ void C_KeyboardMovement::SetMovementSpeed(int moveSpeed) {
 	this->moveSpeed = moveSpeed;
 }
 
-bool C_KeyboardMovement::CheckIfDirectionPressed() {
-	return (input->IsKeyPressed(Input::Key::Left) ||
-		input->IsKeyPressed(Input::Key::Right) ||
-		input->IsKeyPressed(Input::Key::Up) ||
-		input->IsKeyPressed(Input::Key::Down));
+bool C_KeyboardMovement::isDirectionKeyPressed() {
+	return input->isDirectionKeyPressed();
 }
 
 void C_KeyboardMovement::Update(float deltaTime) {
@@ -56,50 +53,52 @@ void C_KeyboardMovement::Update(float deltaTime) {
 
 void C_KeyboardMovement::KeysToMovement(sf::Vector2f currentPosition) {
 	sf::Vector2f currentPositionBefore = currentPosition;
+	AnimationState state = GetAnimationState();
+	FacingDirection currentFacingDir = animToDir(state);
+
+	if (!isDirectionKeyPressed()) {
+		SetIdle();
+		return;
+	}
 
 	bool left = input->IsKeyPressed(Input::Key::Left);
 	bool right = input->IsKeyPressed(Input::Key::Right);
 	bool up = input->IsKeyPressed(Input::Key::Up);
 	bool down = input->IsKeyPressed(Input::Key::Down);
 
-	if (left && collider->FindLeft(currentPosition) == -1) {
+	if (left && !collider->ExistLeft(currentPosition) && currentFacingDir == FacingDirection::Left) {
 		SetAnimationState(AnimationState::WalkLeft);
 		currentPosition.x -= 32;
 	}
 	else if (left)
 		SetAnimationState(AnimationState::IdleLeft);
 
-	else if (right && collider->FindRight(currentPosition) == -1) {
+	else if (right && !collider->ExistRight(currentPosition) && currentFacingDir == FacingDirection::Right) {
 		SetAnimationState(AnimationState::WalkRight);
 		currentPosition.x += 32;
 	}
 	else if (right)
 		SetAnimationState(AnimationState::IdleRight);
 
-	else if (up && collider->FindUp(currentPosition) == -1) {
+	else if (up && !collider->ExistUp(currentPosition) && currentFacingDir == FacingDirection::Up) {
 		SetAnimationState(AnimationState::WalkUp);
 		currentPosition.y -= 32;
 	}
 	else if (up)
 		animation->SetAnimationState(AnimationState::IdleUp);
 
-	else if (down && collider->FindDown(currentPosition) == -1) {
+	else if (down && !collider->ExistDown(currentPosition) && currentFacingDir == FacingDirection::Down) {
 		SetAnimationState(AnimationState::WalkDown);
 		currentPosition.y += 32;
 	}
 	else if (down)
 		animation->SetAnimationState(AnimationState::IdleDown);
 
-	else {
-		SetIdle();
-		return;
-	}
-
 	isMoving = (currentPosition != currentPositionBefore);
 	reachPosition = currentPosition;
 	if (isMoving) {
 		collider->Delete(currentPositionBefore);
-		collider->Add(reachPosition, 2);
+		collider->Add(reachPosition, std::make_shared<Object>(owner));
 	}
 }
 

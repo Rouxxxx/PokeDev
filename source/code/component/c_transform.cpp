@@ -23,15 +23,15 @@ const sf::Vector2f& C_Transform::GetPositionTrainer() const {
 
 void C_Transform::SetPositionPNJ(float x, float y) {
 	position.x = x - 7;
-	position.y = y - 14;
+	position.y = y - 15;
 }
 void C_Transform::SetPositionPNJ(sf::Vector2f pos) {
 	pos.x -= 7;
-	pos.y -= 14;
+	pos.y -= 15;
 	position = pos;
 }
 const sf::Vector2f& C_Transform::GetPositionPNJ() const {
-	return position + sf::Vector2f(7, 14);
+	return position + sf::Vector2f(7, 15);
 }
 
 

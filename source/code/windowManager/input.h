@@ -15,11 +15,12 @@ public:
 		Esc = 5
 	};
 
-	bool IsKeyPressed(Key keycode); // Returns true if the key is pressed.
-	bool IsKeyDown(Key keycode); // Returns true if the key was just pressed.
-	bool IsKeyUp(Key keycode); // Returns true if the key was just released.
+	bool IsKeyPressed(Key keycode); // if the key is pressed.
+	bool IsKeyDown(Key keycode); // if the key was just pressed.
+	bool IsKeyUp(Key keycode); // if the key was just released.
 
 	void Update();
+	bool isDirectionKeyPressed();
 
 private:
 	Bitmask thisFrameKeys;

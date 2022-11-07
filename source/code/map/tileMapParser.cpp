@@ -119,7 +119,7 @@ std::vector<std::shared_ptr<Object>> TileMapParser::Parse(const std::string& fil
 
 			int tileID = tileInfo->tileID;
 			if (tileID >= collisionsGid.first && tileID <= collisionsGid.second)
-				collider->Add((float)x, (float)y, tileID - collisionsGid.first);
+				collider->Add((float)x, (float)y, tileObject);
 
 			tileObject->transform->SetPosition(x, y);
 			tileObjects.emplace_back(tileObject);

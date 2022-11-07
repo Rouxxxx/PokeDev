@@ -53,3 +53,82 @@ void C_Animation::StartUpdating() {
 void C_Animation::StopUpdating() {
 	ShouldUpdate = false;
 };
+
+
+
+
+sf::Vector2f animToReachPosition(sf::Vector2f vec, AnimationState state) {
+	switch (state) {
+	case (WalkDown): case (RunDown):
+		vec.y += 32;
+		break;
+	case (WalkUp): case (RunUp):
+		vec.y -= 32;
+		break;
+	case (WalkLeft): case (RunLeft):
+		vec.x -= 32;
+		break;
+	case (WalkRight): case (RunRight):
+		vec.x += 32;
+		break;
+	}
+	return vec;
+}
+
+sf::Vector2f facingToReachPosition(sf::Vector2f vec, FacingDirection dir) {
+	switch (dir) {
+	case (FacingDirection::Down):
+		vec.y += 32;
+		break;
+	case (FacingDirection::Up):
+		vec.y -= 32;
+		break;
+	case (FacingDirection::Left):
+		vec.x -= 32;
+		break;
+	case (FacingDirection::Right):
+		vec.x += 32;
+		break;
+	}
+	return vec;
+}
+
+sf::Vector2f animToNewPosition(AnimationState state, int moveSpeed) {
+	sf::Vector2f vec(0, 0);
+
+	switch (state) {
+	case (WalkDown): case (RunDown):
+		vec.y += 1;
+		break;
+	case (WalkUp): case (RunUp):
+		vec.y -= 1;
+		break;
+	case (WalkLeft): case (RunLeft):
+		vec.x -= 1;
+		break;
+	case (WalkRight): case (RunRight):
+		vec.x += 1;
+		break;
+	}
+
+	if (state == RunDown || state == RunUp || state == RunRight || state == RunLeft)
+		vec *= 2.0f;
+
+	vec *= moveSpeed / 1.0f;
+	return vec;
+}
+
+FacingDirection animToDir(AnimationState state) {
+	switch (state) {
+	case (IdleLeft): case(WalkLeft): case(RunLeft):
+		return FacingDirection::Left;
+	case (IdleRight): case(WalkRight): case(RunRight):
+		return FacingDirection::Right;
+	case (IdleUp): case(WalkUp): case(RunUp):
+		return FacingDirection::Up;
+	case (IdleDown): case(WalkDown): case(RunDown):
+		return FacingDirection::Down;
+	default:
+		return FacingDirection::Down;
+	}
+}

@@ -43,7 +43,7 @@ bool C_pnj::move(FacingDirection dir) {
 	if (reachPosition != currentPosition) {
 		collider->Delete(oldPosition);
 		oldPosition = animToReachPosition(oldPosition, GetAnimationState());
-		collider->Add(oldPosition, 2);
+		collider->Add(oldPosition, std::make_shared<Object>(owner));
 		isMoving = true;
 	}
 
@@ -54,7 +54,7 @@ bool C_pnj::moveLeft() {
 	return move(FacingDirection::Left);
 }
 void C_pnj::movementLeft() {
-	if (collider->FindLeft(currentPosition) != -1) {
+	if (collider->ExistLeft(currentPosition)) {
 		SetAnimationState(AnimationState::IdleLeft);
 		return;
 	}
@@ -68,7 +68,7 @@ bool C_pnj::moveRight() {
 	return move(FacingDirection::Right);
 }
 void C_pnj::movementRight() {
-	if (collider->FindRight(currentPosition) != -1) {
+	if (collider->ExistRight(currentPosition)) {
 		SetAnimationState(AnimationState::IdleRight);
 		return;
 	}
@@ -81,7 +81,7 @@ bool C_pnj::moveUp() {
 	return move(FacingDirection::Up);
 }
 void C_pnj::movementUp() {
-	if (collider->FindUp(currentPosition) != -1) {
+	if (collider->ExistUp(currentPosition)) {
 		SetAnimationState(AnimationState::IdleUp);
 		return;
 	}
@@ -95,7 +95,7 @@ bool C_pnj::moveDown() {
 	return move(FacingDirection::Down);
 }
 void C_pnj::movementDown() {
-	if (collider->FindDown(currentPosition) != -1) {
+	if (collider->ExistDown(currentPosition)) {
 		SetAnimationState(AnimationState::IdleDown);
 		return;
 	}

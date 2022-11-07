@@ -19,7 +19,7 @@ public:
 	void SetIdle();
 	void SetOldPosition(float, float);
 	void SetOldPosition(sf::Vector2f);
-	bool CheckIfDirectionPressed();
+	bool isDirectionKeyPressed();
 private:
 	AnimationState GetAnimationState();
 	void SetAnimationState(AnimationState state);

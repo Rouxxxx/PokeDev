@@ -91,7 +91,7 @@ void SceneGame::InitPNJs(reference players) {
 		loadAnimations(moves, animation, TextureID, offset);
 
 		objects.Add(pnj);
-		collider.Add(x, y, 5);
+		collider.Add(x, y, pnj);
 		loadedPNJs++;
 	}
 
