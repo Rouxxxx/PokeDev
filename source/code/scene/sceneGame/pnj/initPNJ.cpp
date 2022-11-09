@@ -55,6 +55,7 @@ void SceneGame::InitPNJs(reference players) {
 
 
 		std::shared_ptr<Object> pnj = std::make_shared<Object>();
+		pnj->SetTextBox(textBoxPtr);
 		auto sprite = pnj->AddComponent<C_Sprite>();
 		sprite->SetTextureAllocator(&textureAllocator);
 		sprite->SetSortOrder(sortOrder);

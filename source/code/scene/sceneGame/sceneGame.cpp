@@ -4,7 +4,8 @@ using json = nlohmann::json;
 
 SceneGame::SceneGame(WorkingDirectory& workingDir, ResourceAllocator<sf::Texture>& textureAllocator, Window& window)
 	: workingDir(workingDir), textureAllocator(textureAllocator), mapParser(textureAllocator), window(window), collider(Collider()), className(typeid(this).name())
-{}
+{
+}
 
 void SceneGame::loadAnimations(reference frames, std::shared_ptr<C_Animation> animation, int TextureID, sf::Vector2i offset) {
 	for (auto it = frames.begin(); it != frames.end(); it++) {
@@ -41,17 +42,13 @@ void SceneGame::loadAnimations(reference frames, std::shared_ptr<C_Animation> an
 void SceneGame::OnCreate()
 {
 	InitTextClass("resources/font/font.json");
+
+	createPlayer();
 	InitMap("resources/map/Bourg_Geon/Bourg_Geon.json");
-
-	auto transform = createPlayer();
-	//createTextBox(1, transform);
 }
 
-void SceneGame::OnDestroy()
-{}
-void SceneGame::ProcessInput() {
-	input.Update();
-}
+void SceneGame::OnDestroy() {}
+void SceneGame::ProcessInput() { input.Update(); }
 
 void SceneGame::Update(float deltaTime) {
 	objects.ProcessRemovals();
@@ -59,13 +56,6 @@ void SceneGame::Update(float deltaTime) {
 	objects.Update(deltaTime);
 }
 
-void SceneGame::LateUpdate(float deltaTime) {
-	objects.LateUpdate(deltaTime);
-}
-
-void SceneGame::Draw(Window& window) {
-	objects.Draw(window);
-}
-
-void SceneGame::InitPlayer() {
-}
+void SceneGame::LateUpdate(float deltaTime) { objects.LateUpdate(deltaTime); }
+void SceneGame::Draw(Window& window) { objects.Draw(window); }
+void SceneGame::InitPlayer() {}

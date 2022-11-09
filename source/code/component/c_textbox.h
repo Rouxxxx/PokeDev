@@ -5,10 +5,10 @@
 
 #include "../resource/resourceAllocator.h"
 
-class C_Sprite_Popup : public Component, public C_Drawable
+class C_TextBox : public Component, public C_Drawable
 {
 public:
-	C_Sprite_Popup(Object* owner);
+	C_TextBox(Object* owner);
 	// Loads a sprite from file.
 	void Load(const std::string& filePath);
 	void Load(int id);
@@ -30,6 +30,8 @@ public:
 	void SetVectorString(sf::Vector2f vec);
 	void SetSize(int size);
 	void SetColor(std::pair<sf::Color, sf::Color> colors);
+
+	void Reset();
 
 private:
 	std::shared_ptr<C_Transform> playerTransform;

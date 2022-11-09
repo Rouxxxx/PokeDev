@@ -1,6 +1,7 @@
 #pragma once
 #include "../../component/component.h"
 #include "../../component/c_animation.h"
+#include "../../component/c_textbox.h"
 #include "../../windowManager/input.h"
 #include "../../object/object.h"
 
@@ -28,6 +29,7 @@ private:
 	Input* input;
 	Collider* collider;
 	std::shared_ptr<C_Animation> animation;
+	std::shared_ptr<C_TextBox> textBox;
 	sf::Vector2f reachPosition;
 	sf::Vector2f oldPosition;
 };

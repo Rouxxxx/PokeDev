@@ -1,11 +1,11 @@
-#include "c_sprite_popup.h"
+#include "c_textbox.h"
 #include "../object/object.h"
 
-C_Sprite_Popup::C_Sprite_Popup(Object* owner)
+C_TextBox::C_TextBox(Object* owner)
 	: Component(owner), currentTextureID(-1), allocator(nullptr), playerTransform(nullptr), currentState(sf::Text()), currentStateShadow(sf::Text()) {
 	currentState.setPosition(100.0f, 200.0f);
 }
-void C_Sprite_Popup::Load(int id) {
+void C_TextBox::Load(int id) {
 	if (id == 0 || id == currentTextureID)
 		return;
 
@@ -14,7 +14,7 @@ void C_Sprite_Popup::Load(int id) {
 	sprite.setTexture(*texture);
 }
 
-void C_Sprite_Popup::Load(const std::string& filePath) {
+void C_TextBox::Load(const std::string& filePath) {
 	if (!allocator)
 		return;
 
@@ -26,29 +26,29 @@ void C_Sprite_Popup::Load(const std::string& filePath) {
 		sprite.setTexture(*texture);
 	}
 }
-void C_Sprite_Popup::SetTextureRect(int x, int y, int width, int height) {
+void C_TextBox::SetTextureRect(int x, int y, int width, int height) {
 	sprite.setTextureRect(sf::IntRect(x, y, width, height));
 }
-void C_Sprite_Popup::SetTextureRect(const sf::IntRect& rect) {
+void C_TextBox::SetTextureRect(const sf::IntRect& rect) {
 	sprite.setTextureRect(rect);
 }
 
 
-void C_Sprite_Popup::SetTextureAllocator(ResourceAllocator<sf::Texture>* allocator) {
+void C_TextBox::SetTextureAllocator(ResourceAllocator<sf::Texture>* allocator) {
 	this->allocator = allocator;
 }
-void C_Sprite_Popup::SetTransform(std::shared_ptr<C_Transform> transform) {
+void C_TextBox::SetTransform(std::shared_ptr<C_Transform> transform) {
 	this->playerTransform = transform;
 }
 
 
-void C_Sprite_Popup::Draw(Window& window) {
+void C_TextBox::Draw(Window& window) {
 	window.Draw(sprite);
 	window.Draw(currentStateShadow);
 	window.Draw(currentState);
 }
 
-void C_Sprite_Popup::UpdateRects() {
+void C_TextBox::UpdateRects() {
 	sf::Vector2f vec = playerTransform->GetPosition();
 
 	vec.y += vectorString.y;
@@ -62,7 +62,7 @@ void C_Sprite_Popup::UpdateRects() {
 	sprite.setPosition(vec);
 }
 
-void C_Sprite_Popup::UpdateStrings() {
+void C_TextBox::UpdateStrings() {
 	std::string newString = currentState.getString();
 
 	if (newString == stringToPrint)
@@ -73,38 +73,44 @@ void C_Sprite_Popup::UpdateStrings() {
 	currentStateShadow.setString(newString);
 }
 
-void C_Sprite_Popup::LateUpdate(float deltaTime) {
+void C_TextBox::LateUpdate(float deltaTime) {
 	UpdateRects();
 	UpdateStrings();
 }
 
-void C_Sprite_Popup::SetScale(float scaleX, float scaleY) {
+void C_TextBox::SetScale(float scaleX, float scaleY) {
 	sprite.setScale(scaleX, scaleY);
 }
 
 
-void C_Sprite_Popup::SetFonts(std::pair<sf::Font, sf::Font> newFonts) {
+void C_TextBox::SetFonts(std::pair<sf::Font, sf::Font> newFonts) {
 	fonts = newFonts;
 	currentState.setFont(fonts.first);
 	currentStateShadow.setFont(fonts.second);
 }
 
-void C_Sprite_Popup::SetStrToPrint(std::string str) {
+void C_TextBox::SetStrToPrint(std::string str) {
 	stringToPrint = str;
 }
-void C_Sprite_Popup::SetVectorString(sf::Vector2f vec) {
+void C_TextBox::SetVectorString(sf::Vector2f vec) {
 	sf::Vector2f newVec;
 	newVec.y = (vec.y / 2) - 85;
 	newVec.x = (vec.x / 2) - 5;
 	vectorString = newVec;
 }
 
-void C_Sprite_Popup::SetSize(int size) {
+void C_TextBox::SetSize(int size) {
 	currentState.setCharacterSize(size);
 	currentStateShadow.setCharacterSize(size);
 }
 
-void C_Sprite_Popup::SetColor(std::pair<sf::Color, sf::Color> colors) {
+void C_TextBox::SetColor(std::pair<sf::Color, sf::Color> colors) {
 	currentState.setFillColor(colors.first);
 	currentStateShadow.setFillColor(colors.second);
+}
+
+void C_TextBox::Reset() {
+	currentState.setString("");
+	currentStateShadow.setString("");
+	owner->SetOff();
 }

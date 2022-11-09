@@ -2,6 +2,14 @@
 
 bool Logger::debugState = false;
 
+static void print_colored(std::ostream *stream, std::string str, int colorID) {
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+
+    SetConsoleTextAttribute(hConsole, colorID);
+    *stream << str;
+    SetConsoleTextAttribute(hConsole, 7);
+}
+
 void Logger::debug_info(std::string className, std::string name, std::string msg) {
     if (!debugState)
         return;
@@ -20,11 +28,10 @@ void Logger::info(std::string className, std::string name, std::string msg) {
 }
 void Logger::info(std::string funcName, std::string msg) {
     std::string timeStr = getTime();
-    std::clog << timeStr << " [info] [" << funcName << "] " << msg << std::endl;
+    std::clog << timeStr << " [";
+    print_colored(&std::clog, "INFO", 14);
+    std::clog << "] [" << funcName << "] " << msg << std::endl;
 }
-
-
-
 
 void Logger::debug_error(std::string className, std::string name, std::string msg) {
     if (!debugState)
@@ -44,7 +51,9 @@ void Logger::error(std::string className, std::string name, std::string msg) {
 
 void Logger::error(std::string funcName, std::string msg) {
     std::string timeStr = getTime();
-    std::cerr << timeStr << " [error] [" << funcName << "] " << msg << std::endl;
+    std::cerr << timeStr << " [";
+    print_colored(&std::cout, "ERROR", 12);
+    std::cerr << "] [" << funcName << "] " << msg << std::endl;
 }
 
 
@@ -68,7 +77,9 @@ void Logger::warn(std::string className, std::string name, std::string msg) {
 }
 void Logger::warn(std::string funcName, std::string msg) {
     std::string timeStr = getTime();
-    std::clog << timeStr << " [warn] [" << funcName << "] " << msg << std::endl;
+    std::clog << timeStr << " [";
+    print_colored(&std::clog, "WARN", 13);
+    std::clog << "] [" << funcName << "] " << msg << std::endl;
 }
 
 

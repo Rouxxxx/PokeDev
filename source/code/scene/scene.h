@@ -1,5 +1,6 @@
 #pragma once
 #include "../windowManager/window.h"
+#include "../game/sound/soundFactory.h"
 class Scene
 {
 public:
@@ -19,4 +20,6 @@ public:
 	virtual void Update(float deltaTime) {};
 	virtual void LateUpdate(float deltaTime) {};
 	virtual void Draw(Window& window) {};
+protected:
+	SoundFactory soundFactory;
 };

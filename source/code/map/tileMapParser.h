@@ -50,7 +50,7 @@ class TileMapParser
 {
 public:
 	TileMapParser(ResourceAllocator<sf::Texture>& textureAllocator);
-	std::vector<std::shared_ptr<Object>> Parse(const std::string& file, sf::Vector2i offset, Collider* collider);
+	std::vector<std::shared_ptr<Object>> Parse(const std::string& file, sf::Vector2i offset, Collider* collider, std::shared_ptr<Object> textBoxPtr);
 private:
 	std::pair<int, int> findCollisionsGid(std::shared_ptr<TileSheets> tileSheets);
 	std::shared_ptr<TileSheets> BuildTileSheetData(xml_node<>* rootNode);

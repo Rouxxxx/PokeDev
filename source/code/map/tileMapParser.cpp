@@ -45,7 +45,7 @@ std::shared_ptr<C_Animation> getAnimation(std::shared_ptr<Object> parent, std::v
 	return nullptr;
 }
 
-std::vector<std::shared_ptr<Object>> TileMapParser::Parse(const std::string& file, sf::Vector2i offset, Collider* collider) {
+std::vector<std::shared_ptr<Object>> TileMapParser::Parse(const std::string& file, sf::Vector2i offset, Collider* collider, std::shared_ptr<Object> textBoxPtr) {
 
 	char* fileLoc = new char[file.size() + 1];
 	//TODO: make multi format version of string copy
@@ -96,6 +96,7 @@ std::vector<std::shared_ptr<Object>> TileMapParser::Parse(const std::string& fil
 
 			std::shared_ptr<TileInfo> tileInfo = tile->properties;
 			std::shared_ptr<Object> tileObject = std::make_shared<Object>();
+			tileObject->SetTextBox(textBoxPtr);
 			//TODO: tile scale should be set at the data level.
 			const unsigned int tileScale = 1;
 

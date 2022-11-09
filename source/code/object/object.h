@@ -5,6 +5,8 @@
 #include "../component/component.h"
 #include "../component/c_transform.h" 
 #include "../component/c_drawable.h"
+#include "../component/c_textbox.h"
+#include "../game/sound/soundFactory.h"
 
 
 class Object
@@ -53,9 +55,15 @@ public:
 		return drawable;
 	}
 
+	std::shared_ptr<C_TextBox> getTextBoxComponent();
+	void SetTextBox(std::shared_ptr<Object>);
+	void SetSoundFactory(std::shared_ptr<SoundFactory>);
+
 private:
 	std::vector<std::shared_ptr<Component>> components;
+	std::shared_ptr<Object> textBoxPtr;
 	std::shared_ptr<C_Drawable> drawable;
+	std::shared_ptr<SoundFactory> soundFactory;
 	bool queuedForRemoval;
 	bool isOn;
 };

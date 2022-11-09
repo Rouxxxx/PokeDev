@@ -1,6 +1,6 @@
 #include "../sceneGame.h"
 
-std::shared_ptr < C_Transform> SceneGame::createPlayer() {
+void SceneGame::createPlayer() {
 	std::ifstream f("resources/sprites/ethan/ethan.json");
 	json data = json::parse(f);
 
@@ -12,7 +12,6 @@ std::shared_ptr < C_Transform> SceneGame::createPlayer() {
 	std::string image = data["ethan"]["meta"]["image"];
 
 	int TextureID = textureAllocator.add(workingDir.Get() + image);
-
 
 	std::shared_ptr<Object> player = std::make_shared<Object>();
 	auto sprite = player->AddComponent<C_Sprite>();
@@ -41,5 +40,6 @@ std::shared_ptr < C_Transform> SceneGame::createPlayer() {
 	window.SetView(view);
 	objects.Add(player);
 
-	return player->transform;
+	createTextBox(1, player->transform);
+	player->SetTextBox(textBoxPtr);
 }

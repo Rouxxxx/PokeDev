@@ -84,7 +84,7 @@
     <ClCompile Include="code\scene\sceneSplashScreen\sceneSpashScreen.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="code\component\c_sprite_popup.cpp">
+    <ClCompile Include="code\component\c_textbox.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="code\scene\sceneGame\textClass.cpp">
@@ -115,6 +115,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="code\scene\sceneGame\pnj\c_pnj_move.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="code\game\sound\soundFactory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -581,7 +584,7 @@
     <ClInclude Include="code\scene\sceneSplashScreen\sceneSplashScreen.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="code\component\c_sprite_popup.h">
+    <ClInclude Include="code\component\c_textbox.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="code\scene\sceneGame\textClass.h">
@@ -591,6 +594,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="code\scene\sceneGame\pnj\c_pnj.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="code\game\sound\soundFactory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

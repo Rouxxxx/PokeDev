@@ -39,12 +39,16 @@ void Object::LateUpdate(float timeDelta) {
 		components[i]->LateUpdate(timeDelta);
 }
 void Object::Draw(Window& window) {
+	if (!isOn)
+		return;
 	drawable->Draw(window);
 }
-void Object::SetOn() {
-	isOn = true;
-}
 
-void Object::SetOff() {
-	isOn = false;
+std::shared_ptr<C_TextBox> Object::getTextBoxComponent() {
+	if (!textBoxPtr) return nullptr;
+	return textBoxPtr->GetComponent<C_TextBox>();
 }
+void Object::SetTextBox(std::shared_ptr<Object> obj) { textBoxPtr = obj; }
+void Object::SetSoundFactory(std::shared_ptr<SoundFactory> s) { soundFactory = s; }
+void Object::SetOn() { isOn = true; }
+void Object::SetOff() { isOn = false; }

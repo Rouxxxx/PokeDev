@@ -11,9 +11,13 @@ void SceneGame::InitMap(std::string path) {
 
 	std::string tilemap = meta["tilemap"];
 	std::string type = meta["type"];
+	std::string musicPath = meta["music"];
+
+	soundFactory.loadMusic(musicPath);
+	soundFactory.StartMusic();
 
 	sf::Vector2i mapOffset(16, 0);
-	std::vector<std::shared_ptr<Object>> levelTiles = mapParser.Parse(workingDir.Get() + tilemap, mapOffset, &collider);
+	std::vector<std::shared_ptr<Object>> levelTiles = mapParser.Parse(workingDir.Get() + tilemap, mapOffset, &collider, textBoxPtr);
 	objects.Add(levelTiles);
 
 	auto pos = path.find_last_of("/");

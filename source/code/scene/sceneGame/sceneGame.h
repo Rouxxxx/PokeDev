@@ -14,7 +14,7 @@
 #include "../../object/objectCollection.h"
 
 #include "../../component/c_sprite.h"
-#include "../../component/c_sprite_popup.h"
+#include "../../component/c_textbox.h"
 #include  "player/c_keyboardMovement.h"
 
 #include "../../resource/resourceAllocator.h"
@@ -41,7 +41,7 @@ private:
 	void InitMap(std::string path);
 	void InitTextClass(std::string path);
 	void InitPlayer();
-	std::shared_ptr <C_Transform> createPlayer();
+	void createPlayer();
 	void createTextBox(int id, std::shared_ptr<C_Transform>);
 	void loadAnimations(reference frames, std::shared_ptr<C_Animation> animation, int TextureID, sf::Vector2i = sf::Vector2i());
 
@@ -53,11 +53,12 @@ private:
 	Collider collider;
 	Window& window;
 	TextClass textClass;
+	std::shared_ptr<Object> textBoxPtr;
 
 	const std::string className;
 
-	int pnjWidth;
-	int pnjHeight;
+	int pnjWidth = 0;
+	int pnjHeight = 0;
 };
 
 inline FacingDirection findFacingDirection(std::string str) {

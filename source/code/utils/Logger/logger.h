@@ -5,6 +5,9 @@
 #include <ctime>
 #include <sstream>
 
+#define NOMINMAX
+#include <windows.h>
+
 enum LogType {
 	info,
 	error,

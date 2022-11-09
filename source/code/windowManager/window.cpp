@@ -4,7 +4,7 @@ Window::Window(const std::string& windowName)
     : window(sf::VideoMode(1034, 800), windowName, sf::Style::Titlebar | sf::Style::Close), size(window.getSize())
 {
     window.setVerticalSyncEnabled(true);
-    centre = sf::Vector2u(window.getSize().x / 2, window.getSize().y / 2);
+    centre = sf::Vector2f(window.getSize().x / 2, window.getSize().y / 2);
 }
 void Window::Update() {
     sf::Event event;
@@ -24,7 +24,7 @@ void Window::EndDraw() {
 bool Window::IsOpen() const {
     return window.isOpen();
 }
-sf::Vector2u Window::GetCentre() const {
+sf::Vector2f Window::GetCentre() const {
     return centre;
 }
 

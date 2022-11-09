@@ -2,7 +2,8 @@
     "map": {
         "meta": {
             "type": "town",
-            "tilemap": "resources/map/Bourg_Geon/Bourg_Geon.tmx"
+            "tilemap": "resources/map/Bourg_Geon/Bourg_Geon.tmx",
+            "music": "resources/sound/music/04-New-Bark-Town.ogg"
         },
         "players": [
             {
