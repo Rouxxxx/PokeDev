@@ -1,7 +1,7 @@
 #include "soundFactory.h"
 
 SoundFactory::SoundFactory()
-	: className(typeid(this).name()), volume(100)
+	: className(typeid(this).name()), musicVolume(Config::musicVolume), soundVolume(Config::soundVolume)
 {}
 
 void SoundFactory::loadMusic(std::string path) {
@@ -10,5 +10,16 @@ void SoundFactory::loadMusic(std::string path) {
 	Logger::debug_info(className, __func__, "Successfully loaded music from path " + path);
 }
 
-void SoundFactory::StartMusic() { music.play(); music.setLoop(true); }
+void SoundFactory::StartMusic() { music.setVolume(musicVolume); music.play(); music.setLoop(true); }
 void SoundFactory::StopMusic() { music.stop(); }
+
+void SoundFactory::SetMusicVolume(float vol) {
+	musicVolume = vol; 
+	if (music.getStatus() != sf::Music::Stopped)
+		music.setVolume(musicVolume);
+};
+void SoundFactory::SetSoundVolume(float vol) {
+	soundVolume = vol;
+	if (sound.getStatus() == sf::Sound::Playing)
+		sound.setVolume(soundVolume);
+};

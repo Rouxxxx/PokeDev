@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SFML/Audio.hpp>
+#include "../config.h"
 #include "../../utils/Logger/logger.h"
 
 
@@ -10,9 +11,11 @@ public:
 	void loadMusic(std::string path);
 	void StopMusic();
 	void StartMusic();
-	void SetVolume(float vol) { volume = vol; };
+	void SetMusicVolume(float vol);
+	void SetSoundVolume(float vol);
 private:
-	float volume;
+	float musicVolume;
+	float soundVolume;
 	sf::Music music;
 	sf::Sound sound;
 	sf::Sound bonkSound;

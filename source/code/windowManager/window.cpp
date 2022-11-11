@@ -1,7 +1,7 @@
 #include "window.h"
 
 Window::Window(const std::string& windowName)
-    : window(sf::VideoMode(1034, 800), windowName, sf::Style::Titlebar | sf::Style::Close), size(window.getSize())
+    : window(sf::VideoMode(Config::windowWidth, Config::windowHeight), windowName, sf::Style::Titlebar | sf::Style::Close), size(window.getSize())
 {
     window.setVerticalSyncEnabled(true);
     centre = sf::Vector2f(window.getSize().x / 2, window.getSize().y / 2);

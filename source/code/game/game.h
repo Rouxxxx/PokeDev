@@ -6,11 +6,15 @@
 #include "../scene/sceneSplashScreen/sceneSplashScreen.h"
 #include "../scene/sceneGame/sceneGame.h"
 #include "../Logger/logger.h"
+#include "config.h"
+
+void GameLoop();
 
 class Game
 {
 public:
     Game();
+    void MainLoop();
     void ProcessInput();
     void Update();
     void LateUpdate();

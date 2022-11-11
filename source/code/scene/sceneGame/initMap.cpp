@@ -2,7 +2,6 @@
 
 void SceneGame::InitMap(std::string path) {
 
-	std::string funcName = __func__;
 	std::ifstream f(path);
 	json data = json::parse(f);
 

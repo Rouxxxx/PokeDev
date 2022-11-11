@@ -141,6 +141,7 @@
   <ItemGroup>
     <ClCompile Include="code\component\c_animation.cpp" />
     <ClCompile Include="code\component\c_textbox.cpp" />
+    <ClCompile Include="code\game\config.cpp" />
     <ClCompile Include="code\game\sound\soundFactory.cpp" />
     <ClCompile Include="code\scene\sceneGame\pnj\c_pnj.cpp" />
     <ClCompile Include="code\scene\sceneGame\pnj\c_pnj_behavior.cpp" />
@@ -178,6 +179,7 @@
   <ItemGroup>
     <ClInclude Include="code\component\c_animation.h" />
     <ClInclude Include="code\component\c_textbox.h" />
+    <ClInclude Include="code\game\config.h" />
     <ClInclude Include="code\game\sound\soundFactory.h" />
     <ClInclude Include="code\scene\sceneGame\pnj\c_pnj.h" />
     <ClInclude Include="code\utils\Logger\logger.h" />
