@@ -1,4 +1,4 @@
-#include "sceneGame.h"
+#include "../sceneGame.h"
 
 void SceneGame::InitMap(std::string path) {
 

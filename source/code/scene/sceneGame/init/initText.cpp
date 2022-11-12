@@ -1,4 +1,4 @@
-#include "sceneGame.h"
+#include "../sceneGame.h"
 
 void SceneGame::InitTextClass(std::string path) {
 	std::ifstream f(path);

@@ -1,17 +1,35 @@
 #include "game.h"
 
+json OpenInitFile() {
+    std::string path = "resources/config.json";
+    json data;
+    try {
+        std::ifstream f(path);
+        data = json::parse(f);
+    }
+    catch (...) {
+        Logger::error("Config", __func__, "Error when parsing " + path + ". Aborting.");
+        exit(2);
+    }
+    return data;
+}
+
 void GameLoop() {
-    Config::InitConf();
-    Game game;
+    json data = OpenInitFile();
+    Config::InitConf(data);
+    Game game(data);
     game.MainLoop();
 }
 
-Game::Game()
-    : window("Pokemon")
+
+
+Game::Game(json json)
+    : window("Pokemon"), input()
 {
     srand((unsigned int)time(NULL));
+    input.InitKeys(json["keys"]);
     std::shared_ptr<SceneSplashScreen> splashScreen = std::make_shared<SceneSplashScreen>(workingDir, sceneStateMachine, window, textureAllocator);
-    std::shared_ptr<SceneGame> gameScene = std::make_shared<SceneGame>(workingDir, textureAllocator, window);
+    std::shared_ptr<SceneGame> gameScene = std::make_shared<SceneGame>(workingDir, textureAllocator, window, input);
 
     unsigned int splashScreenID = sceneStateMachine.Add(splashScreen);
     unsigned int gameSceneID = sceneStateMachine.Add(gameScene);
@@ -30,40 +48,3 @@ void Game::MainLoop() {
         CalculateDeltaTime();
     }
 }
-
-void Game::ProcessInput()
-{
-    sceneStateMachine.ProcessInput();
-}
-void Game::Update()
-{
-    window.Update();
-    sceneStateMachine.Update(deltaTime);
-}
-void Game::LateUpdate()
-{
-    sceneStateMachine.LateUpdate(deltaTime);
-}
-void Game::Draw()
-{
-    window.BeginDraw();
-    sceneStateMachine.Draw(window);
-    window.EndDraw();
-}
-
-bool Game::IsRunning() const
-{
-    return window.IsOpen();
-}
-
-void Game::CalculateDeltaTime()
-{
-    deltaTime = clock.restart().asSeconds();
-}
-
-
-void Game::CaptureInput()
-{
-    sceneStateMachine.ProcessInput();
-}
-

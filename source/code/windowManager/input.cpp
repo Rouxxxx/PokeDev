@@ -1,5 +1,8 @@
 #include "input.h"
 
+Input::Input() 
+{}
+
 bool Input::IsKeyPressed(Key keycode)
 {
 	return thisFrameKeys.GetBit((int)keycode);
@@ -18,10 +21,24 @@ bool Input::IsKeyUp(Key keycode)
 }
 
 
+bool checkKeysPressed(std::vector<sf::Keyboard::Key>::iterator itBegin, std::vector<sf::Keyboard::Key>::iterator itEnd) {
+	for (auto it = itBegin; it != itEnd; it++) {
+		if (sf::Keyboard::isKeyPressed(*it))
+			return true;
+	}
+	return false;
+}
+
+
 void Input::Update()
 {
 	lastFrameKeys.SetMask(thisFrameKeys);
-	thisFrameKeys.SetBit((int)Key::Left,
+
+	for (auto it = keysMapping.begin(); it != keysMapping.end(); it++) {
+		bool isAnyKeyPressed = checkKeysPressed(it->second.begin(), it->second.end());
+		thisFrameKeys.SetBit((int) it->first, isAnyKeyPressed);
+	}
+	/*thisFrameKeys.SetBit((int)Key::Left,
 		(sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) ||
 		(sf::Keyboard::isKeyPressed(sf::Keyboard::Q)));
 	thisFrameKeys.SetBit((int)Key::Right,
@@ -34,7 +51,7 @@ void Input::Update()
 		(sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) ||
 		(sf::Keyboard::isKeyPressed(sf::Keyboard::S)));
 	thisFrameKeys.SetBit((int)Key::Esc),
-		sf::Keyboard::isKeyPressed(sf::Keyboard::Escape);
+		sf::Keyboard::isKeyPressed(sf::Keyboard::Escape);*/
 }
 
 bool Input::isDirectionKeyPressed() {

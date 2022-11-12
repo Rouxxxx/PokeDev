@@ -1,7 +1,7 @@
 #pragma once
 
 #include <SFML/Audio.hpp>
-#include "../config.h"
+#include "../config/config.h"
 #include "../../utils/Logger/logger.h"
 
 

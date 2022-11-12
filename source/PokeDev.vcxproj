@@ -140,18 +140,22 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="code\component\c_animation.cpp" />
+    <ClCompile Include="code\component\c_keyboard\c_keyboard_interactions.cpp" />
+    <ClCompile Include="code\component\c_keyboard\c_keyboard_movement.cpp" />
+    <ClCompile Include="code\component\c_keyboard\c_keyboard_utils.cpp" />
     <ClCompile Include="code\component\c_textbox.cpp" />
-    <ClCompile Include="code\game\config.cpp" />
+    <ClCompile Include="code\game\config\config.cpp" />
+    <ClCompile Include="code\game\gameUtils.cpp" />
     <ClCompile Include="code\game\sound\soundFactory.cpp" />
-    <ClCompile Include="code\scene\sceneGame\pnj\c_pnj.cpp" />
-    <ClCompile Include="code\scene\sceneGame\pnj\c_pnj_behavior.cpp" />
-    <ClCompile Include="code\scene\sceneGame\pnj\c_pnj_move.cpp" />
-    <ClCompile Include="code\scene\sceneGame\pnj\c_pnj_utils.cpp" />
-    <ClCompile Include="code\scene\sceneGame\pnj\initPNJ.cpp" />
+    <ClCompile Include="code\component\c_pnj\c_pnj.cpp" />
+    <ClCompile Include="code\component\c_pnj\c_pnj_behavior.cpp" />
+    <ClCompile Include="code\component\c_pnj\c_pnj_move.cpp" />
+    <ClCompile Include="code\component\c_pnj\c_pnj_utils.cpp" />
+    <ClCompile Include="code\scene\sceneGame\init\initPNJ.cpp" />
     <ClCompile Include="code\utils\Logger\logger.cpp" />
     <ClCompile Include="code\map\collider.cpp" />
     <ClCompile Include="code\component\c_drawable.cpp" />
-    <ClCompile Include="code\scene\sceneGame\player\c_keyboardMovement.cpp" />
+    <ClCompile Include="code\component\c_keyboard\c_keyboard.cpp" />
     <ClCompile Include="code\component\c_sprite.cpp" />
     <ClCompile Include="code\component\c_transform.cpp" />
     <ClCompile Include="code\component\s_drawable.cpp" />
@@ -161,9 +165,9 @@
     <ClCompile Include="code\object\objectCollection.cpp" />
     <ClCompile Include="code\resource\resourseAllocator.cpp" />
     <ClCompile Include="code\scene\sceneFight\sceneFight.cpp" />
-    <ClCompile Include="code\scene\sceneGame\initMap.cpp" />
-    <ClCompile Include="code\scene\sceneGame\player\initPlayer.cpp" />
-    <ClCompile Include="code\scene\sceneGame\initText.cpp" />
+    <ClCompile Include="code\scene\sceneGame\init\initMap.cpp" />
+    <ClCompile Include="code\scene\sceneGame\init\initPlayer.cpp" />
+    <ClCompile Include="code\scene\sceneGame\init\initText.cpp" />
     <ClCompile Include="code\scene\sceneGame\sceneGame.cpp" />
     <ClCompile Include="code\scene\sceneGame\textClass.cpp" />
     <ClCompile Include="code\scene\sceneSplashScreen\sceneSpashScreen.cpp" />
@@ -173,19 +177,20 @@
     <ClCompile Include="code\utils\workingDirectory.cpp" />
     <ClCompile Include="code\windowManager\c_camera.cpp" />
     <ClCompile Include="code\windowManager\input.cpp" />
+    <ClCompile Include="code\windowManager\inputInit.cpp" />
     <ClCompile Include="code\windowManager\window.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="code\component\c_animation.h" />
     <ClInclude Include="code\component\c_textbox.h" />
-    <ClInclude Include="code\game\config.h" />
+    <ClInclude Include="code\game\config\config.h" />
     <ClInclude Include="code\game\sound\soundFactory.h" />
-    <ClInclude Include="code\scene\sceneGame\pnj\c_pnj.h" />
+    <ClInclude Include="code\component\c_pnj\c_pnj.h" />
     <ClInclude Include="code\utils\Logger\logger.h" />
     <ClInclude Include="code\map\collider.h" />
     <ClInclude Include="code\component\c_drawable.h" />
-    <ClInclude Include="code\scene\sceneGame\player\c_keyboardMovement.h" />
+    <ClInclude Include="code\component\c_keyboard\c_keyboard.h" />
     <ClInclude Include="code\component\c_sprite.h" />
     <ClInclude Include="code\component\c_transform.h" />
     <ClInclude Include="code\component\s_drawable.h" />

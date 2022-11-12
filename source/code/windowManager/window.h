@@ -1,6 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include "../game/config.h"
+#include "../game/config/config.h"
 
 class Window
 {

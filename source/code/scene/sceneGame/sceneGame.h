@@ -15,7 +15,7 @@
 
 #include "../../component/c_sprite.h"
 #include "../../component/c_textbox.h"
-#include  "player/c_keyboardMovement.h"
+#include  "../../component/c_keyboard/c_keyboard.h"
 
 #include "../../resource/resourceAllocator.h"
 
@@ -26,7 +26,7 @@
 class SceneGame : public Scene
 {
 public:
-	SceneGame(WorkingDirectory&, ResourceAllocator<sf::Texture>&, Window&);
+	SceneGame(WorkingDirectory&, ResourceAllocator<sf::Texture>&, Window&, Input&);
 	
 	void OnCreate() override;
 	void OnDestroy() override;
@@ -48,7 +48,7 @@ private:
 	ResourceAllocator<sf::Texture>& textureAllocator;
 	ObjectCollection objects;
 	WorkingDirectory& workingDir;
-	Input input;
+	Input &input;
 	TileMapParser mapParser;
 	Collider collider;
 	Window& window;

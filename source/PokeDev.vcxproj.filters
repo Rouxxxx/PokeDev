@@ -45,7 +45,7 @@
     <ClCompile Include="code\component\c_transform.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="code\scene\sceneGame\player\c_keyboardMovement.cpp">
+    <ClCompile Include="code\component\c_keyboard\c_keyboard.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="code\resource\resourseAllocator.cpp">
@@ -90,37 +90,52 @@
     <ClCompile Include="code\scene\sceneGame\textClass.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="code\scene\sceneGame\player\initPlayer.cpp">
+    <ClCompile Include="code\scene\sceneGame\init\initPlayer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="code\scene\sceneGame\initText.cpp">
+    <ClCompile Include="code\scene\sceneGame\init\initText.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="code\utils\Logger\logger.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="code\scene\sceneGame\initMap.cpp">
+    <ClCompile Include="code\scene\sceneGame\init\initMap.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="code\scene\sceneGame\pnj\initPNJ.cpp">
+    <ClCompile Include="code\scene\sceneGame\init\initPNJ.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="code\scene\sceneGame\pnj\c_pnj.cpp">
+    <ClCompile Include="code\component\c_pnj\c_pnj.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="code\scene\sceneGame\pnj\c_pnj_utils.cpp">
+    <ClCompile Include="code\component\c_pnj\c_pnj_utils.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="code\scene\sceneGame\pnj\c_pnj_behavior.cpp">
+    <ClCompile Include="code\component\c_pnj\c_pnj_behavior.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="code\scene\sceneGame\pnj\c_pnj_move.cpp">
+    <ClCompile Include="code\component\c_pnj\c_pnj_move.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="code\game\sound\soundFactory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="code\game\config.cpp">
+    <ClCompile Include="code\game\config\config.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="code\component\c_keyboard\c_keyboard_utils.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="code\component\c_keyboard\c_keyboard_movement.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="code\component\c_keyboard\c_keyboard_interactions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="code\game\gameUtils.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="code\windowManager\inputInit.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -158,7 +173,7 @@
     <ClInclude Include="code\component\c_transform.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="code\scene\sceneGame\player\c_keyboardMovement.h">
+    <ClInclude Include="code\component\c_keyboard\c_keyboard.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="code\resource\resourceAllocator.h">
@@ -596,13 +611,13 @@
     <ClInclude Include="code\utils\Logger\logger.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="code\scene\sceneGame\pnj\c_pnj.h">
+    <ClInclude Include="code\component\c_pnj\c_pnj.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="code\game\sound\soundFactory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="code\game\config.h">
+    <ClInclude Include="code\game\config\config.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

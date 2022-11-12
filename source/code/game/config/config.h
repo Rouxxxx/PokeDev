@@ -1,15 +1,18 @@
 #pragma once
 
 #include<fstream>
+#include <SFML/Window/Keyboard.hpp>
 #include "../../utils/json/json.hpp"
-#include "../utils/Logger/logger.h"
+#include "../../utils/Logger/logger.h"
 
 using json = nlohmann::json;
 using reference = const nlohmann::json&;
 
+
+
 class Config {
 public:
-	static void InitConf();
+	static void InitConf(json);
 	static int windowHeight;
 	static int windowWidth;
 	static float musicVolume;

@@ -7,10 +7,10 @@
 
 #include "../../map/collider.h"
 
-class C_KeyboardMovement : public Component
+class C_Keyboard : public Component
 {
 public:
-	C_KeyboardMovement(Object* owner);
+	C_Keyboard(Object* owner);
 	void SetInput(Input* input);
 	void SetCollider(Collider* collider);
 	void SetMovementSpeed(int moveSpeed);
@@ -22,10 +22,13 @@ public:
 	void SetOldPosition(sf::Vector2f);
 	bool isDirectionKeyPressed();
 private:
+	void UpdateInteractions(float);
+	void UpdateMovement(float, sf::Vector2f);
 	AnimationState GetAnimationState();
 	void SetAnimationState(AnimationState state);
 	int moveSpeed;
 	bool isMoving;
+	bool isInteracting;
 	Input* input;
 	Collider* collider;
 	std::shared_ptr<C_Animation> animation;

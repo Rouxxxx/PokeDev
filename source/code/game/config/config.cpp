@@ -6,23 +6,13 @@ int Config::windowWidth;
 float Config::musicVolume;
 float Config::soundVolume;
 
-void Config::InitConf() {
 
-	std::string path = "resources/config.json";
-	json data;
-	try {
-		std::ifstream f(path);
-		data = json::parse(f);
-	}
-	catch (...) {
-		Logger::error("Config", __func__, "Error when parsing " + path + ". Aborting.");
-		exit(2);
-	}
 
-	SetParam("windowWidth", data);
-	SetParam("windowHeight", data);
-	SetParam("musicVolume", data);
-	SetParam("soundVolume", data);
+void Config::InitConf(json data) {
+	SetParam("windowWidth", data["window"]);
+	SetParam("windowHeight", data["window"]);
+	SetParam("musicVolume", data["window"]);
+	SetParam("soundVolume", data["window"]);
 }
 
 void Config::SetDefaultParam(std::string param) {

@@ -4,7 +4,7 @@ Window::Window(const std::string& windowName)
     : window(sf::VideoMode(Config::windowWidth, Config::windowHeight), windowName, sf::Style::Titlebar | sf::Style::Close), size(window.getSize())
 {
     window.setVerticalSyncEnabled(true);
-    centre = sf::Vector2f(window.getSize().x / 2, window.getSize().y / 2);
+    centre = sf::Vector2f(window.getSize().x / 2.0f, window.getSize().y / 2.0f);
 }
 void Window::Update() {
     sf::Event event;

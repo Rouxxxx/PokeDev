@@ -4,8 +4,8 @@
 #include <functional>
 #include <random>
 
-#include "../../component/component.h"
-#include "../../component/c_animation.h"
+#include "../component.h"
+#include "../c_animation.h"
 #include "../../windowManager/input.h"
 #include "../../object/object.h"
 #include "../../object/objectCollection.h"

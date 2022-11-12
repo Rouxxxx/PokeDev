@@ -1,5 +1,5 @@
 #include "../sceneGame.h"
-#include "c_pnj.h"
+#include "../../component/c_pnj/c_pnj.h"
 
 void SceneGame::InitPNJs(reference players) {
 	std::string filePath = "resources/sprites/trainers/trainers.json";

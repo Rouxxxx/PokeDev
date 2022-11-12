@@ -2,10 +2,9 @@
 
 using json = nlohmann::json;
 
-SceneGame::SceneGame(WorkingDirectory& workingDir, ResourceAllocator<sf::Texture>& textureAllocator, Window& window)
-	: workingDir(workingDir), textureAllocator(textureAllocator), mapParser(textureAllocator), window(window), collider(Collider()), className(typeid(this).name())
-{
-}
+SceneGame::SceneGame(WorkingDirectory& workingDir, ResourceAllocator<sf::Texture>& textureAllocator, Window& window, Input& gameInput)
+	: workingDir(workingDir), textureAllocator(textureAllocator), mapParser(textureAllocator), window(window), collider(Collider()), className(typeid(this).name()), input(gameInput)
+{}
 
 void SceneGame::loadAnimations(reference frames, std::shared_ptr<C_Animation> animation, int TextureID, sf::Vector2i offset) {
 	for (auto it = frames.begin(); it != frames.end(); it++) {

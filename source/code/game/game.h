@@ -6,14 +6,14 @@
 #include "../scene/sceneSplashScreen/sceneSplashScreen.h"
 #include "../scene/sceneGame/sceneGame.h"
 #include "../Logger/logger.h"
-#include "config.h"
+#include "config/config.h"
 
 void GameLoop();
 
 class Game
 {
 public:
-    Game();
+    Game(json);
     void MainLoop();
     void ProcessInput();
     void Update();

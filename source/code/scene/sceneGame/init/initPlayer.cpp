@@ -22,7 +22,7 @@ void SceneGame::createPlayer() {
 	float y = 11 * 32;
 	player->transform->SetPositionTrainer(x, y);
 
-	auto movement = player->AddComponent<C_KeyboardMovement>();
+	auto movement = player->AddComponent<C_Keyboard>();
 	movement->SetInput(&input);
 	movement->SetCollider(&collider);
 	collider.Add(x, y, player);
