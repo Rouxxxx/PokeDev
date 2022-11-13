@@ -30,7 +30,7 @@ public:
 	void SetVectorString(sf::Vector2f vec);
 	void SetSize(int size);
 	void SetColor(std::pair<sf::Color, sf::Color> colors);
-
+	bool IsDone();
 	void Reset();
 
 private:
@@ -43,4 +43,5 @@ private:
 	sf::Text currentState;
 	sf::Text currentStateShadow;
 	sf::Vector2f vectorString;
+	bool isDone = false;;
 };

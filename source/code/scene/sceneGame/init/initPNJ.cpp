@@ -47,6 +47,7 @@ void SceneGame::InitPNJs(reference players) {
 
 		std::string style = currentPlayerIt["style"];
 
+
 		bool isTrainer = currentPlayerIt["trainer"] == "no";
 		float x = currentPlayerIt["x"];
 		float y = currentPlayerIt["y"];

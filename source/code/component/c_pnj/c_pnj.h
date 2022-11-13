@@ -52,9 +52,15 @@ public:
 	void SetMovementSpeed(int moveSpeed);
 	void SetOldPosition(float, float);
 	void SetOldPosition(sf::Vector2f);
+
+	bool IsMoving();
+	void SetInteracted();
 	
 	void SetSpritePtr(std::shared_ptr<C_Sprite>);
 	void SetBehavior(std::string str, std::vector<std::string> = std::vector<std::string>(), std::vector<float> = std::vector<float>());
+
+	AnimationState GetAnimationState();
+	void SetAnimationState(AnimationState state);
 
 private:
 	bool move(FacingDirection);
@@ -67,8 +73,7 @@ private:
 
 	void UpdateSortOrder();
 
-	AnimationState GetAnimationState();
-	void SetAnimationState(AnimationState state);
+	
 	int moveSpeed;
 	bool isMoving = false;
 	bool hasBeenSpokenTo = false;
@@ -77,8 +82,8 @@ private:
 	std::shared_ptr<C_Sprite> spritePtr;
 	sf::Vector2f reachPosition;
 	sf::Vector2f oldPosition;
+	float hasToWait;
 	float waitingTime;
-	float currentWait;
 
 	std::vector<bool(C_pnj::*) ()> functions;
 	std::vector<float> waits;

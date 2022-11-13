@@ -27,7 +27,6 @@ public:
 	void SetOff();
 
 	template <typename T> std::shared_ptr<T> GetComponent() {
-		// Check that we don't already have a component of this type.
 		for (auto& exisitingComponent : components)
 			if (std::dynamic_pointer_cast<T>(exisitingComponent))
 				return std::dynamic_pointer_cast<T>(exisitingComponent);
@@ -55,15 +54,18 @@ public:
 		return drawable;
 	}
 
-	std::shared_ptr<C_TextBox> getTextBoxComponent();
+	bool IsPNJ();
+	bool IsTextBoxDone();
+	void EnableTextBox();
+	void DisableTextBox();
 	void SetTextBox(std::shared_ptr<Object>);
-	void SetSoundFactory(std::shared_ptr<SoundFactory>);
+	void SetTextBoxString(std::string str);
 
 private:
+	std::shared_ptr<C_TextBox> GetTextBoxComponent();
 	std::vector<std::shared_ptr<Component>> components;
 	std::shared_ptr<Object> textBoxPtr;
 	std::shared_ptr<C_Drawable> drawable;
-	std::shared_ptr<SoundFactory> soundFactory;
 	bool queuedForRemoval;
 	bool isOn;
 };

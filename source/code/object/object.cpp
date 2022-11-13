@@ -1,4 +1,5 @@
 #include "object.h"
+#include "../component/c_pnj/c_pnj.h"
 
 Object::Object() 
 	: queuedForRemoval(false), isOn(true) {
@@ -44,11 +45,10 @@ void Object::Draw(Window& window) {
 	drawable->Draw(window);
 }
 
-std::shared_ptr<C_TextBox> Object::getTextBoxComponent() {
-	if (!textBoxPtr) return nullptr;
-	return textBoxPtr->GetComponent<C_TextBox>();
-}
-void Object::SetTextBox(std::shared_ptr<Object> obj) { textBoxPtr = obj; }
-void Object::SetSoundFactory(std::shared_ptr<SoundFactory> s) { soundFactory = s; }
+
 void Object::SetOn() { isOn = true; }
 void Object::SetOff() { isOn = false; }
+
+bool Object::IsPNJ() {
+	return (GetComponent<C_pnj>() != nullptr);
+}

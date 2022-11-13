@@ -25,6 +25,7 @@ void SceneGame::createPlayer() {
 	auto movement = player->AddComponent<C_Keyboard>();
 	movement->SetInput(&input);
 	movement->SetCollider(&collider);
+	movement->SetSoundFactory(&soundFactory);
 	collider.Add(x, y, player);
 	movement->SetOldPosition(x, y);
 

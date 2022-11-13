@@ -11,6 +11,6 @@ void C_Keyboard::Update(float deltaTime) {
 
 	sf::Vector2f currentPosition = owner->transform->GetPositionTrainer();
 
-	UpdateInteractions(deltaTime);
+	UpdateInteractions(deltaTime, currentPosition);
 	UpdateMovement(deltaTime, currentPosition);
 }

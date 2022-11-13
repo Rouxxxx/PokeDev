@@ -43,7 +43,7 @@ bool C_pnj::move(FacingDirection dir) {
 	if (reachPosition != currentPosition) {
 		collider->Delete(oldPosition);
 		oldPosition = animToReachPosition(oldPosition, GetAnimationState());
-		collider->Add(oldPosition, std::make_shared<Object>(owner));
+		collider->Add(oldPosition, std::make_shared<Object>(*owner));
 		isMoving = true;
 	}
 

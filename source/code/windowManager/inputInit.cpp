@@ -2,16 +2,16 @@
 
 Key NameToKey(std::string name) {
     std::vector<std::pair<std::string, Key>> table{
-        {"up", Key::Up},
-        {"down", Key::Down},
-        {"left", Key::Left},
-        {"right", Key::Right},
-        {"a", Key::A},
-        {"b", Key::Right},
-        {"x", Key::Right},
-        {"y", Key::Right},
-        {"start", Key::Right},
-        {"select", Key::Right},
+        {"Up", Key::Up},
+        {"Down", Key::Down},
+        {"Left", Key::Left},
+        {"Right", Key::Right},
+        {"A", Key::A},
+        {"B", Key::Right},
+        {"X", Key::Right},
+        {"Y", Key::Right},
+        {"Start", Key::Right},
+        {"Select", Key::Right},
     };
 
     for (auto curr : table)
@@ -144,7 +144,7 @@ void Input::InitKeys(reference ref) {
 
     for (auto it = ref.begin(); it != ref.end(); it++) {
         std::string name = it.key();
-        Logger::info(__func__, "loading " + name);
+        Logger::debug_info("class Input", __func__, "loading " + name);
         Key currentKey = NameToKey(name);
         auto currentKeyIt = *it;
 
@@ -153,7 +153,8 @@ void Input::InitKeys(reference ref) {
         for (auto itKey = currentKeyIt.begin(); itKey != currentKeyIt.end(); itKey++)
             keyNames.push_back(*itKey);
 
-        keysMapping.push_back(std::make_pair(currentKey, NameToSFMLKeys(keyNames.begin(), keyNames.end())));
+        if (keyNames.size() > 0)
+            keysMapping.push_back(std::make_pair(currentKey, NameToSFMLKeys(keyNames.begin(), keyNames.end())));
     }
-    Logger::info("class Config", __func__, "Successfully bound " + std::to_string(keysMapping.size()) + " keys");
+    Logger::info("class Input", __func__, "Successfully bound " + std::to_string(keysMapping.size()) + " keys");
 }

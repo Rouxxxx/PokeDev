@@ -37,4 +37,5 @@ private:
     SceneStateMachine sceneStateMachine;
 
     ResourceAllocator<sf::Texture> textureAllocator;
+    SoundFactory soundFactory;
 };

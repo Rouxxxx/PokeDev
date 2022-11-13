@@ -48,9 +48,6 @@
     <ClCompile Include="code\component\c_keyboard\c_keyboard.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="code\resource\resourseAllocator.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="code\object\objectCollection.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -138,6 +135,15 @@
     <ClCompile Include="code\windowManager\inputInit.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="code\object\objectTextBox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="code\game\sound\soundFactoryLoadSounds.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="code\resource\resourseAllocator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="code\game\game.h">
@@ -174,9 +180,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="code\component\c_keyboard\c_keyboard.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="code\resource\resourceAllocator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="code\object\objectCollection.h">
@@ -618,6 +621,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="code\game\config\config.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="code\resource\resourceAllocator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

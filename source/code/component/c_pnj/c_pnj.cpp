@@ -1,7 +1,7 @@
 #include "c_pnj.h"
 
 C_pnj::C_pnj(Object* owner)
-	: Component(owner), moveSpeed(2), collider(nullptr), isMoving(false), reachPosition(), currentPosition(), behavior(nullptr), waitingTime(0.0f), currentWait(0.0f) {
+	: Component(owner), moveSpeed(2), collider(nullptr), isMoving(false), reachPosition(), currentPosition(), behavior(nullptr), hasToWait(0.0f), waitingTime(0.0f) {
 }
 
 void C_pnj::Awake() {
@@ -15,7 +15,7 @@ void C_pnj::Update(float deltaTime) {
 
 	if (hasBeenSpokenTo)
 		return;
-	currentWait += deltaTime;
+	waitingTime += deltaTime;
 	UpdateMove(deltaTime);
 	if (isMoving)
 		return;

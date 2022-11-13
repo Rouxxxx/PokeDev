@@ -17,8 +17,8 @@ void SceneGame::InitTextClass(std::string path) {
 
 
 void SceneGame::createTextBox(int id, std::shared_ptr<C_Transform> playerTransform) {
-	std::shared_ptr<Object> textBox = std::make_shared<Object>();
-	textBox->SetOff();
+	textBoxPtr = std::make_shared<Object>();
+	textBoxPtr->SetOff();
 	std::ifstream f("resources/sprites/textBox/textBox.json");
 	json data = json::parse(f);
 
@@ -29,7 +29,7 @@ void SceneGame::createTextBox(int id, std::shared_ptr<C_Transform> playerTransfo
 	auto& boxes = data["textBox"]["boxes"];
 	std::string str = meta["str"];
 
-	auto sprite = textBox->AddComponent<C_TextBox>();
+	auto sprite = textBoxPtr->AddComponent<C_TextBox>();
 	sprite->SetTransform(playerTransform);
 	sprite->SetTextureAllocator(&textureAllocator);
 	sprite->SetSortOrder(sortOrder);
@@ -56,5 +56,5 @@ void SceneGame::createTextBox(int id, std::shared_ptr<C_Transform> playerTransfo
 	sprite->SetFonts(textClass.getFonts());
 	sprite->SetSize(textClass.getSize());
 	sprite->SetColor(textClass.getColor(textColor::Default));
-	objects.Add(textBox);
+	objects.Add(textBoxPtr);
 }

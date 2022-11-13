@@ -17,7 +17,9 @@ const sf::Vector2f& C_Transform::GetPosition() const {
 	return position;
 }
 const sf::Vector2f& C_Transform::GetPositionTrainer() const {
-	return position + sf::Vector2f(0, 8);
+	sf::Vector2f currentPos = position;
+	currentPos.y += 8;
+	return currentPos;
 }
 
 
@@ -31,7 +33,10 @@ void C_Transform::SetPositionPNJ(sf::Vector2f pos) {
 	position = pos;
 }
 const sf::Vector2f& C_Transform::GetPositionPNJ() const {
-	return position + sf::Vector2f(7, 15);
+	sf::Vector2f currentPos = position;
+	currentPos.x += 7;
+	currentPos.y += 15;
+	return currentPos;
 }
 
 

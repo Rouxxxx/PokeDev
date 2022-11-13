@@ -28,8 +28,9 @@ Game::Game(json json)
 {
     srand((unsigned int)time(NULL));
     input.InitKeys(json["keys"]);
+    soundFactory.loadSounds(json["sounds"]["folder"]);
     std::shared_ptr<SceneSplashScreen> splashScreen = std::make_shared<SceneSplashScreen>(workingDir, sceneStateMachine, window, textureAllocator);
-    std::shared_ptr<SceneGame> gameScene = std::make_shared<SceneGame>(workingDir, textureAllocator, window, input);
+    std::shared_ptr<SceneGame> gameScene = std::make_shared<SceneGame>(workingDir, textureAllocator, window, input, soundFactory);
 
     unsigned int splashScreenID = sceneStateMachine.Add(splashScreen);
     unsigned int gameSceneID = sceneStateMachine.Add(gameScene);

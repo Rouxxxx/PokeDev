@@ -1,4 +1,5 @@
 #include "soundFactory.h"
+#include <iostream>
 
 SoundFactory::SoundFactory()
 	: className(typeid(this).name()), musicVolume(Config::musicVolume), soundVolume(Config::soundVolume)
@@ -23,3 +24,16 @@ void SoundFactory::SetSoundVolume(float vol) {
 	if (sound.getStatus() == sf::Sound::Playing)
 		sound.setVolume(soundVolume);
 };
+
+void SoundFactory::StartSound(SoundEnum soundEnum) {
+	auto it = sounds.find(soundEnum);
+	if (it == sounds.end()) {
+		Logger::error("class SoundFactory", __func__, "Tried to play unloaded sound. Aborting.");
+		return;
+	}
+	if (it->second.first.getStatus() == sf::Sound::Playing)
+		return;
+
+	Logger::info(__func__, "playing sound");
+	it->second.first.play();
+}

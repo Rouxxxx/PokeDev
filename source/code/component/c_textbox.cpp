@@ -65,7 +65,8 @@ void C_TextBox::UpdateRects() {
 void C_TextBox::UpdateStrings() {
 	std::string newString = currentState.getString();
 
-	if (newString == stringToPrint)
+	isDone = (newString == stringToPrint);
+	if (isDone) 
 		return;
 	char at = stringToPrint.at(newString.size());
 	newString += at;
@@ -90,6 +91,7 @@ void C_TextBox::SetFonts(std::pair<sf::Font, sf::Font> newFonts) {
 }
 
 void C_TextBox::SetStrToPrint(std::string str) {
+	Reset();
 	stringToPrint = str;
 }
 void C_TextBox::SetVectorString(sf::Vector2f vec) {
@@ -114,3 +116,5 @@ void C_TextBox::Reset() {
 	currentStateShadow.setString("");
 	owner->SetOff();
 }
+
+bool C_TextBox::IsDone() { return isDone; }

@@ -1,15 +1,12 @@
 #include "c_keyboard.h"
 
 void C_Keyboard::UpdateMovement(float deltaTime, sf::Vector2f currentPosition) {
-	if (isInteracting)
-		return;
+	if (isMoving) animation->StartUpdating();
+	else animation->StopUpdating();
+
+	if (isInteracting) return;
 
 	AnimationState state = animation->GetAnimationState();
-
-	if (isMoving)
-		animation->StartUpdating();
-	else
-		animation->StopUpdating();
 
 	if (isMoving && currentPosition == reachPosition) {
 		isMoving = false;

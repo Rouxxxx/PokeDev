@@ -48,3 +48,6 @@ void C_pnj::IdleLeft() { SetAnimationState(AnimationState::IdleLeft); }
 void C_pnj::IdleRight() { SetAnimationState(AnimationState::IdleRight); }
 void C_pnj::IdleUp() { SetAnimationState(AnimationState::IdleUp); }
 void C_pnj::IdleDown() { SetAnimationState(AnimationState::IdleDown); }
+
+bool C_pnj::IsMoving() { return isMoving; }
+void C_pnj::SetInteracted() { hasBeenSpokenTo = true; }

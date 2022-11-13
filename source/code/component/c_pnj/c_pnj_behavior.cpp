@@ -57,21 +57,21 @@ AnimationState intToState(int integer, AnimationState oldAnim) {
 }
 
 void C_pnj::IdleAround() {
-	if (currentWait < waitingTime)
+	if (waitingTime < hasToWait)
 		return;
 
-	currentWait = 0.0f;
-	waitingTime = generateRandomfloat(2, 4);
+	waitingTime = 0.0f;
+	hasToWait = generateRandomfloat(2, 4);
 	SetAnimationState(intToState(generateRandomInt(0, 2), GetAnimationState()));
 }
 
 void C_pnj::MultipleActionsFunc() {
-	if (currentWait < waitingTime)
+	if (waitingTime < hasToWait)
 		return;
 
-	currentWait = 0.0f;
+	waitingTime = 0.0f;
 	if ((this->*(functions.at(currentActionId)))()) {
-		waitingTime = waits.at(currentActionId);
+		hasToWait = waits.at(currentActionId);
 		size_t size = (functions.size() < waits.size()) ? functions.size() : waits.size();
 		currentActionId = (currentActionId + 1) % size;
 	}

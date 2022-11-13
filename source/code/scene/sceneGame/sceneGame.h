@@ -26,7 +26,7 @@
 class SceneGame : public Scene
 {
 public:
-	SceneGame(WorkingDirectory&, ResourceAllocator<sf::Texture>&, Window&, Input&);
+	SceneGame(WorkingDirectory&, ResourceAllocator<sf::Texture>&, Window&, Input&, SoundFactory&);
 	
 	void OnCreate() override;
 	void OnDestroy() override;
@@ -59,6 +59,9 @@ private:
 
 	int pnjWidth = 0;
 	int pnjHeight = 0;
+
+
+	SoundFactory& soundFactory;
 };
 
 inline FacingDirection findFacingDirection(std::string str) {
