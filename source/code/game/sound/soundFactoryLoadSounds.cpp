@@ -2,7 +2,7 @@
 
 void SoundFactory::NameToSound(std::string path, std::string name) {
 	std::vector<std::pair<std::string, SoundEnum>> table{
-		{"Player_bump.wav", SoundEnum::Bump}
+		{"Player_bump.ogg", SoundEnum::Bump}
 	};
 
 	for (auto curr : table)

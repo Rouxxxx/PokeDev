@@ -1,5 +1,5 @@
 #include "c_textbox.h"
-#include "../object/object.h"
+#include "../../object/object.h"
 
 C_TextBox::C_TextBox(Object* owner)
 	: Component(owner), currentTextureID(-1), allocator(nullptr), playerTransform(nullptr), currentState(sf::Text()), currentStateShadow(sf::Text()) {
@@ -46,6 +46,10 @@ void C_TextBox::Draw(Window& window) {
 	window.Draw(sprite);
 	window.Draw(currentStateShadow);
 	window.Draw(currentState);
+
+	auto cursor = owner->GetTextBox();
+	if (isDone)
+		cursor->Draw(window);
 }
 
 void C_TextBox::UpdateRects() {
@@ -60,6 +64,12 @@ void C_TextBox::UpdateRects() {
 	currentStateShadow.setPosition(vecStr);
 
 	sprite.setPosition(vec);
+
+	auto cursor = owner->GetTextBox();
+	if (cursor) {
+		sf::Vector2f vecCursor = vec + sf::Vector2f(425, 45);
+		cursor->transform->SetPosition(vecCursor);
+	}
 }
 
 void C_TextBox::UpdateStrings() {
@@ -77,6 +87,12 @@ void C_TextBox::UpdateStrings() {
 void C_TextBox::LateUpdate(float deltaTime) {
 	UpdateRects();
 	UpdateStrings();
+
+	auto cursor = owner->GetTextBox();
+	if (isDone) {
+		cursor->Update(deltaTime);
+		cursor->LateUpdate(deltaTime);
+	}
 }
 
 void C_TextBox::SetScale(float scaleX, float scaleY) {

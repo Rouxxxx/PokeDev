@@ -43,6 +43,7 @@ private:
 	void InitPlayer();
 	void createPlayer();
 	void createTextBox(int id, std::shared_ptr<C_Transform>);
+	void createTextBoxCursor(int TextureID, int sortOrder, float scale, reference frames);
 	void loadAnimations(reference frames, std::shared_ptr<C_Animation> animation, int TextureID, sf::Vector2i = sf::Vector2i());
 
 	ResourceAllocator<sf::Texture>& textureAllocator;
@@ -54,11 +55,15 @@ private:
 	Window& window;
 	TextClass textClass;
 	std::shared_ptr<Object> textBoxPtr;
+	Object cursor;
 
 	const std::string className;
 
 	int pnjWidth = 0;
 	int pnjHeight = 0;
+
+	int basicWidth = 0;
+	int basicHeight = 0;
 
 
 	SoundFactory& soundFactory;

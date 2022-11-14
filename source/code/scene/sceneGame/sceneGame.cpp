@@ -29,8 +29,8 @@ void SceneGame::loadAnimations(reference frames, std::shared_ptr<C_Animation> an
 				h = currentFrameIt["spriteSource"]["h"];
 			}
 			catch (...) {
-				w = pnjWidth;
-				h = pnjHeight;
+				w = basicWidth;
+				h = basicHeight;
 			}
 			currentAnimation->AddFrame(TextureID, x, y, w, h, idleAnimSeconds);
 		}

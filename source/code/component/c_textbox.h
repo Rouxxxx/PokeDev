@@ -32,6 +32,7 @@ public:
 	void SetColor(std::pair<sf::Color, sf::Color> colors);
 	bool IsDone();
 	void Reset();
+	
 
 private:
 	std::shared_ptr<C_Transform> playerTransform;
@@ -43,5 +44,5 @@ private:
 	sf::Text currentState;
 	sf::Text currentStateShadow;
 	sf::Vector2f vectorString;
-	bool isDone = false;;
+	bool isDone = false;
 };

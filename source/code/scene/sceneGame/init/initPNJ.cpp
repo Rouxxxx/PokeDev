@@ -2,6 +2,7 @@
 #include "../../component/c_pnj/c_pnj.h"
 
 void SceneGame::InitPNJs(reference players) {
+
 	std::string filePath = "resources/sprites/trainers/trainers.json";
 	std::ifstream f2(filePath);
 	json data;
@@ -25,6 +26,9 @@ void SceneGame::InitPNJs(reference players) {
 
 	pnjWidth = meta2["pnjWidth"];
 	pnjHeight = meta2["pnjHeight"];
+
+	basicWidth = pnjWidth;
+	basicHeight = pnjHeight;
 
 	int offsetWidth = meta2["offsetWidth"];
 	int offsetHeight = meta2["offsetHeight"];

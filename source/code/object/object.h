@@ -60,6 +60,7 @@ public:
 	void DisableTextBox();
 	void SetTextBox(std::shared_ptr<Object>);
 	void SetTextBoxString(std::string str);
+	std::shared_ptr<Object> GetTextBox() { return textBoxPtr; }
 
 private:
 	std::shared_ptr<C_TextBox> GetTextBoxComponent();

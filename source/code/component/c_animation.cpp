@@ -6,6 +6,8 @@ C_Animation::C_Animation(Object* owner)
 {}
 void C_Animation::Awake() {
 	sprite = owner->GetComponent<C_Sprite>();
+	if (!sprite)
+		Logger::error(__func__, "C_Animation component without C_Sprite");
 }
 
 

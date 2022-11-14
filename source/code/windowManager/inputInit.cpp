@@ -7,11 +7,11 @@ Key NameToKey(std::string name) {
         {"Left", Key::Left},
         {"Right", Key::Right},
         {"A", Key::A},
-        {"B", Key::Right},
-        {"X", Key::Right},
-        {"Y", Key::Right},
-        {"Start", Key::Right},
-        {"Select", Key::Right},
+        {"B", Key::B},
+        {"X", Key::X},
+        {"Y", Key::Y},
+        {"Start", Key::Start},
+        {"Select", Key::Select},
     };
 
     for (auto curr : table)

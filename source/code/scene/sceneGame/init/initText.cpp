@@ -29,6 +29,9 @@ void SceneGame::createTextBox(int id, std::shared_ptr<C_Transform> playerTransfo
 	auto& boxes = data["textBox"]["boxes"];
 	std::string str = meta["str"];
 
+	basicWidth = meta["cursorWidth"];
+	basicHeight = meta["cursorHeight"];
+
 	auto sprite = textBoxPtr->AddComponent<C_TextBox>();
 	sprite->SetTransform(playerTransform);
 	sprite->SetTextureAllocator(&textureAllocator);
@@ -57,4 +60,23 @@ void SceneGame::createTextBox(int id, std::shared_ptr<C_Transform> playerTransfo
 	sprite->SetSize(textClass.getSize());
 	sprite->SetColor(textClass.getColor(textColor::Default));
 	objects.Add(textBoxPtr);
+
+	createTextBoxCursor(TextureID, sortOrder, scale, data["textBox"]["animation"]);
+
+	textBoxPtr->SetTextBox(std::make_shared<Object>(cursor));
+}
+
+void SceneGame::createTextBoxCursor(int TextureID, int sortOrder, float scale, reference frames) {
+	cursor = Object();
+	auto spriteCursor = cursor.AddComponent<C_Sprite>();
+	spriteCursor->SetTextureAllocator(&textureAllocator);
+	spriteCursor->SetSortOrder(sortOrder + 1);
+	spriteCursor->SetScale(scale / 3, scale / 3);
+	spriteCursor->Load(TextureID);
+
+	auto animation = cursor.AddComponent<C_Animation>();
+	loadAnimations(frames, animation, TextureID);
+	animation->SetAnimationState(WalkDown);
+	cursor.Awake();
+	cursor.Start();
 }
