@@ -48,7 +48,7 @@ void C_Keyboard::UpdateInteractions(float deltaTime, sf::Vector2f currentPositio
 
 	if (isInteracting) {
 		if (owner->IsTextBoxDone()) {
-			//soundFactory->StartSound(SoundEnum::Bump);
+			soundFactory->StartSound(SoundEnum::Cursor);
 			owner->DisableTextBox();
 			hasReleasedA = false;
 			SetInteracting(false);

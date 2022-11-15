@@ -5,7 +5,8 @@
 #include "../../utils/Logger/logger.h"
 
 enum SoundEnum {
-	Bump
+	Bump,
+	Cursor
 };
 
 

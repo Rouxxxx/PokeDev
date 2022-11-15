@@ -20,6 +20,11 @@ bool Object::IsTextBoxDone() {
 	auto textBoxComponent = GetTextBoxComponent();
 	return (textBoxComponent) ? textBoxComponent->IsDone() : false;
 }
+bool Object::IsTextBoxDonePrinting() {
+	auto textBoxComponent = GetTextBoxComponent();
+	return (textBoxComponent) ? textBoxComponent->IsDonePrinting() : false;
+}
+
 void Object::SetTextBoxString(std::string str) {
 	auto textBoxComponent = GetTextBoxComponent();
 	if (!textBoxComponent)
@@ -32,14 +37,12 @@ void Object::EnableTextBox() {
 		Logger::error("class Object", __func__, "Trying to enable null textBox");
 		return;
 	}
-
 	textBoxPtr->SetOn();
 }
 void Object::DisableTextBox() {
 	if (!textBoxPtr) {
-		Logger::error("class Object", __func__, "Trying to enable null textBox");
+		Logger::error("class Object", __func__, "Trying to disable null textBox");
 		return;
 	}
-
 	textBoxPtr->SetOff();
 }

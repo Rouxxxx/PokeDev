@@ -67,7 +67,7 @@ void C_TextBox::UpdateRects() {
 
 	auto cursor = owner->GetTextBox();
 	if (cursor) {
-		sf::Vector2f vecCursor = vec + sf::Vector2f(425, 45);
+		sf::Vector2f vecCursor = vec + sf::Vector2f(432, 48);
 		cursor->transform->SetPosition(vecCursor);
 	}
 }
@@ -134,3 +134,4 @@ void C_TextBox::Reset() {
 }
 
 bool C_TextBox::IsDone() { return isDone; }
+bool C_TextBox::IsDonePrinting() { return isDonePrinting; }

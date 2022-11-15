@@ -2,7 +2,8 @@
 
 void SoundFactory::NameToSound(std::string path, std::string name) {
 	std::vector<std::pair<std::string, SoundEnum>> table{
-		{"Player_bump.ogg", SoundEnum::Bump}
+		{"Player_bump.ogg", SoundEnum::Bump},
+		{"GUI_sel_cursor.ogg", SoundEnum::Cursor}
 	};
 
 	for (auto curr : table)
@@ -48,5 +49,6 @@ void SoundFactory::loadSounds(std::string path) {
 
 	for (auto str : files)
 		NameToSound(path, str);
+	SetSoundVolume(Config::soundVolume);
 	Logger::debug_info("class SoundFactory", __func__, "Successfully loaded " + std::to_string(sounds.size()) + " sounds.");
 }

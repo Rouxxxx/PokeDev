@@ -71,7 +71,7 @@ void SceneGame::createTextBoxCursor(int TextureID, int sortOrder, float scale, r
 	auto spriteCursor = cursor.AddComponent<C_Sprite>();
 	spriteCursor->SetTextureAllocator(&textureAllocator);
 	spriteCursor->SetSortOrder(sortOrder + 1);
-	spriteCursor->SetScale(scale / 3, scale / 3);
+	spriteCursor->SetScale(scale / 4, scale / 4);
 	spriteCursor->Load(TextureID);
 
 	auto animation = cursor.AddComponent<C_Animation>();

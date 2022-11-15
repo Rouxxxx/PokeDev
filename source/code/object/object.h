@@ -56,6 +56,7 @@ public:
 
 	bool IsPNJ();
 	bool IsTextBoxDone();
+	bool IsTextBoxDonePrinting();
 	void EnableTextBox();
 	void DisableTextBox();
 	void SetTextBox(std::shared_ptr<Object>);

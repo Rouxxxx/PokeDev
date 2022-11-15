@@ -31,6 +31,7 @@ public:
 	void SetSize(int size);
 	void SetColor(std::pair<sf::Color, sf::Color> colors);
 	bool IsDone();
+	bool IsDonePrinting();
 	void Reset();
 	
 
@@ -45,4 +46,5 @@ private:
 	sf::Text currentStateShadow;
 	sf::Vector2f vectorString;
 	bool isDone = false;
+	bool isDonePrinting = false;
 };

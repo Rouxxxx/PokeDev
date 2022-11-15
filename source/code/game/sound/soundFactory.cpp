@@ -21,8 +21,8 @@ void SoundFactory::SetMusicVolume(float vol) {
 };
 void SoundFactory::SetSoundVolume(float vol) {
 	soundVolume = vol;
-	if (sound.getStatus() == sf::Sound::Playing)
-		sound.setVolume(soundVolume);
+	for (auto it = sounds.begin(); it != sounds.end(); it++)
+		it->second.first.setVolume(soundVolume);
 };
 
 void SoundFactory::StartSound(SoundEnum soundEnum) {
@@ -34,6 +34,5 @@ void SoundFactory::StartSound(SoundEnum soundEnum) {
 	if (it->second.first.getStatus() == sf::Sound::Playing)
 		return;
 
-	Logger::info(__func__, "playing sound");
 	it->second.first.play();
 }
