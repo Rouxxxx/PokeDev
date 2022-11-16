@@ -35,8 +35,7 @@ void Window::SetView(const sf::View& view) {
     window.setView(view);
 }
 
-sf::FloatRect Window::GetViewSpace() const
-{
+sf::FloatRect Window::GetViewSpace() const {
     const sf::View& view = GetView();
     const sf::Vector2f& viewCenter = view.getCenter();
     const sf::Vector2f& viewSize = view.getSize();

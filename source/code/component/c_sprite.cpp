@@ -39,9 +39,31 @@ void C_Sprite::SetTextureAllocator(ResourceAllocator<sf::Texture>* allocator) {
 	this->allocator = allocator;
 }
 
+bool C_Sprite::IsInWindow() {
+	sf::Vector2f pos = sprite.getPosition();
+	float centreX = Config::windowCentreX;
+	float centreY = Config::windowCentreY;
+
+	float sizeX = Config::windowSizeX;
+	float sizeY = Config::windowSizeY;
+
+	float xMax = centreX + sizeX / 2;
+	float yMax = centreY + sizeY / 2;
+
+	float xMin = centreX - sizeX / 2;
+	float yMin = centreY - sizeY / 2;
+	if (pos.x < (xMin - 32) || pos.x > xMax)
+		return false;
+	if (pos.y < (yMin - 32) || pos.y > yMax)
+		return false;
+
+	return true;
+}
+
 
 void C_Sprite::Draw(Window& window) {
-	window.Draw(sprite);
+	if (IsInWindow())
+		window.Draw(sprite);
 }
 
 void C_Sprite::LateUpdate(float deltaTime) {

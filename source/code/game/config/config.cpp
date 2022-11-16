@@ -5,6 +5,10 @@ int Config::windowHeight;
 int Config::windowWidth;
 float Config::musicVolume;
 float Config::soundVolume;
+float Config::windowCentreX = 0;
+float Config::windowCentreY = 0;
+float Config::windowSizeX = 0;
+float Config::windowSizeY = 0;
 
 
 

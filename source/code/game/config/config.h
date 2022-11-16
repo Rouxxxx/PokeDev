@@ -17,6 +17,10 @@ public:
 	static int windowWidth;
 	static float musicVolume;
 	static float soundVolume;
+	static float windowCentreX;
+	static float windowCentreY;
+	static float windowSizeX;
+	static float windowSizeY;
 private:
 	static void SetParam(std::string, json);
 	static void SetNormalParam(std::string, json) throw();

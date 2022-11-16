@@ -25,6 +25,7 @@ public:
 	void SetScale(float scaleX, float scaleY);
 
 private:
+	bool IsInWindow();
 	ResourceAllocator<sf::Texture>* allocator;
 	sf::Sprite sprite;
 	int currentTextureID; // We’ll now keep track of our currently set texture.

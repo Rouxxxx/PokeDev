@@ -41,6 +41,10 @@ void SceneGame::createPlayer() {
 	window.SetView(view);
 	objects.Add(player);
 
+	sf::Vector2f vec = window.GetView().getSize();
+	Config::windowSizeX = vec.x + 32;
+	Config::windowSizeY = vec.y + 32;
+
 	createTextBox(1, player->transform);
 	player->SetTextBox(textBoxPtr);
 }
