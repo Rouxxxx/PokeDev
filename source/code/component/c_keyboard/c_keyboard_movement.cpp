@@ -29,7 +29,7 @@ void C_Keyboard::UpdateMovement(float deltaTime, sf::Vector2f currentPosition) {
 
 
 void C_Keyboard::KeysToMovement(sf::Vector2f currentPosition) {
-	sf::Vector2f currentPositionBefore = currentPosition;
+	sf::Vector2f currentPositionBefore = sf::Vector2f(currentPosition);
 	AnimationState state = GetAnimationState();
 	FacingDirection currentFacingDir = animToDir(state);
 
@@ -43,35 +43,41 @@ void C_Keyboard::KeysToMovement(sf::Vector2f currentPosition) {
 	bool up = input->IsKeyPressed(Key::Up);
 	bool down = input->IsKeyPressed(Key::Down);
 
-	if (left && !collider->ExistLeft(currentPosition) && currentFacingDir == FacingDirection::Left) {
+	bool bumpingLeft = collider->ExistLeft(currentPosition);
+	bool bumpingRight = collider->ExistRight(currentPosition);
+	bool bumpingUp = collider->ExistUp(currentPosition);
+	bool bumpingDown = collider->ExistDown(currentPosition);
+
+	bool bumpingWall = bumpingLeft || bumpingRight || bumpingUp || bumpingDown;
+
+	if (left && !bumpingLeft && currentFacingDir == FacingDirection::Left) {
 		SetAnimationState(AnimationState::WalkLeft);
 		currentPosition.x -= 32;
-	}
-	else if (left)
-		SetAnimationState(AnimationState::IdleLeft);
+	} else if (left) SetAnimationState(AnimationState::IdleLeft);
 
-	else if (right && !collider->ExistRight(currentPosition) && currentFacingDir == FacingDirection::Right) {
+	else if (right && !bumpingRight && currentFacingDir == FacingDirection::Right) {
 		SetAnimationState(AnimationState::WalkRight);
 		currentPosition.x += 32;
-	}
-	else if (right)
-		SetAnimationState(AnimationState::IdleRight);
+	} else if (right) SetAnimationState(AnimationState::IdleRight);
 
-	else if (up && !collider->ExistUp(currentPosition) && currentFacingDir == FacingDirection::Up) {
+	else if (up && !bumpingUp && currentFacingDir == FacingDirection::Up) {
 		SetAnimationState(AnimationState::WalkUp);
 		currentPosition.y -= 32;
-	}
-	else if (up)
-		animation->SetAnimationState(AnimationState::IdleUp);
+	} else if (up) animation->SetAnimationState(AnimationState::IdleUp);
 
-	else if (down && !collider->ExistDown(currentPosition) && currentFacingDir == FacingDirection::Down) {
+	else if (down && !bumpingDown && currentFacingDir == FacingDirection::Down) {
 		SetAnimationState(AnimationState::WalkDown);
 		currentPosition.y += 32;
-	}
-	else if (down)
-		animation->SetAnimationState(AnimationState::IdleDown);
+	} else if (down) animation->SetAnimationState(AnimationState::IdleDown);
+
 
 	isMoving = (currentPosition != currentPositionBefore);
+
+	if (!isMoving && bumpingWall) {
+		soundFactory->StartSound(SoundEnum::Bump);
+		return;
+	}
+
 	reachPosition = currentPosition;
 	if (isMoving) {
 		collider->Delete(currentPositionBefore);
